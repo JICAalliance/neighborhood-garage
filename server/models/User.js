@@ -30,7 +30,9 @@ const userSchema = new Schema({
         unique: true
     },
     ownedTools: [Tool],
+
     borrowedTools: [Checkout],
+    
     address: {
         type: String,
     }
