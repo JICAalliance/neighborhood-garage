@@ -29,14 +29,19 @@ const userSchema = new Schema({
         required: true,
         unique: true
     },
-    ownedTools: [Tool],
-
-    borrowedTools: [Checkout],
-    
     address: {
         type: String,
-    }
-});
+    },
+    ownedTools: [Tool],
+    borrowedTools: [Checkout],
+    sharedGarages: [Garage],
+
+},
+    {
+        toJSON: {
+            virtuals: true
+        }
+    });
 
 // set up pre-save middleware to create password
 userSchema.pre('save', async function (next) {
