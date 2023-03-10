@@ -1,6 +1,6 @@
 const {Schema, model} = require('mongoose');
 
-const messageSchema = new Schema(
+const checkoutSchema = new Schema(
     {
         outDate: {
             type: Date,
@@ -17,7 +17,7 @@ const messageSchema = new Schema(
     }
 )
 
-messageSchema.virtual('overdue').get(function () {
+checkoutSchema.virtual('overdue').get(function () {
     if(this.dueDate){
         if(Date.now()>this.dueDate){
             return true;
@@ -26,6 +26,6 @@ messageSchema.virtual('overdue').get(function () {
     return false;
 })
 
-const Message = model('Message', messageSchema);
+const Checkout = model('Checkout', checkoutSchema);
 
-module.exports = Message;
+module.exports = checkout;
