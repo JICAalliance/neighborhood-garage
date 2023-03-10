@@ -29,10 +29,10 @@ const userSchema = new Schema({
         required: true,
         unique: true
     },
-    ownedTools: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Tool'
-    }],
+    ownedTools: [Tool],
+
+    borrowedTools: [Checkout],
+    
     address: {
         type: String,
     }
