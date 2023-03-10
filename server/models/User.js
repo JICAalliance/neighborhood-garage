@@ -29,6 +29,8 @@ const userSchema = new Schema({
         required: true,
         unique: true
     },
+    ownedTools: [Tool],
+    borrowedTools: [Checkout],
     address: {
         type: String,
     },
