@@ -12,6 +12,11 @@ const typeDefs = gql`
     myGarages: [Garage]
   }
 
+  type Auth {
+    token: ID!
+    user: User
+  }
+
   type Tool {
     _id: ID
     name: String
@@ -43,20 +48,20 @@ const typeDefs = gql`
   type Query {
     users: [User]
     user(_id:ID!): User
+    currentUser: User
     tools: [Tool]
     garages: [Garage]
 
   }
 
   type Mutation {
-    addUser(name: String!, email: String!, password: String!, phone: String!, address: String): User
+    addUser(name: String!, email: String!, password: String!, phone: String!, address: String): Auth
+    login(email: String!, password: String!): Auth
     updateUser(_id:ID!, name: String, phone: String, address: String): User
     removeUser(_id:ID!): User
 
-
-    addTool( name: String!, description: String, image: String, ownerId:ID!): User
+    addTool( name: String!, description: String, image: String): User
     removeTool(_id:ID!):User
-    tempRemTool(_id:ID!):Tool
 
     createGarage(admin: ID!, garageName: String!, description: String): Garage
     deleteGarage(admin:ID!,invitationCode: String!): Garage

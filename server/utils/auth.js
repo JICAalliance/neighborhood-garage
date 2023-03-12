@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-const secret = 'JICAalliancesuperSecretsecret';
+const secret = 'JICAalliancesuperSecretsecret03212023';
 const expiration = '2h';
 
 module.exports = {
@@ -24,7 +24,6 @@ module.exports = {
     } catch {
       console.log('Invalid token');
     }
-
     // return the request object so it can be passed to the resolver as `context`
     return req;
   },
