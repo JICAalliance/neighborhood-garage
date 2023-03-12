@@ -1,9 +1,9 @@
-import "./signUp.scss";
+import "./signup.scss";
 
-const SignUp = () => (
-  <div id="signUp">
-    <h1>This is the homepage</h1>
+const Signup = () => (
+  <div id="signup">
+    <h1>This is the signup page</h1>
   </div>
 );
 
-export default SignUp;
+export default Signup;
