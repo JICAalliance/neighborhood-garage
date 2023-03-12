@@ -3,10 +3,6 @@ const { Schema } = mongoose;
 
 const bcrypt = require('bcrypt');
 
-//bring in the other models needed for User
-const Tool = require('./Tool');
-const Garage = require('./Garage');
-const Checkout = require('./Checkout')
 
 const userSchema = new Schema({
     name: {
@@ -29,14 +25,21 @@ const userSchema = new Schema({
         required: true,
         unique: true
     },
-    ownedTools: [Tool],
-    borrowedTools: [Checkout],
     address: {
         type: String,
     },
-    ownedTools: [Tool],
-    borrowedTools: [Checkout],
-    sharedGarages: [Garage],
+    myTools: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Tool',
+    }],
+    borrowedTools:[{    
+        type: Schema.Types.ObjectId,
+        ref: 'Tool',
+    }],
+    myGarages: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Garage',
+    }],
 
 },
     {

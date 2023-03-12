@@ -1,7 +1,8 @@
-const User = require('./User');
+const Checkout = require('./Checkout');
 const Garage = require('./Garage');
 const Tool = require('./Tool');
-const Checkout = require('./Checkout');
+const User = require('./User');
 const Message = require('./Message');
 
-module.exports = { User, Garage, Tool, Checkout, Message };
+
+module.exports = { User, Tool, Garage, Checkout, Message };

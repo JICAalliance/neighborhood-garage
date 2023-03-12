@@ -28,4 +28,4 @@ checkoutSchema.virtual('overdue').get(function () {
 
 const Checkout = model('Checkout', checkoutSchema);
 
-module.exports = checkout;
+module.exports = Checkout;

@@ -1,7 +1,5 @@
 const {Schema, model} = require('mongoose');
 
-const Checkout = require('./Checkout');
-
 const toolSchema = new Schema(
     {
         name: {
@@ -14,7 +12,10 @@ const toolSchema = new Schema(
         image: {
             type: String
         },
-        checkout: Checkout
+        checkout: {
+            type: Schema.Types.ObjectId,
+            ref: 'Checkout',
+        },
     },
     {
         toJSON: {
