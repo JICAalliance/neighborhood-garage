@@ -1,4 +1,4 @@
-import "./signup.scss";
+import "./signUp.scss";
 
 const Signup = () => (
   <div id="signup">

@@ -34,7 +34,7 @@ const userSchema = new Schema({
     }],
     borrowedTools:[{    
         type: Schema.Types.ObjectId,
-        ref: 'Tool',
+        ref: 'Checkout',
     }],
     myGarages: [{
         type: Schema.Types.ObjectId,
