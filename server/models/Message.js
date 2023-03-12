@@ -1,15 +1,15 @@
 const {Schema, model} = require('mongoose');
 
-const User = require('./User');
-
 const messageSchema = new Schema(
     {
         author: {
-            type: User,
+            type: Schema.Types.ObjectId,
+            ref: 'User',
             required: true
         },
-        timeStamp: {
-            type: Date
+        createdAt: {
+            type: Date,
+            default: Date.now
         },
         body: {
             type: String
@@ -20,7 +20,7 @@ const messageSchema = new Schema(
             virtuals: true
         }
     }
-)
+);
 
 const Message = model('Message', messageSchema);
 

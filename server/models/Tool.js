@@ -1,6 +1,34 @@
 const {Schema, model} = require('mongoose');
 
-const Checkout = require('./Checkout');
+
+//checkout lives in the tool
+// const checkoutSchema = new Schema(
+//     {
+//         outDate: {
+//             type: Date,
+//             required: true
+//         },
+//         dueDate: {
+//             type: Date
+//         }
+//     },
+//     {
+//         toJSON: {
+//             virtuals: true
+//         }
+//     }
+// );
+
+// checkoutSchema.virtual('overdue').get(function () {
+//     if(this.dueDate){
+//         if(Date.now()>this.dueDate){
+//             return true;
+//         }
+//     }
+//     return false;
+// });
+
+
 
 const toolSchema = new Schema(
     {
@@ -14,7 +42,10 @@ const toolSchema = new Schema(
         image: {
             type: String
         },
-        checkout: Checkout
+        checkout: {
+            type: Schema.Types.ObjectId,
+            ref: 'Checkout',
+        },
     },
     {
         toJSON: {
