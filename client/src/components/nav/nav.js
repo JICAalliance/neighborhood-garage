@@ -1,12 +1,16 @@
 import "./nav.scss";
+import { Link } from "react-router-dom"
 
 const Nav = (props) => (
   <nav>
-    <button onClick={() => props.setPage("home")}>
-      <h1>Neighborhood Garage</h1>
-    </button>
 
-    <div>
+  <Link to="/"><button>Home</button></Link>
+
+    {/* <button onClick={() => props.setPage("home")}>
+      <h1>Neighborhood Garage</h1>
+    </button> */}
+
+    {/* <div>
       {props.loggedIn ? (
         <button onClick={() => props.setPage("signOut")}>Sign Out</button>
       ) : (
@@ -15,7 +19,10 @@ const Nav = (props) => (
       )}
       <button onClick={() => props.setPage("profile")}>Profile</button>
       <button onClick={() => props.setPage("home")}>Sign Up</button>
-    </div>
+    </div> */}
+
+    <Link to="/login"><button>Log In</button></Link>
+    
   </nav>
 );
 

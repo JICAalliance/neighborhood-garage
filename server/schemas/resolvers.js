@@ -251,7 +251,7 @@ const resolvers = {
         },
 
         // user removes tool
-        removeCheckout: async (parent, args, context) => {
+        deleteCheckout: async (parent, args, context) => {
             // if (context.user) {
                 // delete tool but capture its data
                 const removedCheckout = await Checkout.findByIdAndDelete(args);
