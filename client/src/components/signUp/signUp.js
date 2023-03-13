@@ -1,4 +1,4 @@
-import "./signup.scss";
+import "./signUp.scss";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useMutation } from "@apollo/client";
@@ -6,16 +6,20 @@ import Auth from "../utils/auth";
 import { ADD_USER } from "../utils/mutations";
 
 function Signup(props) {
-  const [formState, setFormState] = useState({ name:"", email: "", password: "" });
+  const [formState, setFormState] = useState({ name:"", email: "", password: "",phone: "", address: "" });
   const [addUser] = useMutation(ADD_USER);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
+    //test
+    console.log(formState.name,formState.email,formState.password,formState.address);
     const mutationResponse = await addUser({
       variables: {
         name: formState.name,
         email: formState.email,
         password: formState.password,
+        phone: formState.phone,
+        address: formState.address,
       },
     });
     const token = mutationResponse.data.addUser.token;
@@ -63,6 +67,26 @@ function Signup(props) {
             name="password"
             type="password"
             id="pwd"
+            onChange={handleChange}
+          />
+        </div>
+        <div className="flex-row space-between my-2">
+          <label htmlFor="phone">Phone:</label>
+          <input
+            placeholder="XXX-XXX-XXXX"
+            name="phone"
+            type="phone"
+            id="phone"
+            onChange={handleChange}
+          />
+        </div>
+        <div className="flex-row space-between my-2">
+          <label htmlFor="address">Address:</label>
+          <input
+            placeholder="type address here"
+            name="address"
+            type="address"
+            id="address"
             onChange={handleChange}
           />
         </div>
