@@ -139,7 +139,7 @@ const resolvers = {
 
                 //remove the tool from the user (one to one relationship)
                 return await User.findOneAndUpdate(
-                    { myTools: args._id },
+                    { myTools: args._id},
                     { $pull: { myTools: args._id } },
                     { new: true },
                 ).populate('myTools');
@@ -225,6 +225,50 @@ const resolvers = {
                 { new: true }
             );
             return user;
+        },
+
+        addCheckout: async (parent, args, context) => {
+            // if (context.user) {
+                //create tool
+                const checkout = await Checkout.create({
+                    outDate: args.name,
+                    dueDate: args.description,
+                });
+
+                await Tool.findOneAndUpdate(
+                    { _id: args.toolId},
+                    { checkout: checkout},
+                    { new: true}
+                ).populate('checkout');
+                //add tool to user
+                return await User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { $addToSet: { borrowedTools: checkout._id } },
+                    { new: true }
+                ).populate('borrowedTools');
+            // }
+            // throw new AuthenticationError('You need to be logged in!');
+        },
+
+        // user removes tool
+        deleteCheckout: async (parent, args, context) => {
+            // if (context.user) {
+                // delete tool but capture its data
+                const removedCheckout = await Checkout.findByIdAndDelete(args);
+
+                await Tool.findOneAndUpdate(
+                    { checkout: args._id},
+                    { checkout: null},
+                    { new: true}
+                ).populate('checkout');
+                //remove the tool from the user (one to one relationship)
+                return await User.findOneAndUpdate(
+                    { borrowedTools: args._id },
+                    { $pull: { borrowedTools: args._id } },
+                    { new: true },
+                ).populate('myTools');
+            // }
+            // throw new AuthenticationError('You need to be logged in!');
         },
     },
 };

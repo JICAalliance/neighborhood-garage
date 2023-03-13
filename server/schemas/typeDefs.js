@@ -8,7 +8,7 @@ const typeDefs = gql`
     phone: String
     address: String
     myTools: [Tool]
-    borrowedTools: [Tool]
+    borrowedTools: [Checkout]
     myGarages: [Garage]
   }
 
@@ -44,6 +44,11 @@ const typeDefs = gql`
     body: String
     }
 
+    type Checkout {
+      _id: ID
+      outDate: Date
+      dueDate: Date
+    }
         
   type Query {
     users: [User]
@@ -67,6 +72,9 @@ const typeDefs = gql`
     deleteGarage(admin:ID!,invitationCode: String!): Garage
     joinGarage(invitationCode: String!, member:ID!): Garage
     leaveGarage(invitationCode: String!, member:ID!): User
+
+    addCheckout(outDate: Date!, dueDate: Date!, toolId: ID!): User
+    deleteCheckout(_id:ID!): User
   }
 `;
 
