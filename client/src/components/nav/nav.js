@@ -23,12 +23,12 @@ function Nav() {
       );
     } else {
       return (
-        <ul>
-          <li>
+        <ul className="navlinks">
+          {/* <li>
             <Link to="/signup">
               <button>Signup</button>
             </Link>
-          </li>
+          </li> */}
           <li>
             <Link to="/login">
               <button>Login</button>
@@ -56,7 +56,7 @@ function Nav() {
   }
 
   return (
-    <header>
+    <header className="logo">
       <h1>
         <Link to="/">Neighborhood Garage</Link>
       </h1>

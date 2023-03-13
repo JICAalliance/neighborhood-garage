@@ -31,11 +31,10 @@ function Signup(props) {
   };
 
   return (
-    <div className="container my-1">
-      <Link to="/login">← Go to Login</Link>
+    <div className="container my-1 signup-container">
 
       <h2>Signup</h2>
-      <form onSubmit={handleFormSubmit}>
+      <form onSubmit={handleFormSubmit} className="signup-form">
         <div className="flex-row space-between my-2">
           <label htmlFor="name">Name:</label>
           <input
@@ -70,6 +69,7 @@ function Signup(props) {
           <button type="submit">Submit</button>
         </div>
       </form>
+      <Link to="/login">← Go to Login</Link>
     </div>
   );
 }
