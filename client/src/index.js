@@ -3,15 +3,14 @@ import ReactDOM from 'react-dom/client';
 import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter } from "react-router-dom";
-import { ContextProvider } from './components/auth';
+// import { ContextProvider } from './components/utils/auth';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <ContextProvider>
+    {/* <ContextProvider> */}
       <App />
-    </ContextProvider>
+    {/* </ContextProvider> */}
   </React.StrictMode>
 );
 

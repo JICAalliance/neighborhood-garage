@@ -1,29 +1,69 @@
 import "./nav.scss";
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
+import Auth from "../utils/auth";
 
-const Nav = (props) => (
-  <nav>
+function Nav() {
+  function showNavigation() {
+    if (Auth.loggedIn()) {
+      return (
+        <ul>
+          <li>
+            <Link to="/profile">
+              <button>Profile</button>
+            </Link>
+          </li>
+          <li>
+            <button>
+              <a href="/" onClick={() => Auth.logout()}>
+                Logout
+              </a>
+            </button>
+          </li>
+        </ul>
+      );
+    } else {
+      return (
+        <ul>
+          <li>
+            <Link to="/signup">
+              <button>Signup</button>
+            </Link>
+          </li>
+          <li>
+            <Link to="/login">
+              <button>Login</button>
+            </Link>
+          </li>
 
-  <Link to="/"><button>Home</button></Link>
+          {/* PLACEHOLDER TO TEST FUNCTIONALITY OF PROFILE AND LOGOUT BUTTONS: remove once authentication is working */}
+          <li>
+            <Link to="/profile">
+              <button>Profile</button>
+            </Link>
+          </li>
+          <li>
+            <button>
+              <a href="/" onClick={() => Auth.logout()}>
+                Logout
+              </a>
+            </button>
+          </li>
+          {/* END OF PLACEHOLDER */}
 
-    {/* <button onClick={() => props.setPage("home")}>
-      <h1>Neighborhood Garage</h1>
-    </button> */}
+        </ul>
+      );
+    }
+  }
 
-    {/* <div>
-      {props.loggedIn ? (
-        <button onClick={() => props.setPage("signOut")}>Sign Out</button>
-      ) : (
-        ((<button onClick={() => props.setPage("logIn")}>Login</button>),
-        (<button onClick={() => props.setPage("signUp")}>Sign Up</button>))
-      )}
-      <button onClick={() => props.setPage("profile")}>Profile</button>
-      <button onClick={() => props.setPage("home")}>Sign Up</button>
-    </div> */}
+  return (
+    <header>
+      <h1>
+        <Link to="/">Neighborhood Garage</Link>
+      </h1>
 
-    <Link to="/login"><button>Log In</button></Link>
-    
-  </nav>
-);
+      <nav>{showNavigation()}</nav>
+    </header>
+  );
+}
 
 export default Nav;
