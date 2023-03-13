@@ -22,7 +22,7 @@ const typeDefs = gql`
     name: String
     description: String
     image: String
-    owner: User
+    checkout: Checkout
   }
 
   type Garage {
@@ -44,11 +44,11 @@ const typeDefs = gql`
     body: String
     }
 
-    type Checkout {
-      _id: ID
-      outDate: Date
-      dueDate: Date
-    }
+  type Checkout {
+    _id: ID
+    outDate: Date
+    dueDate: Date
+  }
         
   type Query {
     users: [User]
@@ -60,7 +60,7 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    addUser(name: String!, email: String!, password: String!, phone: String!, address: String): Auth
+    addUser(name: String!, email: String!, password: String!, phone: String!, address: String!): Auth
     login(email: String!, password: String!): Auth
     updateUser(_id:ID!, name: String, phone: String, address: String): User
     removeUser(_id:ID!): User

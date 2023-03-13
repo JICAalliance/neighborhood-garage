@@ -3,6 +3,7 @@ import { Nav, Home, Signup, Login, Profile } from "./components";
 // import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import {
+  from,
   ApolloClient,
   InMemoryCache,
   ApolloProvider,
@@ -10,6 +11,20 @@ import {
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { GarageProvider } from "./components/utils/GlobalState";
+
+//error handling on Apollo
+import { onError } from "@apollo/client/link/error";
+
+const errorLink = onError(({ graphQLErrors, networkError }) => {
+  if (graphQLErrors)
+    graphQLErrors.forEach(({ message, locations, path }) =>
+      console.log(
+        `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
+      ),
+    );
+
+  if (networkError) console.log(`[Network error]: ${networkError}`);
+});
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -26,7 +41,8 @@ const authLink = setContext((_, { headers }) => {
 });
 
 const client = new ApolloClient({
-  link: authLink.concat(httpLink),
+  // link: authLink.concat(errorLink, httpLink),
+  link:  from([errorLink,authLink.concat(httpLink)]),
   cache: new InMemoryCache(),
 });
 
