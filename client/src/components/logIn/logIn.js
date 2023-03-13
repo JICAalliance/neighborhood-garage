@@ -1,4 +1,4 @@
-import "./logIn.scss";
+import "./login.scss";
 import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useMutation } from "@apollo/client";

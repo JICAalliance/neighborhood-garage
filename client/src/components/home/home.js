@@ -1,5 +1,5 @@
 import "./home.scss";
-import Signup from "../signup"
+import Signup from "../signUp"
 
 const Home = () => (
   <div id="home">
