@@ -1,7 +1,7 @@
-import Nav from "./nav/nav"
-import Home from "./home/home"
-import SignUp from "./signUp/signUp"
-import LogIn from "./logIn/logIn"
-import Profile from "./profile/profile"
+import Nav from "./nav"
+import Home from "./home"
+import Signup from "./signup"
+import Login from "./login"
+import Profile from "./profile"
 
-export {Nav, Home, SignUp, LogIn, Profile}
+export {Nav, Home, Signup, Login, Profile}
