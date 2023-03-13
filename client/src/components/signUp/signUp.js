@@ -6,8 +6,4 @@ const SignUp = () => (
   </div>
 );
 
-<<<<<<< HEAD
-export default Signup;
-=======
 export default SignUp;
->>>>>>> ad82ddd758962f7b268b7f6e861cef1d1ab9ea01
