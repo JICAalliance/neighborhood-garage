@@ -2,7 +2,7 @@ import "./home.scss";
 
 const Home = () => (
   <div id="home">
-    <h1>This is the homepage</h1>
+    <h1>Neighborhood Garage</h1>
   </div>
 );
 
