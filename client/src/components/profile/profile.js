@@ -1,7 +1,7 @@
 import "./profile.scss";
 
 const Profile = () => (
-  <div id="profile">
+  <div className="profile-container">
     <h1>This is the profile page</h1>
   </div>
 );
