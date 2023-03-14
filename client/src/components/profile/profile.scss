@@ -54,5 +54,15 @@
             background-color: black;
             color: white;
         }
+
+.profile-container {
+    width: fit-content;
+    margin: auto;
+    position: relative;
+    top: 5rem;
+    h2 {
+        margin-bottom: 1.2rem;
+        font-size: 1.2rem;
+
     }
 }

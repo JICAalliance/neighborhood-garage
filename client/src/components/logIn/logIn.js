@@ -5,10 +5,8 @@ import { useMutation } from "@apollo/client";
 import Auth, { useStateContext } from "../utils/auth";
 import { LOGIN } from "../utils/mutations";
 
-
-
 function Login(props) {
-  const [formState, setFormState] = useState({ email: '', password: '' });
+  const [formState, setFormState] = useState({ email: "", password: "" });
   const [login, { error }] = useMutation(LOGIN);
 
   const handleFormSubmit = async (event) => {
@@ -35,9 +33,8 @@ function Login(props) {
   return (
     <div className="container my-1 login-container">
       <Link to="/signup">← Go to Signup</Link>
-
       <h2>Login</h2>
-      <form onSubmit={handleFormSubmit}>
+      <form onSubmit={handleFormSubmit} className="login-form">
         <div className="flex-row space-between my-2">
           <label htmlFor="email">Email address:</label>
           <input
@@ -67,13 +64,12 @@ function Login(props) {
           <button type="submit">Submit</button>
         </div>
       </form>
+      <Link to="/">← Go to Signup</Link>
     </div>
   );
 }
 
 export default Login;
-
-
 
 // const Login = () => {
 //   //having an object of key and value pairs

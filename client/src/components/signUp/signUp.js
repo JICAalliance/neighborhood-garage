@@ -36,7 +36,6 @@ function Signup(props) {
 
   return (
     <div className="container my-1 signup-container">
-
       <h2>Signup</h2>
       <form onSubmit={handleFormSubmit} className="signup-form">
         <div className="flex-row space-between my-2">

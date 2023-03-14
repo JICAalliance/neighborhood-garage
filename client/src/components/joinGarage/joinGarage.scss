@@ -1,4 +1,10 @@
-.login-container {
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.editProfile-container {
     width: fit-content;
     margin: auto;
     position: relative;
@@ -9,7 +15,7 @@
     }
 }
 
-.login-form {
+.editProfile-form {
     width: fit-content;
     height: 50vh;
     display: flex;

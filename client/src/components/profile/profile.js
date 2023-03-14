@@ -2,6 +2,7 @@ import "./profile.scss";
 import { Link } from "react-router-dom"
 import { useNavigate } from "react-router-dom";
 
+
 const Profile = () => {
   const navigate = useNavigate()
   const navToProduct = (e) => {
