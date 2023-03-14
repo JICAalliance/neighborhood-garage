@@ -1,4 +1,4 @@
-import "./login.scss";
+import "./logIn.scss";
 import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useMutation } from "@apollo/client";
@@ -33,7 +33,7 @@ function Login(props) {
   };
 
   return (
-    <div className="container my-1">
+    <div className="container my-1 login-container">
       <Link to="/signup">← Go to Signup</Link>
 
       <h2>Login</h2>

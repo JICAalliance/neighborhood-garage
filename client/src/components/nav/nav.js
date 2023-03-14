@@ -57,8 +57,8 @@ function Nav() {
 
   return (
     <header className="logo">
-      <h1>
-        <Link to="/">Neighborhood Garage</Link>
+      <h1 style={{margin: 0}}>
+        <Link to="/" className="logo-text">Neighborhood Garage</Link>
       </h1>
 
       <nav>{showNavigation()}</nav>
