@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 
 const CreateGarage = () => {
   const [formState, setFormState] = useState({
-    garageName: "",
-    garageDescription: "",
+    name: "",
+    description: "",
   });
 
   const handleChange = (event) => {
@@ -25,7 +25,7 @@ const CreateGarage = () => {
           <input
             placeholder="garage name"
             name="name"
-            type="name"
+            type="text"
             id="name"
             onChange={handleChange}
           />

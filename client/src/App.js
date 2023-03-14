@@ -1,5 +1,5 @@
 import "./App.scss";
-import { Nav, Home, Signup, Login, Profile, CreateGarage, AddTool } from "./components";
+import { Nav, Home, Signup, Login, Profile, CreateGarage, AddTool, EditProfile, JoinGarage } from "./components";
 // import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import {
@@ -60,6 +60,8 @@ function App() {
               <Route path="/profile" element={<Profile />} />
               <Route path="/createGarage" element={<CreateGarage />} />
               <Route path="/addTool" element={<AddTool />} />
+              <Route path="/editProfile" element={<EditProfile />} />
+              <Route path="/joinGarage" element={<JoinGarage />} />
             </Routes>
           </GarageProvider>
         </div>
