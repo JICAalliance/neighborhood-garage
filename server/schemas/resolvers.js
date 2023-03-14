@@ -1,6 +1,7 @@
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
 const { User, Tool, Garage } = require('../models');
+const { uploadImage } = require('../utils/uploadImage');
 
 // TODO: NEED TO ADD AUTHENTICATION TO ALL MUTATIONS when all mutations are done and connected to the front end so context can be injected
 
@@ -117,10 +118,11 @@ const resolvers = {
         addTool: async (parent, args, context) => {
             // if (context.user) {
                 //create tool
+                const imageUrl = await uploadImage(args.image);
                 const tool = await Tool.create({
                     name: args.name,
                     description: args.description,
-                    image: args.image,
+                    image: imageUrl.secure_url
                 });
                 //add tool to user
                 return await User.findOneAndUpdate(
