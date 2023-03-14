@@ -36,9 +36,33 @@ export const ADD_USER = gql`
   }
 `;
 
+//TODO: change ADD_TOOL mutation code from AddUser code to correct AddTool code
+export const ADD_TOOL = gql`mutation AddUser($name: String!, $email: String!, $password: String!, $phone: String!, $address: String!) {
+  addUser(name: $name, email: $email, password: $password, phone: $phone, address: $address) {
+    token
+    user{
+      name
+      email
+      phone
+      myTools {
+        _id
+        name
+      }
+      borrowedTools {
+        _id
+        dueDate
+      }
+      myGarages {
+        _id
+        garageName
+      }
+    }
+  }
+}
+`;;
+
 // export const UPDATE_USER = gql``;
 // export const REMOVE_USER = gql``;
-// export const ADD_TOOL = gql``;
 // export const REMOVE_TOOL = gql``;
 // export const CREATE_GARAGE = gql``;
 // export const DELETE_GARAGE = gql``;

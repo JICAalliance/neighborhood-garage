@@ -39,6 +39,11 @@ function Nav() {
               <button>Create Garage</button>
             </Link>
           </li>
+          <li>
+            <Link to="/addTool">
+              <button>Add Tool</button>
+            </Link>
+          </li>
 
           {/* PLACEHOLDER TO TEST FUNCTIONALITY OF PROFILE AND LOGOUT BUTTONS: remove once authentication is working */}
           <li>

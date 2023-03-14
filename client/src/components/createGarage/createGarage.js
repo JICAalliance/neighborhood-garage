@@ -18,26 +18,24 @@ const CreateGarage = () => {
 
   return (
     <div className="container my-1 createGarage-container">
-      <h2>Create Garage</h2>
+      <h2>Create a Neighborhood Garage</h2>
       <form className="createGarage-form">
         <div className="flex-row space-between my-2">
-          <label htmlFor="garageName">Neighborhood Garage Name:</label>
+          <label htmlFor="name">Name:</label>
           <input
             placeholder="garage name"
-            name="garageName"
-            type="string"
-            id="garageName"
+            name="name"
+            type="name"
+            id="name"
             onChange={handleChange}
           />
         </div>
         <div className="flex-row space-between my-2">
-          <label htmlFor="garageDescription">
-            Neighborhood Garage Description:
-          </label>
+          <label htmlFor="description">Description:</label>
           <textarea
-            placeholder="garage description"
-            name="garageDescription"
-            id="garageDescription"
+            placeholder="Enter a description"
+            name="description"
+            id="description"
             onChange={handleChange}
           />
         </div>

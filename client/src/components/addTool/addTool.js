@@ -7,7 +7,7 @@ import { ADD_TOOL } from "../utils/mutations";
 
 function AddTool(props) {
   const [formState, setFormState] = useState({ name:"", description: "", image: ""});
-  const [addTool] = useMutation(ADD_USER);
+  const [addTool] = useMutation(ADD_TOOL);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -29,10 +29,10 @@ function AddTool(props) {
   };
 
   return (
-    <div className="container my-1 addtool-container">
+    <div className="container my-1 addTool-container">
 
       <h2>Create A Tool</h2>
-      <form onSubmit={handleFormSubmit} className="addtool-form">
+      <form onSubmit={handleFormSubmit} className="addTool-form">
         <div className="flex-row space-between my-2">
           <label htmlFor="name">Name:</label>
           <input
@@ -48,7 +48,6 @@ function AddTool(props) {
           <textarea
             placeholder="Enter a description"
             name="description"
-            type="description"
             id="description"
             onChange={handleChange}
           />
