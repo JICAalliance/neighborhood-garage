@@ -34,6 +34,11 @@ function Nav() {
               <button>Login</button>
             </Link>
           </li>
+          <li>
+            <Link to="/createGarage">
+              <button>Create Garage</button>
+            </Link>
+          </li>
 
           {/* PLACEHOLDER TO TEST FUNCTIONALITY OF PROFILE AND LOGOUT BUTTONS: remove once authentication is working */}
           <li>

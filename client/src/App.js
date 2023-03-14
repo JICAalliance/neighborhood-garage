@@ -1,5 +1,5 @@
 import "./App.scss";
-import { Nav, Home, Signup, Login, Profile } from "./components";
+import { Nav, Home, Signup, Login, Profile, CreateGarage } from "./components";
 // import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import {
@@ -58,6 +58,7 @@ function App() {
               {/* <Route path="/signup" element={<Signup />} /> */}
               <Route path="/login" element={<Login />} />
               <Route path="/profile" element={<Profile />} />
+              <Route path="/createGarage" element={<CreateGarage />} />
             </Routes>
           </GarageProvider>
         </div>
