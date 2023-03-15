@@ -57,7 +57,7 @@ const typeDefs = gql`
     tools: [Tool]
     tool(_id:ID!): Tool
     garages: [Garage]
-    garage: Garage
+    garage(_id:ID!): Garage
   }
 
   type Mutation {

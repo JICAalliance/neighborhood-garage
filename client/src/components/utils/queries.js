@@ -12,17 +12,14 @@ import { gql } from "@apollo/client";
 // `;
 
 export const QUERY_GARAGE = gql`
-    {
-        garage {
-            admin
-            garageName
-            description
-            members
-            invitationCode
-            messages
-          }
+  query Garage {
+    garages {
+      _id
+      garageName
+      description
     }
-`
+  }
+`;
 
 // export const QUERY_TOOL = gql``;
 // export const QUERY_GARAGE = gql``;
