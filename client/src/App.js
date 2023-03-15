@@ -42,9 +42,10 @@ const authLink = setContext((_, { headers }) => {
 });
 
 const client = new ApolloClient({
-  link: from([errorLink, httpLink]),
+  // link: from([errorLink, httpLink]),
   // link: authLink.concat(errorLink, httpLink),
-  // link:  from([errorLink,authLink.concat(httpLink)]),
+  // the authLink sends the token to the back end, please keep line 48
+  link:  from([errorLink,authLink.concat(httpLink)]),
   cache: new InMemoryCache(),
 });
 

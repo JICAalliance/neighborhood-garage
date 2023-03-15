@@ -5,7 +5,7 @@ import { Card, Icon } from 'semantic-ui-react'
 // import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 // import Auth from "../utils/auth";
-import { QUERY_MY_TOOLS } from '../utils/queries';
+import { QUERY_MY_TOOLS } from "../utils/queries";
 
 
 function  ViewTool(props) {
