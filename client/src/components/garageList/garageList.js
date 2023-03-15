@@ -8,11 +8,7 @@ const GarageList = ({ garage }) => {
 
     //capture list of members and admin info
     const adminId = garage.admin._id;
-
-
     const memberArray = garage.members;
-
-
 
     console.log("garageList ", adminId, memberArray);
 
@@ -28,14 +24,11 @@ const GarageList = ({ garage }) => {
   else {
     console.log("ADMIN", garage.admin.name);
 
-
-
     return (
       <div key={garage._id} id='{garage._id}'>
         <h3>Welcome to {garage.garageName}!!!</h3>
         <h5>Admin: {garage.admin.name}</h5>
         <h5>Members:</h5>
-
 
 
 
