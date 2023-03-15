@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import ViewTool from '../viewTool';
 import { QUERY_ME } from "../utils/queries";
 import { useQuery } from "@apollo/client";
+import { QUERY_USER_GARAGES } from "../utils/queries";
 
 
 const Profile = () => {
@@ -16,16 +17,20 @@ const Profile = () => {
   const navToGarage = (e) => {
     // navigate(e.target.value)
     if (e.target.value !== "Choose Garage") {
-      return (navigate(`/garage/${e.target.value}`))
+      return (navigate(`/garage/${e.target.key}`))
     }
     // console.log(e.target.value)
-  }
+  };
+
+  //const { loading, data, userId } = useQuery(QUERY_USER_GARAGES,{variables:{userId}});
+  //const garages = data?.garages || [];
+
 
   if (loading) {
     return <div>Loading...</div>;
   }
   console.log("PROFILE DATA", data.currentUser.name);
-  const {name, email, myGarages, myTools, phone, address}=data.currentUser;
+  const {name, email, myGarages, myTools, phone, address, borrowedTools}=data.currentUser;
   console.log("myGarages",myGarages[0]);
 
   return (
@@ -35,7 +40,7 @@ const Profile = () => {
       <div><button>Create Garage</button></div>
       <div><button>Join Garage</button></div>
       {/* product will be what is displayed, index for unique ID; replace the array with dynamic values of garages user is in*/}
-      <select name="product" onClick={(e) => navToGarage(e)}>
+      <select name="garage" onClick={(e) => navToGarage(e)}>
         <option>Choose Garage</option>
         {myGarages.map((garage) => {
           return (
@@ -48,7 +53,8 @@ const Profile = () => {
       </div>
     </div>
 
-  )
+  );
+
 };
 
 export default Profile;
