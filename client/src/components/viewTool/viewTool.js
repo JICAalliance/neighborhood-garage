@@ -7,9 +7,11 @@ import { useQuery } from "@apollo/client";
 // import Auth from "../utils/auth";
 import { QUERY_MY_TOOLS } from '../utils/queries';
 
+
 function  ViewTool(props) {
   // const [formState, setFormState] = useState({ name:"", description: "", image: ""});
   
+
   const { loading, data } = useQuery(QUERY_MY_TOOLS);
 
 
@@ -19,6 +21,7 @@ function  ViewTool(props) {
     </div>
   };
   if(data){
+
     console.log(data.myTools.myTools);
     const tools=data.myTools.myTools;
 
@@ -33,6 +36,7 @@ function  ViewTool(props) {
           {tools.map(({_id, name, description, image, checkout},index)=>(
 
               <Card 
+
               key={_id}
               id={_id}
               // image={image? image: 'No image to display'}
@@ -52,7 +56,29 @@ function  ViewTool(props) {
 
 
 
-return;
+
+  // console.log(useQuery(QUERY_TOOLS));
+
+  // handle form click
+  // const handleFormSubmit = async (event) => {
+  //   event.preventDefault();
+  //   const mutationResponse = await addTool({
+  //     variables: {
+  //       name: formState.name,
+  //       description: formState.description,
+  //       image: formState.image
+  //     },
+  //   });
+  // };
+
+  // const handleChange = (event) => {
+  //   const { name, value } = event.target;
+  //   setFormState({
+  //     ...formState,
+  //     [name]: value,
+  //   });
+  // };
+
 }
 
 export default ViewTool;

@@ -14,6 +14,7 @@ export const QUERY_SINGLE_USER = gql`
 `;
 
 export const QUERY_ME = gql`
+
   query CurrentUser {
       currentUser {
       _id
@@ -84,4 +85,5 @@ export const QUERY_GARAGE = gql`
 `;
 
 // export const QUERY_TOOL = gql``;
+
 // export const QUERY_GARAGE = gql``;
