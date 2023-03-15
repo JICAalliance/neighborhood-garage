@@ -1,11 +1,32 @@
 import "./joinGarage.scss";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useMutation, useQuery } from "@apollo/client";
+import { JOIN_GARAGE } from "../utils/mutations";
+import { QUERY_ME } from "../utils/queries";
 
 const JoinGarage = () => {
   const [formState, setFormState] = useState({
-    qrCode: "",
+    invitationCode: "",
   });
+  const { loading, data } = useQuery(QUERY_ME);
+  const me = data?.me || [];
+  const [joinGarage, { error }] = useMutation(JOIN_GARAGE);
+
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      const join = await joinGarage({
+        variables: {
+          invitationCode: formState.invitationCode,
+          member: me._id,
+        },
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -18,14 +39,14 @@ const JoinGarage = () => {
   return (
     <div className="container my-1 editProfile-container">
       <h2>Join a Garage</h2>
-      <form className="editProfile-form">
+      <form onSubmit={handleFormSubmit} className="editProfile-form">
         <div className="flex-row space-between my-2">
-          <label htmlFor="qrCode">Join with QR Code:</label>
+          <label htmlFor="invitationCode">Join with Invitation Code:</label>
           <input
-            placeholder="enter QR code here"
-            name="qrCode"
+            placeholder="enter Invitation code here"
+            name="invitationCode"
             type="text"
-            id="qrCode"
+            id="invitationCode"
             onChange={handleChange}
           />
         </div>

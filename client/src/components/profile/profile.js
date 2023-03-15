@@ -16,7 +16,8 @@ const Profile = () => {
     // console.log(e.target.value)
   };
 
-  const { loading, data, userId } = useQuery(QUERY_USER_GARAGES,{variables:{userId}});
+  // const { loading, data, userId } = useQuery(QUERY_USER_GARAGES,{variables:{userId}});
+  const { loading, data } = useQuery(QUERY_USER_GARAGES);
   const garages = data?.garages || [];
 
   return (

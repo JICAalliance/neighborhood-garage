@@ -28,6 +28,20 @@ export const QUERY_ME = gql`
       borrowedTools {
         _id
       }
+      myGarages {
+        _id
+        admin {
+          _id
+          name
+        }
+        garageName
+        description
+        members {
+          _id
+          name
+        }
+        invitationCode
+      }
     }
   }
 `;
