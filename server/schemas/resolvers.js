@@ -33,6 +33,12 @@ const resolvers = {
 
             return tool;
         },
+        myTools: async (parent, args, context) => {
+            if (context.user) {
+                return User.findOne({ _id: context.user._id }).populate('myTools');
+            }
+            throw new AuthenticationError('You need to be logged in!');
+        },
         //views all the tools
         tools: async () => {
             return await Tool.find();
