@@ -37,25 +37,13 @@ export const ADD_USER = gql`
 `;
 
 //TODO: change ADD_TOOL mutation code from AddUser code to correct AddTool code
-export const ADD_TOOL = gql`mutation AddUser($name: String!, $email: String!, $password: String!, $phone: String!, $address: String!) {
-  addUser(name: $name, email: $email, password: $password, phone: $phone, address: $address) {
-    token
-    user{
+export const ADD_TOOL = gql`
+mutation AddTool($name: String!, $description: String, $image: String) {
+  addTool(name: $name, description: $description, image: $image) {
+    tool{
       name
-      email
-      phone
-      myTools {
-        _id
-        name
-      }
-      borrowedTools {
-        _id
-        dueDate
-      }
-      myGarages {
-        _id
-        garageName
-      }
+      description
+      image
     }
   }
 }

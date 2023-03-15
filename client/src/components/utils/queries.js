@@ -14,22 +14,23 @@ export const QUERY_SINGLE_USER = gql`
 `;
 
 export const QUERY_ME = gql`
-    query CurrentUser {
-        currentUser {
-        _id
-        name
-        email
-        phone
-        address
-        myTools{
-            _id
-            name
-        }
-        borrowedTools {
-            _id
-        }
-        }
-    }
+
+  query CurrentUser {
+      currentUser {
+      _id
+      name
+      email
+      phone
+      address
+      myTools{
+          _id
+          name
+      }
+      borrowedTools {
+          _id
+      }
+      }
+  }
 
 `;
 //for now query all tools
@@ -50,5 +51,39 @@ query Tools {
   }
 `;
 
+export const QUERY_MY_TOOLS = gql`
+
+  query myTools {
+    myTools {
+      _id
+      name
+      myTools {
+        _id
+        name
+        description
+        image
+        checkout {
+          _id
+          outDate
+          dueDate
+        }
+      }
+    }
+  }
+  
+`;
+
+
+export const QUERY_GARAGE = gql`
+  query Garage {
+    garages {
+      _id
+      garageName
+      description
+    }
+  }
+`;
+
+// export const QUERY_TOOL = gql``;
 
 // export const QUERY_GARAGE = gql``;

@@ -7,5 +7,6 @@ import CreateGarage from "./createGarage"
 import AddTool from "./addTool"
 import EditProfile from "./editProfile/"
 import JoinGarage from "./joinGarage/"
+import ViewGarage from "./viewGarage"
 
-export {Nav, Home, Signup, Login, Profile, CreateGarage, AddTool, EditProfile, JoinGarage}
+export {Nav, Home, Signup, Login, Profile, CreateGarage, AddTool, EditProfile, JoinGarage, ViewGarage}
