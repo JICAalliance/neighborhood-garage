@@ -65,7 +65,7 @@ function App() {
               <Route path="/addTool" element={<AddTool />} />
               <Route path="/editProfile" element={<EditProfile />} />
               <Route path="/joinGarage" element={<JoinGarage />} />
-              <Route path="/viewGarage" element={<ViewGarage />} />
+              <Route path="/viewGarage/:garageId" element={<ViewGarage />} />
             </Routes>
           </GarageProvider>
         </div>

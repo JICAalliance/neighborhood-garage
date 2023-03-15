@@ -13,6 +13,16 @@ const resolvers = {
         users: async () => {
             return await User.find().populate('myTools').populate('borrowedTools').populate('myGarages');
         },
+        usersGarage: async (args) => {
+            // if (context.user) {
+            return await User.find(
+                {
+                    "myGarages": {$elemMatch: {_id: args}}
+                }
+            ).populate('myTools').populate('borrowedTools').populate('myGarages');
+            // }
+            // throw new AuthenticationError('You need to be logged in!');
+        },
         //views a specific user and can be user to view the user's tools
         user: async (parent, args, context) => {
             const user = await User.findById(args).populate('myTools').populate('borrowedTools').populate('myGarages');
@@ -48,7 +58,7 @@ const resolvers = {
             return await Garage.find().populate('members').populate('admin');
         },
         garage: async (parent, args, context) => {
-            const garage = await Garage.findById(args).populate('members').populate('admin');
+            const garage = await Garage.findById(args).populate('members').populate('members.myTools').populate('members.myTools.checkout').populate('admin');
 
             return garage;
         },
@@ -174,10 +184,10 @@ const resolvers = {
             if (context.user) {
                 // create the garage
                 const newGarage = await Garage.create
-                ({
-                    admin:context.user._id, 
-                    garageName: args.garageName,
-                    description: args.description
+                    ({
+                        admin: context.user._id,
+                        garageName: args.garageName,
+                        description: args.description
                     });
 
                 // push user as a member
