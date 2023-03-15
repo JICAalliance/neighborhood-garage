@@ -17,7 +17,8 @@ const Profile = () => {
   const navToGarage = (e) => {
     // navigate(e.target.value)
     if (e.target.value !== "Choose Garage") {
-      return (navigate(`/garage/${e.target.key}`))
+      console.log(e.target);
+      return (navigate(`/garage/${e.target.value}`))
     }
     // console.log(e.target.value)
   };
@@ -44,7 +45,7 @@ const Profile = () => {
         <option>Choose Garage</option>
         {myGarages.map((garage) => {
           return (
-            <option value={garage.garageName} key={garage._id} onClick={(e) => navToGarage(e)}>{garage.garageName}</option>
+            <option value={garage._id} key={garage._id} onClick={(e) => navToGarage(e)}>{garage.garageName}</option>
           )
         })}
       </select>
