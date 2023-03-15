@@ -12,10 +12,22 @@ export const LOGIN = gql`
 `;
 
 export const ADD_USER = gql`
-  mutation AddUser($name: String!, $email: String!, $password: String!, $phone: String!, $address: String!) {
-    addUser(name: $name, email: $email, password: $password, phone: $phone, address: $address) {
+  mutation AddUser(
+    $name: String!
+    $email: String!
+    $password: String!
+    $phone: String!
+    $address: String!
+  ) {
+    addUser(
+      name: $name
+      email: $email
+      password: $password
+      phone: $phone
+      address: $address
+    ) {
       token
-      user{
+      user {
         name
         email
         phone
@@ -38,52 +50,58 @@ export const ADD_USER = gql`
 
 //TODO: change ADD_TOOL mutation code from AddUser code to correct AddTool code
 export const ADD_TOOL = gql`
-mutation addTool($name: String!, $description: String, $image: String) {
-  addTool(name: $name, description: $description, image: $image) {
-    _id
-    name
-    myTools {
+  mutation addTool($name: String!, $description: String, $image: String) {
+    addTool(name: $name, description: $description, image: $image) {
       _id
       name
-      description
-      image
-      checkout {
+      myTools {
         _id
-        outDate
-        dueDate
+        name
+        description
+        image
+        checkout {
+          _id
+          outDate
+          dueDate
+        }
       }
     }
   }
-}
+`;
 
-`;;
+export const JOIN_GARAGE = gql`
+  mutation joinGarage($invitationCode: String!, $member: ID!) {
+    joinGarage(invitationCode: $invitationCode, member: $member) {
+      _id
+      garageName
+      description
+    }
+  }
+`;
 
 //Create Garage
 export const CREATE_GARAGE = gql`
-mutation CreateGarage($garageName: String!, $description: String) {
-  createGarage(garageName: $garageName, description: $description) {
-    admin{
-      _id
-      name
+  mutation CreateGarage($garageName: String!, $description: String) {
+    createGarage(garageName: $garageName, description: $description) {
+      admin {
+        _id
+        name
+      }
+      garageName
+      invitationCode
+      description
+      members {
+        _id
+        name
+      }
     }
-    garageName
-    invitationCode
-    description
-    members{
-      _id
-      name
-    }
-    
   }
-}
 `;
 
 // export const UPDATE_USER = gql``;
 // export const REMOVE_USER = gql``;
 // export const REMOVE_TOOL = gql``;
-
 // export const DELETE_GARAGE = gql``;
-// export const JOIN_GARAGE = gql``;
 // export const LEAVE_GARAGE = gql``;
 // export const ADD_CHECKOUT = gql``;
 // export const DELETE_CHECKOUT = gql``;

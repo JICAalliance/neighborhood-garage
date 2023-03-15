@@ -24,6 +24,32 @@ query CurrentUser {
     myTools {
       _id
       name
+<<<<<<< HEAD
+      email
+      phone
+      address
+      myTools {
+        _id
+        name
+      }
+      borrowedTools {
+        _id
+      }
+      myGarages {
+        _id
+        admin {
+          _id
+          name
+        }
+        garageName
+        description
+        members {
+          _id
+          name
+        }
+        invitationCode
+      }
+=======
     }
     borrowedTools {
       _id
@@ -31,6 +57,7 @@ query CurrentUser {
     myGarages {
       _id
       garageName
+>>>>>>> 98c4c47aa21f16c888e665a1612be88e5f9086ce
     }
   }
 }
