@@ -8,5 +8,16 @@ import AddTool from "./addTool"
 import EditProfile from "./editProfile/"
 import JoinGarage from "./joinGarage/"
 import ViewGarage from "./viewGarage"
+import ViewTool from "./viewTool"
 
-export {Nav, Home, Signup, Login, Profile, CreateGarage, AddTool, EditProfile, JoinGarage, ViewGarage}
+export {Nav, 
+    Home, 
+    Signup, 
+    Login, 
+    Profile, 
+    CreateGarage, 
+    AddTool, 
+    EditProfile, 
+    JoinGarage, 
+    ViewGarage,
+    ViewTool}

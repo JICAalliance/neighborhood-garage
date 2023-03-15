@@ -14,10 +14,17 @@ export const QUERY_SINGLE_USER = gql`
 `;
 
 export const QUERY_ME = gql`
-  query CurrentUser {
-    currentUser {
+query CurrentUser {
+  currentUser {
+    _id
+    name
+    email
+    phone
+    address
+    myTools {
       _id
       name
+<<<<<<< HEAD
       email
       phone
       address
@@ -42,8 +49,19 @@ export const QUERY_ME = gql`
         }
         invitationCode
       }
+=======
+    }
+    borrowedTools {
+      _id
+    }
+    myGarages {
+      _id
+      garageName
+>>>>>>> 98c4c47aa21f16c888e665a1612be88e5f9086ce
     }
   }
+}
+
 `;
 //for now query all tools
 //TODO make this query on the context.user tool

@@ -50,42 +50,23 @@ export const ADD_USER = gql`
 
 //TODO: change ADD_TOOL mutation code from AddUser code to correct AddTool code
 export const ADD_TOOL = gql`
-  mutation addTool($name: String!, $description: String, $image: String) {
-    addTool(name: $name, description: $description, image: $image) {
+mutation addTool($name: String!, $description: String, $image: String) {
+  addTool(name: $name, description: $description, image: $image) {
+    _id
+    name
+    myTools {
+      _id
       name
       description
       image
-    }
-  }
-`;
-
-export const CREATE_GARAGE = gql`
-  mutation createGarage(
-    $admin: ID!
-    $garageName: String!
-    $description: String
-  ) {
-    createGarage(
-      admin: $admin
-      garageName: $garageName
-      description: $description
-    ) {
-      _id
-      admin {
+      checkout {
         _id
-      }
-      garageName
-      description
-      members {
-        _id
-      }
-      invitationCode
-      messages {
-        _id
+        outDate
+        dueDate
       }
     }
   }
-`;
+}
 
 export const JOIN_GARAGE = gql`
   mutation joinGarage($invitationCode: String!, $member: ID!) {
@@ -95,6 +76,26 @@ export const JOIN_GARAGE = gql`
       description
     }
   }
+`;
+
+//Create Garage
+export const CREATE_GARAGE = gql`
+mutation CreateGarage($garageName: String!, $description: String) {
+  createGarage(garageName: $garageName, description: $description) {
+    admin{
+      _id
+      name
+    }
+    garageName
+    invitationCode
+    description
+    members{
+      _id
+      name
+    }
+    
+  }
+}
 `;
 
 // export const UPDATE_USER = gql``;
