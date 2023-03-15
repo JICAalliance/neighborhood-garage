@@ -84,7 +84,6 @@ export const QUERY_GARAGE = gql`
   }
 `;
 
-<<<<<<< HEAD
 export const QUERY_TOOL = gql`
     query Tool {
         tools {
@@ -95,8 +94,4 @@ export const QUERY_TOOL = gql`
         }
     }
 `;
-=======
-// export const QUERY_TOOL = gql``;
-
->>>>>>> 5f0e0361309385b2e5c74eedc1ad7f2fea56495b
 // export const QUERY_GARAGE = gql``;
