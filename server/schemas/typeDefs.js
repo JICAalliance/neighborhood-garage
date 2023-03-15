@@ -55,8 +55,9 @@ const typeDefs = gql`
     user(_id:ID!): User
     currentUser: User
     tools: [Tool]
+    tool(_id:ID!): Tool
     garages: [Garage]
-
+    garage: Garage
   }
 
   type Mutation {
@@ -65,7 +66,7 @@ const typeDefs = gql`
     updateUser(_id:ID!, name: String, phone: String, address: String): User
     removeUser(_id:ID!): User
 
-    addTool( name: String!, description: String, image: String): User
+    addTool( name: String!, description: String, image: String): Tool
     removeTool(_id:ID!):User
 
     createGarage(admin: ID!, garageName: String!, description: String): Garage
