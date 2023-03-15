@@ -27,6 +27,12 @@ const resolvers = {
             }
             throw new AuthenticationError('You need to be logged in!');
         },
+
+        tool: async (parent, args, context) => {
+            const tool = await Tool.findById(args).populate('checkout');
+
+            return tool;
+        },
         //views all the tools
         tools: async () => {
             return await Tool.find();
@@ -34,6 +40,11 @@ const resolvers = {
         // views all the garages
         garages: async () => {
             return await Garage.find().populate('members').populate('admin');
+        },
+        garage: async (parent, args, context) => {
+            const garage = await Garage.findById(args).populate('members').populate('admin');
+
+            return garage;
         },
 
 
@@ -115,21 +126,22 @@ const resolvers = {
 
         // user can add tool
         // TODO: owner ID in typedef need to be replaced with login data and reflected here as well
-        addTool: async (parent, args, context) => {
+        addTool: async (parent, args) => {
             // if (context.user) {
                 //create tool
-                const imageUrl = await uploadImage(args.image);
+                // const imageUrl = await uploadImage(args.image);
                 const tool = await Tool.create({
                     name: args.name,
                     description: args.description,
-                    image: imageUrl.secure_url
+                    image: args.image
                 });
+                return tool;
                 //add tool to user
-                return await User.findOneAndUpdate(
-                    { _id: context.user._id },
-                    { $addToSet: { myTools: tool._id } },
-                    { new: true }
-                ).populate('myTools');
+                // return await User.findOneAndUpdate(
+                //     { _id: context.user._id },
+                //     { $addToSet: { myTools: tool._id } },
+                //     { new: true }
+                // ).populate('myTools');
             // }
             // throw new AuthenticationError('You need to be logged in!');
         },

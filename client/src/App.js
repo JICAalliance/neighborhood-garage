@@ -1,4 +1,5 @@
 import "./App.scss";
+import React from "react";
 import { Nav, Home, Signup, Login, Profile, CreateGarage, AddTool, EditProfile, JoinGarage } from "./components";
 // import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";

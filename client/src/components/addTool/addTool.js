@@ -2,20 +2,39 @@ import "./addTool.scss";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useMutation } from "@apollo/client";
-// import Auth from "../utils/auth";
+import Auth from "../utils/auth";
 import { ADD_TOOL } from "../utils/mutations";
 
 function AddTool(props) {
   const [formState, setFormState] = useState({ name:"", description: "", image: ""});
-  const [addTool] = useMutation(ADD_TOOL);
+  const [addTool, {error}] = useMutation(ADD_TOOL);
+
+  const convertBase64 = (file) => {
+    //if it's successful or if there's an error
+    return new Promise((resolve, reject) => {
+      //similar to node fs but for JS; will just read through the image file
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+      //on load eventListener - particular to file readers
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      };
+      fileReader.onerror = (error) => {
+        reject(error);
+      };
+    });
+  };
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    const mutationResponse = await addTool({
+    const file = formState.image;
+    console.log(formState);
+    // const tool_image = await convertBase64(file);
+    await addTool({
       variables: {
         name: formState.name,
         description: formState.description,
-        image: formState.image
+        image: 'test'
       },
     });
   };
@@ -52,10 +71,10 @@ function AddTool(props) {
             onChange={handleChange}
           />
         </div>
-        <div className="flex-row space-between my-2">
+        <div className="flex-row space-between my-2 file input">
           <label htmlFor="image">Upload a picture</label>
           <input
-            name="filename"
+            name="image"
             type="file"
             id="image"
             onChange={handleChange}
