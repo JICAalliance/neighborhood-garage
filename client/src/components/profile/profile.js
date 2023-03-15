@@ -1,8 +1,12 @@
 import "./profile.scss";
 import React from 'react'
+
 import { useParams } from "react-router-dom"
 import { useNavigate } from "react-router-dom";
+//import components
 import ViewTool from '../viewTool';
+import AddTool from '../addTool';
+
 import { QUERY_ME } from "../utils/queries";
 import { useQuery } from "@apollo/client";
 import { QUERY_USER_GARAGES } from "../utils/queries";
@@ -31,8 +35,10 @@ const Profile = () => {
     return <div>Loading...</div>;
   }
   console.log("PROFILE DATA", data.currentUser.name);
-  const {name, email, myGarages, myTools, phone, address, borrowedTools}=data.currentUser;
-  console.log("myGarages",myGarages[0]);
+  const { name, email, myGarages, myTools, phone, address, borrowedTools } = data.currentUser;
+  console.log("myGarages", myGarages[0]);
+
+  
 
   return (
     <div id="profile">
@@ -49,6 +55,9 @@ const Profile = () => {
           )
         })}
       </select>
+      <div id='addTool'>
+        <AddTool />
+      </div>
       <div id='viewTool'>
         <ViewTool />
       </div>

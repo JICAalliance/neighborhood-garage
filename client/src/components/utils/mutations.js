@@ -40,9 +40,19 @@ export const ADD_USER = gql`
 export const ADD_TOOL = gql`
 mutation addTool($name: String!, $description: String, $image: String) {
   addTool(name: $name, description: $description, image: $image) {
+    _id
     name
-    description
-    image
+    myTools {
+      _id
+      name
+      description
+      image
+      checkout {
+        _id
+        outDate
+        dueDate
+      }
+    }
   }
 }
 

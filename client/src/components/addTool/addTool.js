@@ -5,9 +5,14 @@ import { useMutation } from "@apollo/client";
 import Auth from "../utils/auth";
 import { ADD_TOOL } from "../utils/mutations";
 
+// import ViewTool from '../viewTool';
+
+
 function AddTool(props) {
+  console.log(props);
   const [formState, setFormState] = useState({ name: "", description: "", image: "" });
   const [addTool, { error }] = useMutation(ADD_TOOL);
+  // const [toolSubmit, setToolSubmit] = useState(false);
 
   const convertBase64 = (file) => {
     //if it's successful or if there's an error
@@ -31,14 +36,19 @@ function AddTool(props) {
     console.log(formState.name);
     // const tool_image = await convertBase64(file);
     try {
-      const tool = await addTool({
+      const user = await addTool({
         variables: {
           name: formState.name,
           description: formState.description,
           image: "test"
         }
-      })
-      console.log(tool);
+      });
+      if (user){
+      console.log("USER AddTool", user);
+      };
+ 
+      // window.location.reload();
+
     } catch (e) {
       console.log(e);
     }
@@ -55,9 +65,9 @@ function AddTool(props) {
   return (
     <div className="container my-1 addTool-container">
 
-      <h2>Create A Tool</h2>
+      <h2>Add A Tool</h2>
       <form onSubmit={handleFormSubmit} className="addTool-form">
-        <div className="flex-row space-between my-2">
+        <div className="flex-row space-between my-1">
           <label htmlFor="name">Name:</label>
           <input
             placeholder="tool name"
@@ -67,7 +77,7 @@ function AddTool(props) {
             onChange={handleChange}
           />
         </div>
-        <div className="flex-row space-between my-2">
+        <div className="flex-row space-between my-1">
           <label htmlFor="description">Description:</label>
           <textarea
             placeholder="Enter a description"
@@ -76,7 +86,7 @@ function AddTool(props) {
             onChange={handleChange}
           />
         </div>
-        <div className="flex-row space-between my-2 file input">
+        <div className="flex-row space-between my-1 file input">
           <label htmlFor="image">Upload a picture</label>
           <input
             name="image"

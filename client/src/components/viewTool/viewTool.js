@@ -1,16 +1,18 @@
 import "./viewTool.scss";
 import React from 'react'
 import { Card, Icon } from 'semantic-ui-react'
-// import { useState } from "react";
+import { useState } from "react";
 // import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 // import Auth from "../utils/auth";
 import { QUERY_MY_TOOLS } from "../utils/queries";
+// import AddTool from '../addTool';
 
 
 function  ViewTool(props) {
   // const [formState, setFormState] = useState({ name:"", description: "", image: ""});
   
+  // const [toolSubmit, setToolSubmit] = useState('false');
 
   const { loading, data } = useQuery(QUERY_MY_TOOLS);
 
@@ -28,7 +30,9 @@ function  ViewTool(props) {
 
     return (
       <div className="container my-1 viewTool-container">
-  
+     
+        {/* <AddTool toolSubmit={toolSubmit} setToolSubmit={setToolSubmit}/> */}
+      
         <h2>My Inventory of Tools</h2>
   
         <div id='displayTools'>

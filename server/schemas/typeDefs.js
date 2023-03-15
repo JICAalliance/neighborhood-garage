@@ -67,7 +67,7 @@ const typeDefs = gql`
     updateUser(_id:ID!, name: String, phone: String, address: String): User
     removeUser(_id:ID!): User
 
-    addTool( name: String!, description: String, image: String): Tool
+    addTool( name: String!, description: String, image: String): User
     removeTool(_id:ID!):User
 
     createGarage(admin: ID!, garageName: String!, description: String): Garage

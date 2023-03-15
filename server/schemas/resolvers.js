@@ -132,8 +132,8 @@ const resolvers = {
 
         // user can add tool
         // TODO: owner ID in typedef need to be replaced with login data and reflected here as well
-        addTool: async (parent, args) => {
-            // if (context.user) {
+        addTool: async (parent, args,context) => {
+            if (context.user) {
                 //create tool
                 // const imageUrl = await uploadImage(args.image);
                 const tool = await Tool.create({
@@ -141,15 +141,17 @@ const resolvers = {
                     description: args.description,
                     image: args.image
                 });
-                return tool;
+                
                 //add tool to user
-                // return await User.findOneAndUpdate(
-                //     { _id: context.user._id },
-                //     { $addToSet: { myTools: tool._id } },
-                //     { new: true }
-                // ).populate('myTools');
-            // }
-            // throw new AuthenticationError('You need to be logged in!');
+                return await User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { $addToSet: { myTools: tool._id } },
+                    { new: true }
+                ).populate('myTools');
+
+                // return tool;
+            }
+            throw new AuthenticationError('You need to be logged in!');
         },
         // user removes tool
         removeTool: async (parent, args, context) => {
