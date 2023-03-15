@@ -1,6 +1,6 @@
 import "./App.scss";
 import React from "react";
-import { Nav, Home, Signup, Login, Profile, CreateGarage, AddTool, EditProfile, JoinGarage } from "./components";
+import { Nav, Home, Signup, Login, Profile, CreateGarage, AddTool, EditProfile, JoinGarage, ViewGarage } from "./components";
 // import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import {
@@ -63,6 +63,7 @@ function App() {
               <Route path="/addTool" element={<AddTool />} />
               <Route path="/editProfile" element={<EditProfile />} />
               <Route path="/joinGarage" element={<JoinGarage />} />
+              <Route path="/viewGarage" element={<ViewGarage />} />
             </Routes>
           </GarageProvider>
         </div>
