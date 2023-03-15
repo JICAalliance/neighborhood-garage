@@ -21,5 +21,14 @@ export const QUERY_GARAGE = gql`
   }
 `;
 
-// export const QUERY_TOOL = gql``;
+export const QUERY_TOOL = gql`
+    query Tool {
+        tools {
+            _id
+            name
+            description
+            image
+        }
+    }
+`;
 // export const QUERY_GARAGE = gql``;

@@ -38,15 +38,14 @@ export const ADD_USER = gql`
 
 //TODO: change ADD_TOOL mutation code from AddUser code to correct AddTool code
 export const ADD_TOOL = gql`
-mutation AddTool($name: String!, $description: String, $image: String) {
+mutation addTool($name: String!, $description: String, $image: String) {
   addTool(name: $name, description: $description, image: $image) {
-    tool{
-      name
-      description
-      image
-    }
+    name
+    description
+    image
   }
 }
+
 `;;
 
 // export const UPDATE_USER = gql``;

@@ -6,8 +6,8 @@ import Auth from "../utils/auth";
 import { ADD_TOOL } from "../utils/mutations";
 
 function AddTool(props) {
-  const [formState, setFormState] = useState({ name:"", description: "", image: ""});
-  const [addTool, {error}] = useMutation(ADD_TOOL);
+  const [formState, setFormState] = useState({ name: "", description: "", image: "" });
+  const [addTool, { error }] = useMutation(ADD_TOOL);
 
   const convertBase64 = (file) => {
     //if it's successful or if there's an error
@@ -28,15 +28,20 @@ function AddTool(props) {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     const file = formState.image;
-    console.log(formState);
+    console.log(formState.name);
     // const tool_image = await convertBase64(file);
-    await addTool({
-      variables: {
-        name: formState.name,
-        description: formState.description,
-        image: 'test'
-      },
-    });
+    try {
+      const tool = await addTool({
+        variables: {
+          name: formState.name,
+          description: formState.description,
+          image: "test"
+        }
+      })
+      console.log(tool);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   const handleChange = (event) => {
