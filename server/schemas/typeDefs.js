@@ -70,7 +70,7 @@ const typeDefs = gql`
     addTool( name: String!, description: String, image: String): User
     removeTool(_id:ID!):User
 
-    createGarage(admin: ID!, garageName: String!, description: String): Garage
+    createGarage(garageName: String!, description: String): Garage
     deleteGarage(admin:ID!,invitationCode: String!): Garage
     joinGarage(invitationCode: String!, member:ID!): Garage
     leaveGarage(invitationCode: String!, member:ID!): User

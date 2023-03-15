@@ -85,11 +85,11 @@ const resolvers = {
         // front end must always set the value to what was originally there so a field wont be nulled accidentally
         updateUser: async (parent, args) => {
             // if (context.user) {
-                return await User.findByIdAndUpdate(
-                    { _id: args._id },
-                    { name: args.name, phone: args.phone, address: args.address },
-                    { new: true, runValidators: true }
-                )
+            return await User.findByIdAndUpdate(
+                { _id: args._id },
+                { name: args.name, phone: args.phone, address: args.address },
+                { new: true, runValidators: true }
+            )
             // }
             // If user attempts to execute this mutation and isn't logged in, throw an error
             // throw new AuthenticationError('You need to be logged in!');
@@ -97,42 +97,42 @@ const resolvers = {
         // removes user
         removeUser: async (parent, args, context) => {
             // if (context.user) {
-                const user = await User.findByIdAndDelete(args).populate('myTools');
-                //also delete the associated tools
-                await Tool.deleteMany({ _id: { $in: user.myTools } });
+            const user = await User.findByIdAndDelete(args).populate('myTools');
+            //also delete the associated tools
+            await Tool.deleteMany({ _id: { $in: user.myTools } });
 
-                //find list of all garages that this user is admin of
-                const adminGarages = await Garage.find(
-                    { admin: args._id }
+            //find list of all garages that this user is admin of
+            const adminGarages = await Garage.find(
+                { admin: args._id }
+            );
+
+            //delete all the garages this user is admin of
+            const deletedGarage = await Garage.deleteMany({ admin: args._id });
+
+            //for the removed garages remove it from users who have it as one of their garages
+            adminGarages.forEach(async (garage) => {
+                //for each garage deleted remove it from the user's array
+                await User.updateMany(
+                    { myGarages: garage._id },
+                    { $pull: { myGarages: garage._id } },
                 );
+            });
 
-                //delete all the garages this user is admin of
-                const deletedGarage = await Garage.deleteMany({ admin: args._id });
+            // remove the user from garages that the user is a part off
+            await Garage.updateMany(
+                { members: args._id },
+                { $pull: { members: args._id } },
+                { new: true }
+            );
 
-                //for the removed garages remove it from users who have it as one of their garages
-                adminGarages.forEach(async (garage) => {
-                    //for each garage deleted remove it from the user's array
-                    await User.updateMany(
-                        { myGarages: garage._id },
-                        { $pull: { myGarages: garage._id } },
-                    );
-                });
-
-                // remove the user from garages that the user is a part off
-                await Garage.updateMany(
-                    { members: args._id },
-                    { $pull: { members: args._id } },
-                    { new: true }
-                );
-
-                return user;
+            return user;
             // }
             // throw new AuthenticationError('You need to be logged in!');
         },
 
         // user can add tool
         // TODO: owner ID in typedef need to be replaced with login data and reflected here as well
-        addTool: async (parent, args,context) => {
+        addTool: async (parent, args, context) => {
             if (context.user) {
                 //create tool
                 // const imageUrl = await uploadImage(args.image);
@@ -141,7 +141,7 @@ const resolvers = {
                     description: args.description,
                     image: args.image
                 });
-                
+
                 //add tool to user
                 return await User.findOneAndUpdate(
                     { _id: context.user._id },
@@ -156,40 +156,47 @@ const resolvers = {
         // user removes tool
         removeTool: async (parent, args, context) => {
             // if (context.user) {
-                // delete tool but capture its data
-                const removedTool = await Tool.findByIdAndDelete(args);
+            // delete tool but capture its data
+            const removedTool = await Tool.findByIdAndDelete(args);
 
-                //remove the tool from the user (one to one relationship)
-                return await User.findOneAndUpdate(
-                    { myTools: args._id},
-                    { $pull: { myTools: args._id } },
-                    { new: true },
-                ).populate('myTools');
+            //remove the tool from the user (one to one relationship)
+            return await User.findOneAndUpdate(
+                { myTools: args._id },
+                { $pull: { myTools: args._id } },
+                { new: true },
+            ).populate('myTools');
             // }
             // throw new AuthenticationError('You need to be logged in!');
         },
         // garage creation accepts userId (atm ID but TODO: login details), garageName and description
         // create Garage and return it with admin and members populated, the user who created it automatically becomes a member
-        createGarage: async (parent, args) => {
-            //create the garage
-            const newGarage = await Garage.create(args);
+        createGarage: async (parent, args, context) => {
+            if (context.user) {
+                // create the garage
+                const newGarage = await Garage.create
+                ({
+                    admin:context.user._id, 
+                    garageName: args.garageName,
+                    description: args.description
+                    });
 
-            // push user as a member
-            const garage = await Garage.findByIdAndUpdate(
-                { _id: newGarage._id },
-                { $addToSet: { members: args.admin } },
-                { new: true }
-            ).populate('admin').populate('members');
+                // push user as a member
+                const garage = await Garage.findByIdAndUpdate(
+                    { _id: newGarage._id },
+                    { $addToSet: { members: args.admin } },
+                    { new: true }
+                ).populate('admin').populate('members');
 
-            //push the garage reference into the user's myGarage
-            await User.findByIdAndUpdate(
-                { _id: args.admin },
-                { $addToSet: { myGarages: newGarage._id } },
-                { new: true }
-            );
+                //push the garage reference into the user's myGarage
+                await User.findByIdAndUpdate(
+                    { _id: context.user._id },
+                    { $addToSet: { myGarages: newGarage._id } },
+                    { new: true }
+                );
 
-
-            return garage;
+                return garage;
+            }
+            throw new AuthenticationError('You need to be logged in!');
         },
         // deleteGarage will check is the user's ID matches the admin ID, 
         // deleting Garage will not delete tools nor users but in the future the messages
@@ -251,23 +258,23 @@ const resolvers = {
 
         addCheckout: async (parent, args, context) => {
             // if (context.user) {
-                //create tool
-                const checkout = await Checkout.create({
-                    outDate: args.name,
-                    dueDate: args.description,
-                });
+            //create tool
+            const checkout = await Checkout.create({
+                outDate: args.name,
+                dueDate: args.description,
+            });
 
-                await Tool.findOneAndUpdate(
-                    { _id: args.toolId},
-                    { checkout: checkout},
-                    { new: true}
-                ).populate('checkout');
-                //add tool to user
-                return await User.findOneAndUpdate(
-                    { _id: context.user._id },
-                    { $addToSet: { borrowedTools: checkout._id } },
-                    { new: true }
-                ).populate('borrowedTools');
+            await Tool.findOneAndUpdate(
+                { _id: args.toolId },
+                { checkout: checkout },
+                { new: true }
+            ).populate('checkout');
+            //add tool to user
+            return await User.findOneAndUpdate(
+                { _id: context.user._id },
+                { $addToSet: { borrowedTools: checkout._id } },
+                { new: true }
+            ).populate('borrowedTools');
             // }
             // throw new AuthenticationError('You need to be logged in!');
         },
@@ -275,20 +282,20 @@ const resolvers = {
         // user removes tool
         deleteCheckout: async (parent, args, context) => {
             // if (context.user) {
-                // delete tool but capture its data
-                const removedCheckout = await Checkout.findByIdAndDelete(args);
+            // delete tool but capture its data
+            const removedCheckout = await Checkout.findByIdAndDelete(args);
 
-                await Tool.findOneAndUpdate(
-                    { checkout: args._id},
-                    { checkout: null},
-                    { new: true}
-                ).populate('checkout');
-                //remove the tool from the user (one to one relationship)
-                return await User.findOneAndUpdate(
-                    { borrowedTools: args._id },
-                    { $pull: { borrowedTools: args._id } },
-                    { new: true },
-                ).populate('myTools');
+            await Tool.findOneAndUpdate(
+                { checkout: args._id },
+                { checkout: null },
+                { new: true }
+            ).populate('checkout');
+            //remove the tool from the user (one to one relationship)
+            return await User.findOneAndUpdate(
+                { borrowedTools: args._id },
+                { $pull: { borrowedTools: args._id } },
+                { new: true },
+            ).populate('myTools');
             // }
             // throw new AuthenticationError('You need to be logged in!');
         },

@@ -58,10 +58,30 @@ mutation addTool($name: String!, $description: String, $image: String) {
 
 `;;
 
+//Create Garage
+export const CREATE_GARAGE = gql`
+mutation CreateGarage($garageName: String!, $description: String) {
+  createGarage(garageName: $garageName, description: $description) {
+    admin{
+      _id
+      name
+    }
+    garageName
+    invitationCode
+    description
+    members{
+      _id
+      name
+    }
+    
+  }
+}
+`;
+
 // export const UPDATE_USER = gql``;
 // export const REMOVE_USER = gql``;
 // export const REMOVE_TOOL = gql``;
-// export const CREATE_GARAGE = gql``;
+
 // export const DELETE_GARAGE = gql``;
 // export const JOIN_GARAGE = gql``;
 // export const LEAVE_GARAGE = gql``;
