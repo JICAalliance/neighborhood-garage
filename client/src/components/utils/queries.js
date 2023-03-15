@@ -14,22 +14,27 @@ export const QUERY_SINGLE_USER = gql`
 `;
 
 export const QUERY_ME = gql`
-  query CurrentUser {
-    currentUser {
+query CurrentUser {
+  currentUser {
+    _id
+    name
+    email
+    phone
+    address
+    myTools {
       _id
       name
-      email
-      phone
-      address
-      myTools {
-        _id
-        name
-      }
-      borrowedTools {
-        _id
-      }
+    }
+    borrowedTools {
+      _id
+    }
+    myGarages {
+      _id
+      garageName
     }
   }
+}
+
 `;
 //for now query all tools
 //TODO make this query on the context.user tool
