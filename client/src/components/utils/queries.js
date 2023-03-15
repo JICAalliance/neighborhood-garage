@@ -1,17 +1,40 @@
 import { gql } from "@apollo/client";
 
 export const QUERY_SINGLE_USER = gql`
-  query User($id: ID!) {
-    user(_id: $id) {
+query User($id: ID!) {
+  user(_id: $id) {
+    _id
+    name
+    phone
+    address
+    myTools {
       _id
       name
-      myTools {
-        _id
-        name
-      }
     }
   }
+}
 `;
+export const QUERY_USERS = gql`
+query Users {
+  users {
+    _id
+    name
+    email
+    phone
+    address
+    myTools {
+      _id
+      name
+      
+    }
+    myGarages {
+      garageName
+    }
+
+  }
+}
+`;
+
 
 export const QUERY_ME = gql`
 query CurrentUser {
@@ -22,29 +45,28 @@ query CurrentUser {
     phone
     address
     myTools {
-       id
-       name
-      }
-   borrowedTools {
-        _id
-      }
-    myGarages {
-        _id
-        admin {
-          _id
-          name
-        }
-        garageName
-        description
-        members {
-          _id
-          name
-        }
-        invitationCode
-      }
+      _id
+      name
     }
+    borrowedTools {
+      _id
+    }
+    myGarages {
+      _id
+      admin{
+        _id
+        name
+      }
+      garageName
+      description
+      members {
+        _id
+        name
+      }
+      invitationCode
+    }
+  }
 }
-
 `;
 //for now query all tools
 //TODO make this query on the context.user tool
@@ -83,15 +105,33 @@ export const QUERY_MY_TOOLS = gql`
     }
   }
 `;
-
+//query the garage by ID not by invitation code
 export const QUERY_GARAGE = gql`
-  query Garage {
-    garages {
+query Garage($id: ID!) {
+  garage(_id: $id) {
+    _id
+    admin{
       _id
-      garageName
-      description
+      name
+    }
+    invitationCode
+    garageName
+    description
+    members {
+      _id
+      name
+      phone
+      address
+      myTools {
+        _id
+        checkout {
+          _id
+          dueDate
+        }
+      }
     }
   }
+}
 `;
 
 export const QUERY_TOOL = gql`
