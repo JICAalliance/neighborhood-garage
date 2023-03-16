@@ -33,7 +33,10 @@ const resolvers = {
         //find owner of tool
         toolOwner: async (parents, args, context) =>{
             //find user if it contains the checkout ID
-            const owner = await User.findOne({})
+            console.log('args', args);
+            const owner = await User.findOne({myTools: args._id}).populate('borrowedTools myTools');
+            console.log("resolver line 37", owner);
+            return owner;
         },
         //views specific tools
         tool: async (parent, args, context) => {
