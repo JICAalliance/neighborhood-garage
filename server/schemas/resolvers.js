@@ -3,6 +3,8 @@ const { signToken } = require('../utils/auth');
 const { User, Tool, Garage } = require('../models');
 const uploadImage = require('../utils/uploadImage');
 
+
+
 // TODO: NEED TO ADD AUTHENTICATION TO ALL MUTATIONS when all mutations are done and connected to the front end so context can be injected
 
 
@@ -12,16 +14,6 @@ const resolvers = {
         // views all users
         users: async () => {
             return await User.find().populate('myTools').populate('borrowedTools').populate('myGarages');
-        },
-        usersGarage: async (args) => {
-            // if (context.user) {
-            return await User.find(
-                {
-                    "myGarages": {$elemMatch: {_id: args}}
-                }
-            ).populate('myTools').populate('borrowedTools').populate('myGarages');
-            // }
-            // throw new AuthenticationError('You need to be logged in!');
         },
         //views a specific user and can be user to view the user's tools
         user: async (parent, args, context) => {
@@ -33,11 +25,11 @@ const resolvers = {
         //returns the user with all the populated array fields
         currentUser: async (parents, args, context) => {
             if (context.user) {
-                return User.findOne({ _id: context.user._id }).populate('myTools').populate('borrowedTools').populate('myGarages');
+                return User.findOne({ _id: context.user._id }).populate('myTools').populate('myTools.name').populate('borrowedTools').populate('myGarages');
             }
             throw new AuthenticationError('You need to be logged in!');
         },
-
+        //views specific tools
         tool: async (parent, args, context) => {
             const tool = await Tool.findById(args).populate('checkout');
 
@@ -58,7 +50,21 @@ const resolvers = {
             return await Garage.find().populate('members').populate('admin');
         },
         garage: async (parent, args, context) => {
-            const garage = await Garage.findById(args).populate('members').populate('members.myTools').populate('members.myTools.checkout').populate('admin');
+            // const garage = await Garage.findById(args).populate('admin').populate('members.myTools.name').populate('members.myTools.checkout').populate('admin');
+
+            const garage = await Garage.findById(args).populate('admin')
+            .populate({
+                path: 'members',
+                model: 'User',
+                populate: {
+                    path: 'myTools',
+                    model: 'Tool',
+                    populate: {
+                        path:'checkout',
+                        model: 'Checkout',
+                    }
+                }
+            });
 
             return garage;
         },

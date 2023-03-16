@@ -17,6 +17,7 @@ const typeDefs = gql`
     user: User
   }
 
+
   type Tool {
     _id: ID
     name: String
@@ -53,11 +54,12 @@ const typeDefs = gql`
   type Query {
     users: [User]
     user(_id:ID!): User
-    usersGarage(_id:ID!): [User]
+  
     currentUser: User
     tools: [Tool]
     myTools: User
     tool(_id:ID!): Tool
+
     garages: [Garage]
     garage(_id:ID!): Garage
   }
@@ -70,6 +72,7 @@ const typeDefs = gql`
 
     addTool( name: String!, description: String, image: String): User
     removeTool(_id:ID!):User
+
 
     createGarage(garageName: String!, description: String): Garage
     deleteGarage(admin:ID!,invitationCode: String!): Garage
