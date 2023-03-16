@@ -1,6 +1,17 @@
 import "./App.scss";
 import React from "react";
-import { Nav, Home, Signup, Login, Profile, CreateGarage, AddTool, EditProfile, JoinGarage, ViewGarage } from "./components";
+import {
+  Nav,
+  Home,
+  Signup,
+  Login,
+  Profile,
+  CreateGarage,
+  AddTool,
+  EditProfile,
+  JoinGarage,
+  ViewGarage,
+} from "./components";
 // import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import {
@@ -11,7 +22,7 @@ import {
   createHttpLink,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
-import { GarageProvider } from "./components/utils/GlobalState";
+import { ContextProvider } from "./components/utils/GlobalState";
 
 //error handling on Apollo
 import { onError } from "@apollo/client/link/error";
@@ -20,8 +31,8 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors)
     graphQLErrors.forEach(({ message, locations, path }) =>
       console.log(
-        `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
-      ),
+        `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+      )
     );
 
   if (networkError) console.log(`[Network error]: ${networkError}`);
@@ -45,7 +56,7 @@ const client = new ApolloClient({
   // link: from([errorLink, httpLink]),
   // link: authLink.concat(errorLink, httpLink),
   // the authLink sends the token to the back end, please keep line 48
-  link:  from([errorLink,authLink.concat(httpLink)]),
+  link: from([errorLink, authLink.concat(httpLink)]),
   cache: new InMemoryCache(),
 });
 
@@ -54,12 +65,13 @@ function App() {
     <ApolloProvider client={client}>
       <Router>
         <div>
-          <GarageProvider>
+          <ContextProvider>
             <Nav />
             <Routes>
               <Route path="/" element={<Home />} />
               {/* <Route path="/signup" element={<Signup />} /> */}
               <Route path="/login" element={<Login />} />
+              {/* <Route path="/login" element={<Login setUser={value.setUser} />} /> */}
               <Route path="/profile" element={<Profile />} />
               <Route path="/createGarage" element={<CreateGarage />} />
               <Route path="/addTool" element={<AddTool />} />
@@ -67,7 +79,7 @@ function App() {
               <Route path="/joinGarage" element={<JoinGarage />} />
               <Route path="/viewGarage/:garageId" element={<ViewGarage />} />
             </Routes>
-          </GarageProvider>
+          </ContextProvider>
         </div>
       </Router>
     </ApolloProvider>

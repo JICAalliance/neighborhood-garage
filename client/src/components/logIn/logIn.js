@@ -17,6 +17,7 @@ function Login(props) {
       });
       const userId = mutationResponse.data.login.user._id;
       const token = mutationResponse.data.login.token;
+      props.setUser(mutationResponse.data.login.user);
       Auth.login(token);
     } catch (e) {
       console.log(e);
