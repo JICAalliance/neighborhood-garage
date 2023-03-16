@@ -76,8 +76,8 @@ const typeDefs = gql`
     joinGarage(invitationCode: String!, member:ID!): Garage
     leaveGarage(invitationCode: String!, member:ID!): User
 
-    addCheckout(outDate: Date!, dueDate: Date!, toolId: ID!): User
-    deleteCheckout(_id:ID!): User
+    addCheckout(outDate: Date!, dueDate: Date!, toolId: ID!): Tool
+    deleteCheckout(_id:ID!): Tool
   }
 `;
 
