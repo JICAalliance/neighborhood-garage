@@ -1,6 +1,6 @@
 import React from "react";
 import { useQuery } from "@apollo/client";
-import { QUERY_GARAGE_TOOLS} from "../utils/queries";
+import { QUERY_GARAGE_TOOLS } from "../utils/queries";
 import ClipboardCopy from "../clipboardCopy";
 import ToolCard from "../toolCard";
 
@@ -23,36 +23,40 @@ const GarageList = ({ garage }) => {
     //grab ALL TOOLS ID
     const garageTools = [];
     memberArray.forEach(member => {
-      member.myTools.forEach(tool => {
-        garageTools.push(tool);
+  
+      if (member){
+        member.myTools.forEach(tool => {
+          garageTools.push(tool);   
       })
+    }
 
-    });
+  });
 
-    return (
-      <div key={garage._id} id='{garage._id}'>
-        <h3>Welcome to {garage.garageName}!!!</h3>
 
-        <h4 id='invitationCode' key={garage.invitationCode}><ClipboardCopy copyText={garage.invitationCode} /></h4>
+  return (
+    <div key={garage._id} id='{garage._id}'>
+      <h3>Welcome to {garage.garageName}!!!</h3>
 
-        <h5>Admin: {garage.admin.name}</h5>
+      <h4 id='invitationCode' key={garage.invitationCode}><ClipboardCopy copyText={garage.invitationCode} /></h4>
 
-        <h5>Members:
-          {memberArray.map((member) => {
+      <h5>Admin: {garage.admin.name}</h5>
 
-            return <li key={member._id} id='{member._id} member.name'> {member.name} </li>
-          })}
-        </h5>
+      <h5>Members:
+        {memberArray.map((member) => {
 
-        <h4>Garage Tools:</h4>
-        <div id='displayTools'>
+          return <li key={member._id} id='{member._id} member.name'> {member.name} </li>
+        })}
+      </h5>
 
-          <ToolCard tools={garageTools} />
+      <h4>Garage Tools:</h4>
+      <div id='displayTools'>
 
-        </div>
+        <ToolCard tools={garageTools} />
+
       </div>
-    );
-  }
+    </div>
+  );
+}
 
 };
 

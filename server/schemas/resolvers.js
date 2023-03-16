@@ -199,7 +199,7 @@ const resolvers = {
                 // push user as a member
                 const garage = await Garage.findByIdAndUpdate(
                     { _id: newGarage._id },
-                    { $addToSet: { members: args.admin } },
+                    { $addToSet: { members: newGarage.admin } },
                     { new: true }
                 ).populate('admin').populate('members');
 

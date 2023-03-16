@@ -15,7 +15,7 @@ function ViewTool(props) {
   // const [toolSubmit, setToolSubmit] = useState('false');
 
   const { loading, data } = useQuery(QUERY_MY_TOOLS);
-
+  let tools = [];
 
   if (loading) {
     <div>
@@ -24,9 +24,9 @@ function ViewTool(props) {
   };
   if (data) {
 
-    console.log(data.myTools.myTools);
-    const tools = data.myTools.myTools;
-
+    if (data.myTools.myTools) {
+      tools = data.myTools.myTools;
+    };
 
     return (
       <div className="container my-4 viewTool-container">
