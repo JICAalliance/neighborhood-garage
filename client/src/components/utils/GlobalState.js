@@ -1,23 +1,39 @@
-import React, { createContext, useContext } from "react";
-import { useToolReducer } from "./reducers";
+import React, { useState, createContext, useContext } from "react";
+// import { useToolReducer } from "./reducers";
 
-const GarageContext = createContext();
-const { Provider } = GarageContext;
+const initialState = {name: "Clark Kent", email: "superman@gmail.com"};
 
-const GarageProvider = ({ value = [], ...props }) => {
-  const [state, dispatch] = useToolReducer({
-    // products: [],
-    // cart: [],
-    // cartOpen: false,
-    // categories: [],
-    // currentCategory: '',
-  });
+const stateContext = createContext();
+const { Provider } = stateContext;
 
-  return <Provider value={[state, dispatch]} {...props} />;
+const ContextProvider = ({ children }) => {
+  const [user, setUser] = useState(initialState);
+  return (
+    <stateContext.Provider value={[user, setUser]}>
+      {children}
+    </stateContext.Provider>
+  );
+// const ContextProvider = ({ value = [], ...props }) => {
+//   const [user, setUser] = useState(initialState);
+//   return (
+//     <stateContext.Provider value={[user, setUser]}>
+//       {props.children}
+//     </stateContext.Provider>
+//   );
+
+  // const [state, dispatch] = useToolReducer({
+  //   // products: [],
+  //   // cart: [],
+  //   // cartOpen: false,
+  //   // categories: [],
+  //   // currentCategory: '',
+  // });
+
+  // return <Provider value={[state, dispatch]} {...props} />;
 };
 
-const useGarageContext = () => {
-  return useContext(GarageContext);
+const useStateContext = () => {
+  return useContext(stateContext);
 };
 
-export { GarageProvider, useGarageContext };
+export { ContextProvider, useStateContext };
