@@ -5,6 +5,7 @@ const uploadImage = require('../utils/uploadImage');
 
 
 
+
 // TODO: NEED TO ADD AUTHENTICATION TO ALL MUTATIONS when all mutations are done and connected to the front end so context can be injected
 
 
@@ -25,9 +26,14 @@ const resolvers = {
         //returns the user with all the populated array fields
         currentUser: async (parents, args, context) => {
             if (context.user) {
-                return User.findOne({ _id: context.user._id }).populate('myTools').populate('myTools.name').populate('borrowedTools').populate('myGarages');
+                return await User.findOne({ _id: context.user._id }).populate('myTools').populate('myTools.name').populate('borrowedTools').populate('myGarages');
             }
             throw new AuthenticationError('You need to be logged in!');
+        },
+        //find owner of tool
+        toolOwner: async (parents, args, context) =>{
+            //find user if it contains the checkout ID
+            const owner = await User.findOne({})
         },
         //views specific tools
         tool: async (parent, args, context) => {
@@ -37,7 +43,7 @@ const resolvers = {
         },
         myTools: async (parent, args, context) => {
             if (context.user) {
-                return User.findOne({ _id: context.user._id }).populate('myTools');
+                return await User.findOne({ _id: context.user._id }).populate('myTools');
             }
             throw new AuthenticationError('You need to be logged in!');
         },

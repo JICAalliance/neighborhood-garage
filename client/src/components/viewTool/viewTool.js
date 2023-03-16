@@ -37,7 +37,7 @@ function ViewTool(props) {
         {/* map through tool and display via card */}
         <div id='displayTools'>
 
-          <ToolCard tools={tools} />
+          <ToolCard tools={tools} checkoutModal={false} />
 
         </div>
 

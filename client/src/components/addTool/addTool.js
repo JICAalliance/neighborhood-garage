@@ -98,7 +98,7 @@ function AddTool(props) {
             onChange={handleChange}
           />
         </div>
-        <div className="flex-row space-between my-1 file input">
+        <div className="flex-row space-between my-1 ui file input">
           <label htmlFor="image">Upload a picture</label>
           <input
             name="image"

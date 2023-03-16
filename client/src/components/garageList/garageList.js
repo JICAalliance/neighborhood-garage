@@ -51,7 +51,7 @@ const GarageList = ({ garage }) => {
       <h4>Garage Tools:</h4>
       <div id='displayTools'>
 
-        <ToolCard tools={garageTools} />
+        <ToolCard tools={garageTools} checkoutModal={true}/>
 
       </div>
     </div>
