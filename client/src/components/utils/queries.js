@@ -68,6 +68,22 @@ query CurrentUser {
   }
 }
 `;
+export const QUERY_TOOL_OWNER = gql`
+query ToolOwner($id: ID!) {
+  toolOwner(_id: $id) {
+    _id
+    name
+    email
+    phone
+    address
+    borrowedTools {
+      _id
+      outDate
+      dueDate
+    }
+  }
+}
+`;
 //for now query all tools
 //TODO make this query on the context.user tool
 export const QUERY_TOOLS = gql`

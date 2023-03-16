@@ -56,6 +56,7 @@ const typeDefs = gql`
     user(_id:ID!): User
   
     currentUser: User
+    toolOwner(_id:ID!): User
     tools: [Tool]
     myTools: User
     tool(_id:ID!): Tool

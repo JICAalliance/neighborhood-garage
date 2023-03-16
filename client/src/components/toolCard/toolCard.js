@@ -1,11 +1,14 @@
 import './toolCard.scss';
 import React from "react";
+
 import { Card, Icon, Button, Image } from 'semantic-ui-react';
 import ToolCheckout from '../toolCheckout';
 
+
 const ToolCard = ({ tools, checkoutModal }) => {
 
-  //find owner of tool
+
+
 
   return <div id='tool-container'>
     {/* map through tool and display via card */}

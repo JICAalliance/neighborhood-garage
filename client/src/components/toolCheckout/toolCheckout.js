@@ -1,11 +1,25 @@
 import './toolCheckout.scss';
 import React from "react";
 import { Button, Header, Image, Modal } from 'semantic-ui-react'
+import { QUERY_TOOL_OWNER } from '../utils/queries';
+import { useQuery } from '@apollo/client';
 
 const ToolCheckout = ({ _id, name, description, image, checkout }) => {
     const [open, setOpen] = React.useState(false);
+    const [borrowed, setBorrowed] = React.useState(false);
 
+  //find owner of tool
+  const {loading, data} =useQuery(QUERY_TOOL_OWNER, {
+    variables: {id: _id}
+  });
 
+  //find borrower of tool
+  if (data){
+    console.log(_id);
+    console.log("toolCheckout ", data);
+    const owner=data.toolOwner;
+    console.log("toolOwner ", owner);
+  
 
     return (
         <Modal
@@ -22,6 +36,9 @@ const ToolCheckout = ({ _id, name, description, image, checkout }) => {
                     <p>
                         {description}
                     </p>
+                    <p id='{owner.id} owner'>Owner: {owner.name}</p>
+                    <p id='ownerContact'>Owner Contact: {owner.phone}</p>
+                    <p id='borrower'>Borrower: </p>
 
                     {/* <p>Is it okay to use this photo?</p> */}
                 </Modal.Description>
@@ -41,7 +58,7 @@ const ToolCheckout = ({ _id, name, description, image, checkout }) => {
             </Modal.Actions>
         </Modal>
     );
-
+    }
 };
 
 export default ToolCheckout;
