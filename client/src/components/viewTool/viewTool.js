@@ -1,60 +1,47 @@
 import "./viewTool.scss";
 import React from 'react'
-import { Card, Icon } from 'semantic-ui-react'
+
 import { useState } from "react";
 // import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 // import Auth from "../utils/auth";
 import { QUERY_MY_TOOLS } from "../utils/queries";
-// import AddTool from '../addTool';
+import ToolCard from "../toolCard";
 
 
-function  ViewTool(props) {
+function ViewTool(props) {
   // const [formState, setFormState] = useState({ name:"", description: "", image: ""});
-  
+
   // const [toolSubmit, setToolSubmit] = useState('false');
 
   const { loading, data } = useQuery(QUERY_MY_TOOLS);
+  let tools = [];
 
-
-  if (loading){
+  if (loading) {
     <div>
       <h2>Searching for tools...</h2>
     </div>
   };
-  if(data){
+  if (data) {
 
-    console.log(data.myTools.myTools);
-    const tools=data.myTools.myTools;
-
+    if (data.myTools.myTools) {
+      tools = data.myTools.myTools;
+    };
 
     return (
-      <div className="container my-1 viewTool-container">
-     
+      <div className="container my-4 viewTool-container">
+
         {/* <AddTool toolSubmit={toolSubmit} setToolSubmit={setToolSubmit}/> */}
-      
+
         <h2>My Inventory of Tools</h2>
-  
+        {/* map through tool and display via card */}
         <div id='displayTools'>
-          {/* map through tool and display via card */}
-          {tools.map(({_id, name, description, image, checkout},index)=>(
 
-              <Card 
+          <ToolCard tools={tools} />
 
-              key={_id}
-              id={_id}
-              // image={image? image: 'No image to display'}
-              header={name}
-              description={description}
-              extra={checkout? 'Status: Borrowed':'Status: Available'}
-              
-            />
-          )
-          )}
-  
         </div>
-  
-      </div>
+
+      </div >
     );
   };
 

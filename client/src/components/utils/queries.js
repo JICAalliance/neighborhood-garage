@@ -124,6 +124,9 @@ query Garage($id: ID!) {
       address
       myTools {
         _id
+        name
+        image
+        description
         checkout {
           _id
           dueDate
@@ -133,6 +136,7 @@ query Garage($id: ID!) {
   }
 }
 `;
+
 
 export const QUERY_TOOL = gql`
   query Tool {
@@ -166,4 +170,5 @@ export const QUERY_USER_GARAGES = gql`
     }
   }
 `;
+
 // export const QUERY_GARAGE = gql``;

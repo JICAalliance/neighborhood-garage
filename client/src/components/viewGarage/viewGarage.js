@@ -4,7 +4,8 @@ import { Link, useParams } from "react-router-dom";
 import React from "react";
 import { useQuery } from "@apollo/client";
 import GarageList from "../garageList";
-import { QUERY_GARAGE } from "../utils/queries";
+import { QUERY_GARAGE} from "../utils/queries";
+import ErrorBoundary from "../errorBoundary";
 
 const ViewGarage = () => {
   // Use `useParams()` to retrieve value of the route parameter `:garageId`
@@ -13,8 +14,12 @@ const ViewGarage = () => {
     // pass URL parameter
     variables: { id: garageId },
   });
+
+
   const garage = data?.garage || [];
   console.log("viewGarage", garage);
+
+
   if (loading) {
     return (<div className="container my-2 viewGarage-container">
       <h2>My Garage</h2>
@@ -27,10 +32,12 @@ const ViewGarage = () => {
 
   return (
     <div className="container my-1 viewGarage-container">
-      <h2>My Garage</h2>
+      {/* <h2>My Garage</h2> */}
       <div>
+        <ErrorBoundary>
         {/* If the data is still loading, render a loading message */}
         {loading ? <div>Loading...</div> : <GarageList garage={garage} />}
+        </ErrorBoundary>
       </div>
       <Link to="/profile">← Back to Profile</Link>
     </div>
