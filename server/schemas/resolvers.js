@@ -1,7 +1,7 @@
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
 const { User, Tool, Garage } = require('../models');
-const { uploadImage } = require('../utils/uploadImage');
+const uploadImage = require('../utils/uploadImage');
 
 // TODO: NEED TO ADD AUTHENTICATION TO ALL MUTATIONS when all mutations are done and connected to the front end so context can be injected
 
