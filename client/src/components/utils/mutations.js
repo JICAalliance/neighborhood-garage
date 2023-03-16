@@ -48,7 +48,6 @@ export const ADD_USER = gql`
   }
 `;
 
-//TODO: change ADD_TOOL mutation code from AddUser code to correct AddTool code
 export const ADD_TOOL = gql`
   mutation addTool($name: String!, $description: String, $image: String) {
     addTool(name: $name, description: $description, image: $image) {
@@ -103,5 +102,22 @@ export const CREATE_GARAGE = gql`
 // export const REMOVE_TOOL = gql``;
 // export const DELETE_GARAGE = gql``;
 // export const LEAVE_GARAGE = gql``;
-// export const ADD_CHECKOUT = gql``;
-// export const DELETE_CHECKOUT = gql``;
+
+export const ADD_CHECKOUT = gql`
+mutation addCheckout($: ID!) {
+  addCheckout(toolId: $toolId, outDate: $outDate, dueDate: $dueDate) {
+    _id
+    checkout {
+      _id
+      outDate
+      dueDate
+    }
+  }
+}`;
+
+export const DELETE_CHECKOUT = gql`
+mutation deleteCheckout($id: ID!) {
+  deleteCheckout(_id: $id) {
+    _id
+  }
+}`;

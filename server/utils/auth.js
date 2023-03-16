@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-const secret = 'JICAalliancesuperSecretsecret03212023';
+const secret = 'JICAalliancesuperSgit ecretsecret03212023';
 const expiration = '2h';
 
 module.exports = {

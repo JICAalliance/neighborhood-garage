@@ -145,6 +145,16 @@ export const QUERY_TOOL = gql`
   }
 `;
 
+export const QUERY_CHECKOUT = gql`
+  query Checkout {
+    checkouts {
+      _id
+      outDate
+      dueDate
+    }
+  }
+`;
+
 export const QUERY_USER_GARAGES = gql`
   query userGarages($id: ID!) {
     user(_id: $id) {

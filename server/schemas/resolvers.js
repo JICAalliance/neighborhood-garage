@@ -1,7 +1,7 @@
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
 const { User, Tool, Garage } = require('../models');
-const { uploadImage } = require('../utils/uploadImage');
+const uploadImage = require('../utils/uploadImage');
 
 // TODO: NEED TO ADD AUTHENTICATION TO ALL MUTATIONS when all mutations are done and connected to the front end so context can be injected
 
@@ -274,17 +274,17 @@ const resolvers = {
                 dueDate: args.description,
             });
 
-            await Tool.findOneAndUpdate(
-                { _id: args.toolId },
-                { checkout: checkout },
-                { new: true }
-            ).populate('checkout');
-            //add tool to user
-            return await User.findOneAndUpdate(
+            await User.findOneAndUpdate(
                 { _id: context.user._id },
                 { $addToSet: { borrowedTools: checkout._id } },
                 { new: true }
             ).populate('borrowedTools');
+
+            return await Tool.findOneAndUpdate(
+                { _id: args.toolId },
+                { checkout: checkout },
+                { new: true }
+            ).populate('checkout');
             // }
             // throw new AuthenticationError('You need to be logged in!');
         },
@@ -292,20 +292,19 @@ const resolvers = {
         // user removes tool
         deleteCheckout: async (parent, args, context) => {
             // if (context.user) {
-            // delete tool but capture its data
             const removedCheckout = await Checkout.findByIdAndDelete(args);
 
-            await Tool.findOneAndUpdate(
+            await User.findOneAndUpdate(
+                { borrowedTools: context.user._id },
+                { $pull: { borrowedTools: args._id } },
+                { new: true },
+            ).populate('borrowedTools');
+
+            return await Tool.findOneAndUpdate(
                 { checkout: args._id },
                 { checkout: null },
                 { new: true }
             ).populate('checkout');
-            //remove the tool from the user (one to one relationship)
-            return await User.findOneAndUpdate(
-                { borrowedTools: args._id },
-                { $pull: { borrowedTools: args._id } },
-                { new: true },
-            ).populate('myTools');
             // }
             // throw new AuthenticationError('You need to be logged in!');
         },
