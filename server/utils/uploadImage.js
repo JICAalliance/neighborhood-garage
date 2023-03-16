@@ -19,6 +19,7 @@ const opts = {
 }
 
 const uploadImage = (image) => {
+    console.log('cloudinary');
     const submit = cloudinary.uploader.upload(image, opts);
     return submit;
 }
