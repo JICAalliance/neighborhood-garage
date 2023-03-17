@@ -256,7 +256,7 @@ const resolvers = {
                 ).populate('members').populate('admin');
                 //update member with new garage
                 const user = await User.findByIdAndUpdate(
-                    { _id: context.user._id  },
+                    { _id: context.user._id },
                     { $push: { myGarages: garage._id } },
                     { new: true }
                 ).exec();
@@ -268,20 +268,24 @@ const resolvers = {
         },
         //leave garage
         //remove user from garage
-        leaveGarage: async (parents, args) => {
-            const garage = await Garage.findOneAndUpdate(
-                { invitationCode: args.invitationCode },
-                { $pull: { members: args.member } },
-                { new: true }
-            );
+        leaveGarage: async (parents, args, context) => {
 
-            //remove reference from user
-            const user = await User.findByIdAndUpdate(
-                { _id: args.member },
-                { $pull: { myGarages: garage._id } },
-                { new: true }
-            );
-            return user;
+            if (context.user) {
+                const garage = await Garage.findOneAndUpdate(
+                    { invitationCode: args.invitationCode },
+                    { $pull: { members: context.user._id } },
+                    { new: true }
+                );
+
+                //remove reference from user
+                const user = await User.findByIdAndUpdate(
+                    { _id: context.user._id },
+                    { $pull: { myGarages: garage._id } },
+                    { new: true }
+                );
+                return user;
+            }
+            throw new AuthenticationError('You need to be logged in!');
         },
 
         addCheckout: async (parent, args, context) => {

@@ -101,7 +101,14 @@ export const CREATE_GARAGE = gql`
 // export const REMOVE_USER = gql``;
 // export const REMOVE_TOOL = gql``;
 // export const DELETE_GARAGE = gql``;
-// export const LEAVE_GARAGE = gql``;
+export const LEAVE_GARAGE = gql`
+mutation LeaveGarage($invitationCode: String!) {
+  leaveGarage(invitationCode: $invitationCode) {
+    _id
+    name
+  }
+}
+`;
 
 export const ADD_CHECKOUT = gql`
 mutation addCheckout($toolId: ID!, $outDate: Date!, $dueDate: Date!) {

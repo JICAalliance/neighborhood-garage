@@ -78,7 +78,7 @@ const typeDefs = gql`
     createGarage(garageName: String!, description: String): Garage
     deleteGarage(admin:ID!,invitationCode: String!): Garage
     joinGarage(invitationCode: String!): Garage
-    leaveGarage(invitationCode: String!, member:ID!): User
+    leaveGarage(invitationCode: String!): User
 
     addCheckout(outDate: Date!, dueDate: Date!, toolId: ID!): Tool
     deleteCheckout(_id:ID!): Tool
