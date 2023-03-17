@@ -3,12 +3,12 @@ import React from 'react'
 import { useParams } from "react-router-dom"
 import { useNavigate } from "react-router-dom";
 //import components
-import ViewTool from '../viewTool';
-import AddTool from '../addTool';
+import ViewTool from '../../toolComponents/viewTool';
+import AddTool from '../../toolComponents/addTool';
 
-import { QUERY_ME } from "../utils/queries";
+import { QUERY_ME } from "../../utils/queries";
 import { useQuery } from "@apollo/client";
-import { QUERY_USER_GARAGES } from "../utils/queries";
+import { QUERY_USER_GARAGES } from "../../utils/queries";
 
 
 const Profile = () => {

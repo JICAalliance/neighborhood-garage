@@ -1,5 +1,5 @@
 import "./home.scss";
-import Signup from "../signUp"
+import Signup from "../userComponents/signUp"
 import ExampleComponent from "../exampleComponent";
 
 const Home = () => (

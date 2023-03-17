@@ -1,14 +1,14 @@
 import Nav from "./nav"
 import Home from "./home"
-import Signup from "./signUp"
-import Login from "./logIn"
-import Profile from "./profile"
-import CreateGarage from "./createGarage"
-import AddTool from "./addTool"
-import EditProfile from "./editProfile/"
-import JoinGarage from "./joinGarage/"
-import ViewGarage from "./viewGarage"
-import ViewTool from "./viewTool"
+import Signup from "./userComponents/signUp"
+import Login from "./userComponents/logIn"
+import Profile from "./userComponents/profile"
+import CreateGarage from "./garageComponents/createGarage"
+import AddTool from "./toolComponents/addTool"
+import EditProfile from "./userComponents/editProfile"
+import JoinGarage from "./garageComponents/joinGarage"
+import ViewGarage from "./garageComponents/viewGarage"
+import ViewTool from "./toolComponents/viewTool"
 
 export {Nav, 
     Home, 
@@ -20,4 +20,4 @@ export {Nav,
     EditProfile, 
     JoinGarage, 
     ViewGarage,
-    ViewTool}
+    ViewTool,}

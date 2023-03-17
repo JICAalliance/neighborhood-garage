@@ -1,13 +1,12 @@
 import './toolCheckout.scss';
 import React from "react";
 import { Button, Header, Image, Modal } from 'semantic-ui-react'
-import { QUERY_TOOL_OWNER} from '../utils/queries';
-import { ADD_CHECKOUT, DELETE_CHECKOUT } from '../utils/mutations';
+import { QUERY_TOOL_OWNER } from '../../utils/queries';
+import { ADD_CHECKOUT, DELETE_CHECKOUT } from '../../utils/mutations';
 import { useQuery, useMutation } from '@apollo/client';
 
-const ToolCheckout = ({ _id, name, description, image, checkout }) => {
+const ToolCheckout = ({ _id, name, description, image, checkout, setBorrowed }) => {
     const [open, setOpen] = React.useState(false);
-    const [borrowed, setBorrowed] = React.useState(false);
     const [addCheckout] = useMutation(ADD_CHECKOUT);
     const [deleteCheckout] = useMutation(DELETE_CHECKOUT);
 
@@ -17,25 +16,31 @@ const ToolCheckout = ({ _id, name, description, image, checkout }) => {
     });
 
     const borrowHandler = async () => {
-        await addCheckout({
+        const checkedOut = await addCheckout({
             variables: {
                 toolId: _id,
                 outDate: Date.now(),
-                dueDate: (Date.now()+(1000*60*60*24*14))
+                dueDate: (Date.now() + (1000 * 60 * 60 * 24 * 14))
             }
-          });
-        setOpen(false);
-        window.location.reload();
+        });
+        if (checkedOut) {
+            setBorrowed(true);
+            setOpen(false);
+        }
     }
 
     const returnHandler = async () => {
-        await deleteCheckout({
+        const returned = await deleteCheckout({
             variables: {
                 id: _id
             }
-          });
-        setOpen(false);
-        window.location.reload();
+        });
+        if (returned) {
+            setBorrowed(false);
+            setOpen(false);
+            // refreshed the page; remove this when we figure out why elements are re-rendering properly
+            window.location.reload();
+        }
     }
 
     //find borrower of tool
@@ -48,7 +53,7 @@ const ToolCheckout = ({ _id, name, description, image, checkout }) => {
                 onClose={() => setOpen(false)}
                 onOpen={() => setOpen(true)}
                 open={open}
-                trigger={<Button>Checkout Tool</Button>}
+                trigger={<Button content="Checkout"></Button>}
             >
                 <Modal.Header>Tool Checkout</Modal.Header>
                 <Modal.Content image>

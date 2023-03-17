@@ -2,8 +2,8 @@ import "./logIn.scss";
 import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useMutation } from "@apollo/client";
-import Auth, { useStateContext } from "../utils/auth";
-import { LOGIN } from "../utils/mutations";
+import Auth, { useStateContext } from "../../utils/auth";
+import { LOGIN } from "../../utils/mutations";
 
 function Login(props) {
   const [formState, setFormState] = useState({ email: "", password: "" });

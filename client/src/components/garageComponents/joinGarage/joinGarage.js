@@ -2,8 +2,8 @@ import "./joinGarage.scss";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useMutation, useQuery } from "@apollo/client";
-import { JOIN_GARAGE } from "../utils/mutations";
-import { QUERY_ME } from "../utils/queries";
+import { JOIN_GARAGE } from "../../utils/mutations";
+import { QUERY_ME } from "../../utils/queries";
 
 const JoinGarage = () => {
   const [formState, setFormState] = useState({
