@@ -247,20 +247,23 @@ const resolvers = {
 
         // join garage, find the garage by invitation code and update its members array with member
         //update member's myGarages with the garage ID
-        joinGarage: async (parents, args) => {
-            const garage = await Garage.findOneAndUpdate(
-                { invitationCode: args.invitationCode },
-                { $addToSet: { members: args.member } },
-                { new: true }
-            ).populate('members').populate('admin');
-            //update member with new garage
-            const user = await User.findByIdAndUpdate(
-                { _id: args.member },
-                { $push: { myGarages: garage._id } },
-                { new: true }
-            ).exec();
+        joinGarage: async (parents, args, context) => {
+            if (context.user) {
+                const garage = await Garage.findOneAndUpdate(
+                    { invitationCode: args.invitationCode },
+                    { $addToSet: { members: context.user._id } },
+                    { new: true }
+                ).populate('members').populate('admin');
+                //update member with new garage
+                const user = await User.findByIdAndUpdate(
+                    { _id: context.user._id  },
+                    { $push: { myGarages: garage._id } },
+                    { new: true }
+                ).exec();
 
-            return garage;
+                return garage;
+            }
+            throw new AuthenticationError('You need to be logged in!');
 
         },
         //leave garage
@@ -308,7 +311,7 @@ const resolvers = {
         // user removes tool
         deleteCheckout: async (parent, args, context) => {
             // if (context.user) {
-            const parentTool = await Tool.findOne({_id: args._id});
+            const parentTool = await Tool.findOne({ _id: args._id });
             await Checkout.findByIdAndDelete(parentTool.checkout._id);
 
             // await User.findOneAndUpdate(
@@ -319,7 +322,7 @@ const resolvers = {
             // }
 
             return await Tool.findOneAndUpdate(
-                { _id: args._id},
+                { _id: args._id },
                 { checkout: null },
                 { new: true }
             ).populate('checkout');

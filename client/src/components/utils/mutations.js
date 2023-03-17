@@ -69,8 +69,8 @@ export const ADD_TOOL = gql`
 `;
 
 export const JOIN_GARAGE = gql`
-  mutation joinGarage($invitationCode: String!, $member: ID!) {
-    joinGarage(invitationCode: $invitationCode, member: $member) {
+  mutation joinGarage($invitationCode: String!) {
+    joinGarage(invitationCode: $invitationCode) {
       _id
       garageName
       description
