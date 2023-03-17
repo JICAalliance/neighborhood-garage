@@ -3,12 +3,24 @@ import React from "react";
 
 import { Card, Icon, Button, Image } from 'semantic-ui-react';
 import ToolCheckout from '../toolCheckout';
+import { useQuery } from '@apollo/client';
+import { QUERY_CHECKOUT_BORROWER } from '../../utils/queries';
 
 
 const ToolCard = ({ tool, checkoutModal }) => {
 
   const [borrowed, setBorrowed] = React.useState(Boolean(tool.checkout));
-
+  let checkoutId = null;
+  let outDate = null;
+  let dueDate = null;
+  if (borrowed) {
+    checkoutId = tool.checkout._id;
+    outDate = new Date(Date.parse(tool.checkout.outDate));
+    dueDate = new Date(Date.parse(tool.checkout.dueDate));
+  }
+  const {data} = useQuery(QUERY_CHECKOUT_BORROWER, { variables: { id: checkoutId } });
+  const borrower = data?.checkoutBorrower || [];
+  
   return <div id='tool-container'>
     <Card key={tool._id} id={tool._id}>
       <Card.Content>
@@ -21,7 +33,10 @@ const ToolCard = ({ tool, checkoutModal }) => {
         <Card.Meta>
           {tool.checkout ?
             <div>
-              Status: Borrowed
+              <p>Status: Borrowed</p>
+              <p>Borrowed by: {borrower.name}</p>
+              <p>Checked out on: {outDate.toLocaleDateString()}</p>
+              <p>Due on: {dueDate.toLocaleDateString()}</p>
             </div>
             :
             <div>

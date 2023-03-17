@@ -39,7 +39,7 @@ function ViewTool(props) {
 
           {tools.map((tool, index) => (
 
-            <ToolCard tool={tool} checkoutModal={false}>
+            <ToolCard tool={tool} key={index} checkoutModal={false}>
             </ToolCard>
           )
           )}

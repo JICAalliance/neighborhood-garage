@@ -77,7 +77,11 @@ const resolvers = {
 
             return garage;
         },
-
+        // find the user connected to a checkout
+        checkoutBorrower: async (parents, args, context) => {
+            const borrower = await User.findOne({ borrowedTools: args._id });
+            return borrower;
+        },
 
     },
     Mutation: {

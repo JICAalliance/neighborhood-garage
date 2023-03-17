@@ -36,26 +36,26 @@ const ToolCheckout = ({ _id, name, description, image, checkout, setBorrowed }) 
             }
         });
         if (returned) {
+            // refreshes the page; remove this when we figure out why elements are not re-rendering properly
+            window.location.reload();
             setBorrowed(false);
             setOpen(false);
-            // refreshed the page; remove this when we figure out why elements are re-rendering properly
-            window.location.reload();
         }
     }
 
     //find borrower of tool
     if (data) {
         const owner = data.toolOwner;
-
+        
 
         return (
             <Modal
                 onClose={() => setOpen(false)}
                 onOpen={() => setOpen(true)}
                 open={open}
-                trigger={<Button content="Checkout"></Button>}
+                trigger={checkout ? <Button content="Return"></Button> : <Button content="Checkout"></Button>}
             >
-                <Modal.Header>Tool Checkout</Modal.Header>
+                                <Modal.Header>Tool Checkout</Modal.Header>
                 <Modal.Content image>
                     <Image size='medium' src={image} wrapped />
                     <Modal.Description>
