@@ -1,6 +1,6 @@
 import "./signUp.scss";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import Auth from "../../utils/auth";
 import { ADD_USER } from "../../utils/mutations";
@@ -8,6 +8,7 @@ import { ADD_USER } from "../../utils/mutations";
 function Signup(props) {
   const [formState, setFormState] = useState({ name:"", email: "", password: "",phone: "", address: "" });
   const [addUser] = useMutation(ADD_USER);
+  const navigate = useNavigate();
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -24,6 +25,7 @@ function Signup(props) {
     });
     const token = mutationResponse.data.addUser.token;
     Auth.login(token);
+    navigate(`/profile`);
   };
 
   const handleChange = (event) => {
