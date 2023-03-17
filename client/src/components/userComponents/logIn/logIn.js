@@ -8,6 +8,7 @@ import { LOGIN } from "../../utils/mutations";
 function Login(props) {
   const [formState, setFormState] = useState({ email: "", password: "" });
   const [login, { error }] = useMutation(LOGIN);
+  const navigate = useNavigate();
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -19,6 +20,8 @@ function Login(props) {
       const token = mutationResponse.data.login.token;
       // props.setUser(mutationResponse.data.login.user);
       Auth.login(token);
+      //navigate to profile when login successful
+      navigate(`/profile`);
     
     } catch (e) {
       console.log(e);

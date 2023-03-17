@@ -9,7 +9,7 @@ import { ADD_TOOL } from "../../utils/mutations";
 
 
 function AddTool(props) {
-  console.log(props);
+  // console.log(props);
   const [formState, setFormState] = useState({ name: "", description: "", image: "" });
   const [addTool, { error }] = useMutation(ADD_TOOL);
   const [file, setFile] = useState([]);

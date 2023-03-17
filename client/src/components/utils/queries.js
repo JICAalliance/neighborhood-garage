@@ -156,14 +156,17 @@ query Garage($id: ID!) {
 
 
 export const QUERY_TOOL = gql`
-  query Tool {
-    tools {
+query Tool($id: ID!) {
+  tool(_id: $id) {
+    _id
+    name
+    description
+    image
+        checkout {
       _id
-      name
-      description
-      image
     }
   }
+}
 `;
 
 export const QUERY_CHECKOUT = gql`
