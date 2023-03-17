@@ -57,7 +57,7 @@ const ToolCheckout = ({ _id, name, description, image, checkout, setBorrowed }) 
             >
                 <Modal.Header>Tool Checkout</Modal.Header>
                 <Modal.Content image>
-                    <Image size='medium' src='https://react.semantic-ui.com/images/avatar/large/rachel.png' wrapped />
+                    <Image size='medium' src={image} wrapped />
                     <Modal.Description>
                         <Header>{name}</Header>
                         <p>

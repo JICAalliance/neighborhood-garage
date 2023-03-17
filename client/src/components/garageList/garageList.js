@@ -1,8 +1,8 @@
 import React from "react";
 import { useQuery, useMutation } from "@apollo/client";
-import { LEAVE_GARAGE} from '../../utils/mutations';
-import ClipboardCopy from "../../clipboardCopy";
-import ToolCard from "../../toolComponents/toolCard";
+import { LEAVE_GARAGE } from "../utils/mutations";
+import ClipboardCopy from "../clipboardCopy";
+import ToolCard from "../toolCard";
 import {Button} from 'semantic-ui-react';
 
 
@@ -13,6 +13,8 @@ const GarageList = ({ garage }) => {
   //capture list of members and admin info
   const adminId = garage.admin._id;
   const memberArray = garage.members;
+
+  // console.log("garageList ", adminId, memberArray);
 
   //leave garage mutation
   const [leaveGarage]=useMutation(LEAVE_GARAGE);
@@ -82,3 +84,4 @@ const GarageList = ({ garage }) => {
 };
 
 export default GarageList;
+
