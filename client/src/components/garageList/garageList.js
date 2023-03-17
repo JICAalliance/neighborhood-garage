@@ -1,8 +1,10 @@
 import React from "react";
-import { useQuery } from "@apollo/client";
-import { QUERY_GARAGE_TOOLS } from "../utils/queries";
+import { useQuery, useMutation } from "@apollo/client";
+import { LEAVE_GARAGE } from "../utils/mutations";
 import ClipboardCopy from "../clipboardCopy";
 import ToolCard from "../toolCard";
+import {Button} from 'semantic-ui-react';
+
 
 
 
@@ -13,6 +15,25 @@ const GarageList = ({ garage }) => {
   const memberArray = garage.members;
 
   console.log("garageList ", adminId, memberArray);
+
+  //leave garage mutation
+  const [leaveGarage]=useMutation(LEAVE_GARAGE);
+
+  //leave garage handler
+  const leaveGarageHandler = async (e) => {
+    e.preventDefault();
+    const inviteCode=e.currentTarget.getAttribute("data-value");
+
+    console.log ("inviteCode ", inviteCode)
+    const user = await leaveGarage({
+      variables: {
+        invitationCode:inviteCode,
+      },
+    });
+
+    return user;
+
+  };
 
   if (!garage) {
     return <h3>Not an Existing Garage</h3>;
@@ -37,7 +58,7 @@ const GarageList = ({ garage }) => {
     <div key={garage._id} id='{garage._id}'>
       <h3>Welcome to {garage.garageName}!!!</h3>
 
-      <h4 id='invitationCode' key={garage.invitationCode}><ClipboardCopy copyText={garage.invitationCode} /></h4>
+      <h4 id='invitationCode' key={garage.invitationCode} ><ClipboardCopy copyText={garage.invitationCode} /></h4>
 
       <h5>Admin: {garage.admin.name}</h5>
 
@@ -47,6 +68,8 @@ const GarageList = ({ garage }) => {
           return <li key={member._id} id='{member._id} member.name'> {member.name} </li>
         })}
       </h5>
+
+        <h5><Button color='black' data-value={garage.invitationCode} onClick={leaveGarageHandler}>->Leave This Garage</Button></h5>
 
       <h4>Garage Tools:</h4>
       <div id='displayTools'>
