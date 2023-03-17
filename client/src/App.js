@@ -8,10 +8,11 @@ import {
   Profile,
   CreateGarage,
   AddTool,
-  EditProfile,
+  // EditProfile,
   JoinGarage,
   ViewGarage,
 } from "./components";
+import EditProfile from './components/userComponents/editProfile'
 // import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import {
@@ -27,6 +28,10 @@ import { ContextProvider } from "./components/utils/GlobalState";
 //error handling on Apollo
 import { onError } from "@apollo/client/link/error";
 
+//check for logged In
+import Auth from './components/utils/auth';
+
+// FUNCTION
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors)
     graphQLErrors.forEach(({ message, locations, path }) =>
@@ -42,6 +47,7 @@ const httpLink = createHttpLink({
   uri: "/graphql",
 });
 
+// FUNCTION
 const authLink = setContext((_, { headers }) => {
   const token = localStorage.getItem("id_token");
   return {
@@ -61,23 +67,25 @@ const client = new ApolloClient({
 });
 
 function App() {
+
+  const loggedIn= Auth.loggedIn();
   return (
     <ApolloProvider client={client}>
       <Router>
         <div>
+        <Nav />
           <ContextProvider>
-            <Nav />
             <Routes>
               <Route path="/" element={<Home />} />
               {/* <Route path="/signup" element={<Signup />} /> */}
               <Route path="/login" element={<Login />} />
               {/* <Route path="/login" element={<Login setUser={value.setUser} />} /> */}
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/createGarage" element={<CreateGarage />} />
-              <Route path="/addTool" element={<AddTool />} />
-              <Route path="/editProfile" element={<EditProfile />} />
-              <Route path="/joinGarage" element={<JoinGarage />} />
-              <Route path="/viewGarage/:garageId" element={<ViewGarage />} />
+              <Route path="/profile" forceRefresh={true} element={loggedIn? <Profile />: <Login />} />
+              <Route path="/createGarage" element={loggedIn? <CreateGarage /> : <Login />} />
+              {/* <Route path="/addTool" element={<AddTool />} /> */}
+              <Route path="/editProfile" element={loggedIn? <EditProfile />: <Login />} />
+              {/* <Route path="/joinGarage" element={<JoinGarage />} /> */}
+              <Route path="/viewGarage/:garageId" element={loggedIn? <ViewGarage />: <Login />} />
             </Routes>
           </ContextProvider>
         </div>

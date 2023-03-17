@@ -4,11 +4,15 @@ import { LEAVE_GARAGE } from '../../utils/mutations';
 import ClipboardCopy from "../../clipboardCopy";
 import ToolCard from "../../toolComponents/toolCard";
 import { Button } from 'semantic-ui-react';
+import { Link,useNavigate } from "react-router-dom";
 
 
 
 
 const GarageList = ({ garage }) => {
+
+    //to navigate 
+    const navigate = useNavigate();
 
   //capture list of members and admin info
   const adminId = garage.admin._id;
@@ -29,7 +33,7 @@ const GarageList = ({ garage }) => {
       },
     });
 
-    return user;
+    navigate('/profile');
 
   };
 
@@ -62,7 +66,7 @@ const GarageList = ({ garage }) => {
         <h5>Members:
           {memberArray.map((member) => {
 
-            return <li key={member._id} id='{member._id} member.name'> {member.name} </li>
+            return <li key={member._id} id={member.id}> {member.name} </li>
           })}
         </h5>
 

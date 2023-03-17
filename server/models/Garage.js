@@ -21,6 +21,7 @@ const garageSchema = new Schema(
         members: [{
             type: Schema.Types.ObjectId,
             ref: 'User',
+            unique:true,
         }],
         //auto generated
         invitationCode: {
