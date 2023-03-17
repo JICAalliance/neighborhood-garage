@@ -12,7 +12,7 @@ function AddTool(props) {
   console.log(props);
   const [formState, setFormState] = useState({ name: "", description: "", image: "" });
   const [addTool, { error }] = useMutation(ADD_TOOL);
-  // const [file, setFile] = useState([]);
+  const [file, setFile] = useState([]);
 
   const convertBase64 = (file) => {
     //if it's successful or if there's an error
@@ -32,10 +32,13 @@ function AddTool(props) {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    // const file = formState.image;
-    // console.log(file);
+    const file = formState.image;
+    console.log(file);
+
+    const { files } = document.querySelector('input[type="file"]')
     
-    // const tool_image = await convertBase64(file);
+    const tool_image = await convertBase64(files[0]);
+    console.log('tool image', tool_image)
     // const formData = new FormData();
     // formData.append("fileupload", file);
     // console.log(formData);
@@ -46,7 +49,7 @@ function AddTool(props) {
         variables: {
           name: formState.name,
           description: formState.description,
-          image: 'placeholder'
+          image: tool_image
         }
       });
       if (user){
