@@ -28,6 +28,7 @@ export const ADD_USER = gql`
     ) {
       token
       user {
+        _id
         name
         email
         phone
@@ -82,17 +83,8 @@ export const JOIN_GARAGE = gql`
 export const CREATE_GARAGE = gql`
   mutation CreateGarage($garageName: String!, $description: String) {
     createGarage(garageName: $garageName, description: $description) {
-      admin {
-        _id
-        name
-      }
+      _id
       garageName
-      invitationCode
-      description
-      members {
-        _id
-        name
-      }
     }
   }
 `;

@@ -5,19 +5,17 @@ import { useNavigate } from "react-router-dom";
 //import components
 import ViewTool from '../../toolComponents/viewTool';
 import AddTool from '../../toolComponents/addTool';
+import JoinGarage from "../../garageComponents/joinGarage";
 
 import { QUERY_ME } from "../../utils/queries";
 import { useQuery } from "@apollo/client";
-import { QUERY_USER_GARAGES } from "../../utils/queries";
+
 
 
 const Profile = () => {
 
   const { loading, data } = useQuery(QUERY_ME);
   const navigate = useNavigate()
-
-
-
 
   const navToGarage = (e) => {
     // navigate(e.target.value)
@@ -31,15 +29,10 @@ const Profile = () => {
     return (navigate(`/createGarage`))
   };
 
-  const navToJoinGarage = () => {
-    return (navigate(`/joinGarage`))
+  // const navToJoinGarage = () => {
+  //   return (navigate(`/joinGarage`))
 
-  };
-
-
-  //const { loading, data, userId } = useQuery(QUERY_USER_GARAGES,{variables:{userId}});
-  //const garages = data?.garages || [];
-
+  // };
 
   if (loading) {
     return <div>Loading...</div>;
@@ -55,7 +48,11 @@ const Profile = () => {
 
       <div><button onClick={navToCreateGarage}>Create Garage</button></div>
 
-      <div><button onClick={navToJoinGarage}> Join Garage</button></div>
+      <div>
+        {/* <button onClick={navToJoinGarage}> Join Garage</button> */}
+        <JoinGarage />
+        </div>
+
       {/* product will be what is displayed, index for unique ID; replace the array with dynamic values of garages user is in*/}
       <select name="garage" onClick={(e) => navToGarage(e)}>
         <option>Choose Garage</option>

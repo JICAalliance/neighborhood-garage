@@ -1,6 +1,7 @@
 import "./editProfile.scss";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import React from 'react';
 
 const EditProfile = () => {
   const [formState, setFormState] = useState({
@@ -55,7 +56,13 @@ const EditProfile = () => {
           <button type="submit">Update</button>
         </div>
       </form>
-      <Link to="/profile">← Back to Profile</Link>
+
+      {/* DELETE PROFILE OPTION */}
+      <div className="flex-row flex-end">
+        <button type="submit">Delete</button>
+      </div>
+
+      <Link reloadDocument to="/profile">← Back to Profile</Link>
     </div>
   );
 };

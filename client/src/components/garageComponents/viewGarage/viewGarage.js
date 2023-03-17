@@ -23,7 +23,7 @@ const ViewGarage = () => {
     return (<div className="container my-2 viewGarage-container">
       <h2>My Garage</h2>
       <div>Loading...</div>
-      <Link to="/profile">← Back to Profile</Link>
+      <Link reloadDocument to="/profile">← Back to Profile</Link>
     </div>);
   }
   else{
@@ -37,7 +37,7 @@ const ViewGarage = () => {
         {loading ? <div>Loading...</div> : <GarageList garage={garage} />}
         </ErrorBoundary>
       </div>
-      <Link to="/profile">← Back to Profile</Link>
+      <Link reloadDocument to="/profile">← Back to Profile</Link>
     </div>
   );
   };

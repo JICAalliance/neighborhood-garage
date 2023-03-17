@@ -1,9 +1,9 @@
 import "./createGarage.scss";
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import { useMutation, useQuery } from "@apollo/client";
+import { Link, useNavigate } from "react-router-dom";
+import { useMutation } from "@apollo/client";
 import { CREATE_GARAGE } from "../../utils/mutations";
-import { QUERY_ME } from "../../utils/queries";
+
 
 const CreateGarage = () => {
   const [createGarage, { error }] = useMutation(CREATE_GARAGE);
@@ -12,6 +12,9 @@ const CreateGarage = () => {
     name: "",
     description: "",
   });
+
+    //to navigate to profile once joined
+  const navigate = useNavigate();
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -25,8 +28,11 @@ const CreateGarage = () => {
 
       if (garage) {
         console.log("GARAGE createGarage", garage);
-        //TODO: navigate to this garage
+        //navigate to this garage
+        navigate(`/viewGarage/${garage.data.createGarage._id}`);
       };
+
+
     }catch (e) {
     console.log(e);
   };
@@ -90,6 +96,7 @@ return (
         <button type="submit">Submit</button>
       </div>
     </form>
+
     <Link to="/profile">← Go to Profile</Link>
   </div>
 );
