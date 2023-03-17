@@ -104,7 +104,7 @@ export const CREATE_GARAGE = gql`
 // export const LEAVE_GARAGE = gql``;
 
 export const ADD_CHECKOUT = gql`
-mutation addCheckout($toolId: ID!) {
+mutation addCheckout($toolId: ID!, $outDate: Date!, $dueDate: Date!) {
   addCheckout(toolId: $toolId, outDate: $outDate, dueDate: $dueDate) {
     _id
     checkout {
