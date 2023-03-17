@@ -80,7 +80,7 @@ function App() {
               {/* <Route path="/signup" element={<Signup />} /> */}
               <Route path="/login" element={<Login />} />
               {/* <Route path="/login" element={<Login setUser={value.setUser} />} /> */}
-              <Route path="/profile" forceRefresh={true} element={loggedIn? <Profile />: <Login />} />
+              <Route path="/profile" element={loggedIn? <Profile />: <Login />} />
               <Route path="/createGarage" element={loggedIn? <CreateGarage /> : <Login />} />
               {/* <Route path="/addTool" element={<AddTool />} /> */}
               <Route path="/editProfile" element={loggedIn? <EditProfile />: <Login />} />
