@@ -22,7 +22,6 @@ const Profile = () => {
   const navToGarage = (e) => {
     // navigate(e.target.value)
     if (e.target.value !== "Choose Garage") {
-      console.log(e.target);
       return (navigate(`/viewGarage/${e.target.value}`))
     }
     // console.log(e.target.value)
@@ -45,9 +44,7 @@ const Profile = () => {
   if (loading) {
     return <div>Loading...</div>;
   }
-  console.log("PROFILE DATA", data.currentUser.name);
   const { name, email, myGarages, myTools, phone, address, borrowedTools } = data.currentUser;
-  console.log("myGarages", myGarages[0]);
 
 
 

@@ -145,6 +145,7 @@ query Garage($id: ID!) {
         description
         checkout {
           _id
+          outDate
           dueDate
         }
       }
@@ -173,6 +174,18 @@ export const QUERY_CHECKOUT = gql`
       dueDate
     }
   }
+`;
+
+export const QUERY_CHECKOUT_BORROWER = gql`
+query CheckoutBorrower($id: ID!) {
+  checkoutBorrower(_id: $id) {
+    _id
+    name
+    email
+    phone
+    address
+  }
+}
 `;
 
 export const QUERY_USER_GARAGES = gql`
