@@ -1,8 +1,8 @@
 import React from "react";
 import { useQuery, useMutation } from "@apollo/client";
-import { LEAVE_GARAGE } from "../utils/mutations";
-import ClipboardCopy from "../clipboardCopy";
-import ToolCard from "../toolCard";
+import { LEAVE_GARAGE} from '../../utils/mutations';
+import ClipboardCopy from "../../clipboardCopy";
+import ToolCard from "../../toolComponents/toolCard";
 import {Button} from 'semantic-ui-react';
 
 
