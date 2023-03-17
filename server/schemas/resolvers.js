@@ -160,11 +160,11 @@ const resolvers = {
         addTool: async (parent, args, context) => {
             if (context.user) {
                 //create tool
-                // const imageUrl = await uploadImage(args.image);
+                const upload_image = await uploadImage(args.image);
                 const tool = await Tool.create({
                     name: args.name,
                     description: args.description,
-                    image: args.image
+                    image: upload_image.secure_url
                 });
 
                 //add tool to user

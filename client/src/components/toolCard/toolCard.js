@@ -19,7 +19,7 @@ const ToolCard = ({ tools, checkoutModal }) => {
           <Image
             // floated='right'
             // size='mini'
-            src='https://react.semantic-ui.com/images/avatar/large/matthew.png'
+            src={image}
           />
           <Card.Header>{name}</Card.Header>
           <Card.Meta>{checkout ? 'Status: Borrowed' : 'Status: Available'}</Card.Meta>
