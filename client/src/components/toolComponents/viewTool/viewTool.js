@@ -5,7 +5,7 @@ import { useState } from "react";
 // import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 // import Auth from "../utils/auth";
-import { QUERY_MY_TOOLS } from "../utils/queries";
+import { QUERY_MY_TOOLS } from "../../utils/queries";
 import ToolCard from "../toolCard";
 
 
@@ -37,7 +37,12 @@ function ViewTool(props) {
         {/* map through tool and display via card */}
         <div id='displayTools'>
 
-          <ToolCard tools={tools} checkoutModal={false} />
+          {tools.map((tool, index) => (
+
+            <ToolCard tool={tool} checkoutModal={false}>
+            </ToolCard>
+          )
+          )}
 
         </div>
 

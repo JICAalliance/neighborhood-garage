@@ -2,8 +2,8 @@ import "./createGarage.scss";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useMutation, useQuery } from "@apollo/client";
-import { CREATE_GARAGE } from "../utils/mutations";
-import { QUERY_ME } from "../utils/queries";
+import { CREATE_GARAGE } from "../../utils/mutations";
+import { QUERY_ME } from "../../utils/queries";
 
 const CreateGarage = () => {
   const [createGarage, { error }] = useMutation(CREATE_GARAGE);

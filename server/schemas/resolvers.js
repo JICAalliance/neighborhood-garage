@@ -290,18 +290,16 @@ const resolvers = {
 
         addCheckout: async (parent, args, context) => {
             // if (context.user) {
-            //create tool
-            console.log('test');
             const checkout = await Checkout.create({
                 outDate: args.outDate,
                 dueDate: args.dueDate,
             });
 
-            // await User.findOneAndUpdate(
-            //     // { _id: context.user._id },
-            //     { $addToSet: { borrowedTools: checkout._id } },
-            //     { new: true }
-            // ).populate('borrowedTools');
+            await User.findOneAndUpdate(
+                { _id: context.user._id },
+                { $addToSet: { borrowedTools: checkout._id } },
+                { new: true }
+            ).populate('borrowedTools');
 
             return await Tool.findOneAndUpdate(
                 { _id: args.toolId },
@@ -318,12 +316,12 @@ const resolvers = {
             const parentTool = await Tool.findOne({ _id: args._id });
             await Checkout.findByIdAndDelete(parentTool.checkout._id);
 
-            // await User.findOneAndUpdate(
-            //     { borrowedTools: context.user._id },
-            //     { $pull: { borrowedTools: args._id } },
-            //     { new: true },
-            // ).populate('borrowedTools');
-            // }
+            await User.findOneAndUpdate(
+                { borrowedTools: context.user._id },
+                { $pull: { borrowedTools: args._id } },
+                { new: true },
+            ).populate('borrowedTools');
+            
 
             return await Tool.findOneAndUpdate(
                 { _id: args._id },
