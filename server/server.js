@@ -18,15 +18,16 @@ app.use(express.urlencoded({ limit: "50mb", extended: false }));
 app.use(express.json({ limit: "50mb" }));
 
 if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, '../client/build')));
-}
-else{
-    app.use(express.static(path.join(__dirname, '../client/public')));
+    app.use(express.static("client/build"));
+    app.get("*", (req, res) => {
+        res.sendFile(path.join(__dirname, "../client/build/index.html"));
+      });
 }
 
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '/app/client/public','index.html'));
-});
+
+// app.get('*', (req, res) => {
+//     res.sendFile(path.join(__dirname, '/app/client/public','index.html'));
+// });
 
 const startApolloServer = async (typeDefs, resolvers) => {
     await server.start();
