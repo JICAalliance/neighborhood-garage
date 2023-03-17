@@ -1,6 +1,6 @@
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
-const { User, Tool, Garage } = require('../models');
+const { User, Tool, Garage, Checkout } = require('../models');
 const uploadImage = require('../utils/uploadImage');
 
 
@@ -31,10 +31,10 @@ const resolvers = {
             throw new AuthenticationError('You need to be logged in!');
         },
         //find owner of tool
-        toolOwner: async (parents, args, context) =>{
+        toolOwner: async (parents, args, context) => {
             //find user if it contains the checkout ID
             console.log('args', args);
-            const owner = await User.findOne({myTools: args._id}).populate('borrowedTools myTools');
+            const owner = await User.findOne({ myTools: args._id }).populate('borrowedTools myTools');
             console.log("resolver line 37", owner);
             return owner;
         },
@@ -62,18 +62,18 @@ const resolvers = {
             // const garage = await Garage.findById(args).populate('admin').populate('members.myTools.name').populate('members.myTools.checkout').populate('admin');
 
             const garage = await Garage.findById(args).populate('admin')
-            .populate({
-                path: 'members',
-                model: 'User',
-                populate: {
-                    path: 'myTools',
-                    model: 'Tool',
+                .populate({
+                    path: 'members',
+                    model: 'User',
                     populate: {
-                        path:'checkout',
-                        model: 'Checkout',
+                        path: 'myTools',
+                        model: 'Tool',
+                        populate: {
+                            path: 'checkout',
+                            model: 'Checkout',
+                        }
                     }
-                }
-            });
+                });
 
             return garage;
         },
@@ -284,16 +284,17 @@ const resolvers = {
         addCheckout: async (parent, args, context) => {
             // if (context.user) {
             //create tool
+            console.log('test');
             const checkout = await Checkout.create({
-                outDate: args.name,
-                dueDate: args.description,
+                outDate: args.outDate,
+                dueDate: args.dueDate,
             });
 
-            await User.findOneAndUpdate(
-                { _id: context.user._id },
-                { $addToSet: { borrowedTools: checkout._id } },
-                { new: true }
-            ).populate('borrowedTools');
+            // await User.findOneAndUpdate(
+            //     // { _id: context.user._id },
+            //     { $addToSet: { borrowedTools: checkout._id } },
+            //     { new: true }
+            // ).populate('borrowedTools');
 
             return await Tool.findOneAndUpdate(
                 { _id: args.toolId },
@@ -307,20 +308,21 @@ const resolvers = {
         // user removes tool
         deleteCheckout: async (parent, args, context) => {
             // if (context.user) {
-            const removedCheckout = await Checkout.findByIdAndDelete(args);
+            const parentTool = await Tool.findOne({_id: args._id});
+            await Checkout.findByIdAndDelete(parentTool.checkout._id);
 
-            await User.findOneAndUpdate(
-                { borrowedTools: context.user._id },
-                { $pull: { borrowedTools: args._id } },
-                { new: true },
-            ).populate('borrowedTools');
+            // await User.findOneAndUpdate(
+            //     { borrowedTools: context.user._id },
+            //     { $pull: { borrowedTools: args._id } },
+            //     { new: true },
+            // ).populate('borrowedTools');
+            // }
 
             return await Tool.findOneAndUpdate(
-                { checkout: args._id },
+                { _id: args._id},
                 { checkout: null },
                 { new: true }
             ).populate('checkout');
-            // }
             // throw new AuthenticationError('You need to be logged in!');
         },
     },
