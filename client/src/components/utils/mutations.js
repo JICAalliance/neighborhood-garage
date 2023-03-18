@@ -122,12 +122,35 @@ export const CREATE_GARAGE = gql`
 `;
 
 // export const REMOVE_TOOL = gql``;
-// export const DELETE_GARAGE = gql``;
+
 export const LEAVE_GARAGE = gql`
   mutation LeaveGarage($invitationCode: String!) {
     leaveGarage(invitationCode: $invitationCode) {
       _id
       name
+    }
+  }
+`;
+
+export const UPDATE_GARAGE = gql`
+  mutation UpdateGarage($invitationCode: String!, $adminIs: Boolean!, $garageName: String!, $description: String) {
+    updateGarage(invitationCode: $invitationCode, adminIs: $adminIs, garageName: $garageName, description: $description) {
+      _id
+      admin {
+        _id
+        name
+      }
+      description
+      garageName
+    }
+  }
+`;
+
+export const DELETE_GARAGE = gql`
+  mutation DeleteGarage($adminIs: Boolean!, $invitationCode: String!) {
+    deleteGarage(adminIs: $adminIs, invitationCode: $invitationCode) {
+      garageName
+      _id
     }
   }
 `;

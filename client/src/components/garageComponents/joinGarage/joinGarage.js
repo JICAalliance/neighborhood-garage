@@ -35,7 +35,7 @@ const JoinGarage = () => {
         return <div>Loading...</div>
       }
       else {
-        navigate(`/viewGarage/${join.data.joinGarage._id}`);
+        navigate(`/viewGarage/${join.data.joinGarage._id}`, { reload: true });
       }
     } catch (e) {
       console.log(e);
@@ -51,25 +51,6 @@ const JoinGarage = () => {
   };
 
   return (
-    // <div className="container my-1 editProfile-container">
-    //   <h2>Join a Garage</h2>
-    // <form onSubmit={handleFormSubmit} className="editProfile-form">
-    //   <div className="flex-row space-between my-2">
-    //     <label htmlFor="invitationCode">Join with Invitation Code:</label>
-    //     <input
-    //       placeholder="enter Invitation code here"
-    //       name="invitationCode"
-    //       type="text"
-    //       id="invitationCode"
-    //       onChange={handleChange}
-    //     />
-    //   </div>
-    //   <div className="flex-row flex-end">
-    //     <button type="submit">Join</button>
-    //   </div>
-    // </form>
-    //   <Link reloadDocument to="/profile">← Back to Profile</Link>
-    // </div>
     <Modal
       onClose={() => setOpen(false)}
       onOpen={() => setOpen(true)}
@@ -92,16 +73,10 @@ const JoinGarage = () => {
             />
           </div>
           <div className="flex-row flex-end" style={{ color: "black", backgroundColor: "white" }}>
-            <button id='joinBtn' type="submit" style={{ color: "black", backgroundColor: "white" }}>Join</button>
+            <Button id='joinBtn' type="submit" color='green'>Join</Button>
           </div>
         </form>
       </Modal.Content>
-      {/* <Modal.Actions>
-      <Button onClick={() => setOpen(false)}>Cancel</Button>
-      <Button onClick={() => setOpen(false)} positive>
-        Ok
-      </Button>
-    </Modal.Actions> */}
     </Modal>
   );
 };

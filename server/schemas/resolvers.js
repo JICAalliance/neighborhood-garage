@@ -240,30 +240,54 @@ const resolvers = {
           { new: true }
         );
 
-        return garage;
-      }
-      throw new AuthenticationError("You need to be logged in!");
-    },
-    // deleteGarage will check is the user's ID matches the admin ID,
-    // deleting Garage will not delete tools nor users but in the future the messages
-    deleteGarage: async (parent, args) => {
-      //TODO: check if the userID of logged in user matches the admin and the invitation code matches as well use the auth. do this when the backend connected to front end.
-      const garage = await Garage.findOneAndDelete({
-        admin: args.admin,
-        invitationCode: args.invitationCode,
-      });
+                return garage;
+            }
+            throw new AuthenticationError('You need to be logged in!');
+        },
+        //TODO: Do UPDATE the Garage. Only the admin can update the garage
+        updateGarage: async (parents, args, context) => {
+            if (context.user && args.adminIs) {
+                const garage = await Garage.findOneAndUpdate(
+                    { invitationCode: args.invitationCode },
+                    {
+                        $set: {
+                            garageName: args.garageName,
+                            description: args.description
+                        }
+                    },
+                    { new: true }
+                ).populate('members').populate('admin');
 
-      //remove garage reference from all the members (this includes the admin)
-      await User.updateMany(
-        { myGarages: garage._id },
-        { $pull: { myGarages: garage._id } },
-        { new: true }
-      );
+                return garage;
+            }
+            throw new AuthenticationError('You need to be logged in and have admin status to update this garage!');
 
-      // TODO: after deleting garage, parse through it to delete messages. This is done when messages are done.
+        },
+        // deleteGarage will check is the user's ID matches the admin ID, 
+        // deleting Garage will not delete tools nor users but in the future the messages
+        deleteGarage: async (parent, args, context) => {
+            if (context.user && args.adminIs) {
+                const garage = await Garage.findOneAndDelete(
+                    { invitationCode: args.invitationCode }
+                );
+                console.log('GARAGE resolver', garage);
 
-      return garage;
-    },
+                //remove garage reference from all the members (this includes the admin)
+                const users = await User.updateMany(
+                    { myGarages: garage._id },
+                    { $pull: { myGarages: garage._id } },
+                    { new: true }
+                );
+
+                console.log('GARAGE USER resolver', users);
+
+                // TODO: after deleting garage, parse through it to delete messages. This is done when messages are done.
+
+                return garage;
+
+            }
+            throw new AuthenticationError('You need to be logged in and have admin status to delete this garage!');
+        },
 
     //TODO: Do UPDATE the Garage. Only the admin can update the garage
 
@@ -338,20 +362,21 @@ const resolvers = {
       const parentTool = await Tool.findOne({ _id: args._id });
       await Checkout.findByIdAndDelete(parentTool.checkout._id);
 
-      await User.findOneAndUpdate(
-        { borrowedTools: context.user._id },
-        { $pull: { borrowedTools: args._id } },
-        { new: true }
-      ).populate("borrowedTools");
+            await User.findOneAndUpdate(
+                { borrowedTools: context.user._id },
+                { $pull: { borrowedTools: args._id } },
+                { new: true },
+            ).populate('borrowedTools');
 
-      return await Tool.findOneAndUpdate(
-        { _id: args._id },
-        { checkout: null },
-        { new: true }
-      ).populate("checkout");
-      // throw new AuthenticationError('You need to be logged in!');
+
+            return await Tool.findOneAndUpdate(
+                { _id: args._id },
+                { checkout: null },
+                { new: true }
+            ).populate('checkout');
+            // throw new AuthenticationError('You need to be logged in!');
+        },
     },
-  },
 };
 
 module.exports = resolvers;

@@ -64,7 +64,7 @@ const typeDefs = gql`
     garages: [Garage]
     garage(_id:ID!): Garage
 
-    checkoutBorrower(_id:ID!): User
+    checkoutBorrower(_id:ID): User
   }
 
   type Mutation {
@@ -78,7 +78,8 @@ const typeDefs = gql`
 
 
     createGarage(garageName: String!, description: String): Garage
-    deleteGarage(admin:ID!,invitationCode: String!): Garage
+    updateGarage(invitationCode:String!, adminIs:Boolean!, garageName:String!, description:String): Garage
+    deleteGarage(adminIs:Boolean!, invitationCode: String!): Garage
     joinGarage(invitationCode: String!): Garage
     leaveGarage(invitationCode: String!): User
 

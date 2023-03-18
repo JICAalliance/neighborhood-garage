@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { useQuery, useMutation } from "@apollo/client";
-import { LEAVE_GARAGE } from '../../utils/mutations';
+import { LEAVE_GARAGE, DELETE_GARAGE } from '../../utils/mutations';
 import ClipboardCopy from "../../clipboardCopy";
 import ToolCard from "../../toolComponents/toolCard";
-import { Button } from 'semantic-ui-react';
+import { Button, Confirm } from 'semantic-ui-react';
 import { Link, useNavigate } from "react-router-dom";
 import Auth from '../../utils/auth';
 
@@ -11,23 +11,31 @@ import Auth from '../../utils/auth';
 
 
 const GarageList = ({ garage }) => {
+  //to handle delete confirm
+  const [openState, setOpenState] = useState(false);
 
   //to navigate 
   const navigate = useNavigate();
 
-  //capture list of members and admin info
-  const adminId = garage.admin._id;
-  const memberArray = garage.members;
+  let adminId = '';
+  let memberArray = '';
 
-
+  if (garage) {
+    //capture list of members and admin info
+    adminId = garage.admin._id;
+    memberArray = garage.members;
+  }
 
   const user = Auth.getProfile();
   console.log('USER GARAGELIST', user.data._id);
+
   //check is current user is admin
   const isAdmin = adminId === user.data._id ? true : false;
   console.log('isAdmin', isAdmin);
-  //leave garage mutation
+
+  //initiate the mutations
   const [leaveGarage] = useMutation(LEAVE_GARAGE);
+  const [deleteGarage] = useMutation(DELETE_GARAGE);
 
   //leave garage handler
   //when user leaves delete garage?
@@ -35,21 +43,47 @@ const GarageList = ({ garage }) => {
     e.preventDefault();
     const inviteCode = e.currentTarget.getAttribute("data-value");
 
-    console.log("inviteCode ", inviteCode)
+    // console.log("inviteCode ", inviteCode)
     const user = await leaveGarage({
       variables: {
         invitationCode: inviteCode,
       },
     });
 
-    navigate('/profile');
+    navigate('/profile', { reload: true });
 
+  };
+
+
+  const handleCancel = () => {
+    setOpenState(false);
   };
 
   if (!garage) {
     return <h3>Not an Existing Garage</h3>;
   }
   else {
+
+
+    //callback functions to confirm delete
+    const show = () => setOpenState(true)
+    const handleConfirm = async (e) => {
+      e.preventDefault();
+      setOpenState(false);
+
+
+      const inviteCode = garage.invitationCode;
+      console.log("inviteCode", inviteCode);
+
+      const garageDeleted = await deleteGarage({
+        variables: {
+          adminIs: isAdmin,
+          invitationCode: inviteCode,
+        },
+      })
+      //navigate to profile
+      navigate('/profile', { reload: true });
+    }
 
     //grab ALL TOOLS ID
     const garageTools = [];
@@ -73,8 +107,17 @@ const GarageList = ({ garage }) => {
         <h5>Admin: {garage.admin.name}</h5>
         {isAdmin
           ? <div>
-            <button>Edit Garage</button>
-            <button>Delete Garage</button>
+            <Button color='olive' onClick={event => window.location.href = `/editGarage/${garage._id}`}>Edit Garage</Button>
+            <Button color='black' data-value={garage.invitationCode} onClick={show} >Delete Garage</Button>
+            <Confirm
+              data-value={garage.invitationCode}
+              open={openState}
+              content='Are you absolutely sure you want to delete this garage?'
+              cancelButton='Cancel Delete'
+              confirmButton="Sure!"
+              onCancel={handleCancel}
+              onConfirm={handleConfirm}
+            />
           </div>
           :
           ''}
@@ -86,7 +129,7 @@ const GarageList = ({ garage }) => {
           })}
         </h5>
 
-        <h5><Button color='black' data-value={garage.invitationCode} onClick={leaveGarageHandler}>Leave This Garage</Button></h5>
+        <h5><Button color='red' data-value={garage.invitationCode} onClick={leaveGarageHandler}>Leave This Garage</Button></h5>
 
         <h4>Garage Tools:</h4>
         <div id='displayTools'>
