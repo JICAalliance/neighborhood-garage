@@ -75,7 +75,7 @@ const typeDefs = gql`
 
     addTool( name: String!, description: String, image: String): User
     removeTool(_id:ID!):User
-
+    updateTool( _id: ID!, name: String!, description: String!): Tool
 
     createGarage(garageName: String!, description: String): Garage
     updateGarage(invitationCode:String!, adminIs:Boolean!, garageName:String!, description:String): Garage
