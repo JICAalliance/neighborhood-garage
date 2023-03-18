@@ -227,6 +227,25 @@ const resolvers = {
             }
             throw new AuthenticationError('You need to be logged in!');
         },
+        //TODO: Do UPDATE the Garage. Only the admin can update the garage
+        updateGarage: async (parents, args, context) => {
+            if (context.user && args.adminIs) {
+                const garage = await Garage.findOneAndUpdate(
+                    { invitationCode: args.invitationCode },
+                    {
+                        $set: {
+                            garageName: args.garageName,
+                            description: args.description
+                        }
+                    },
+                    { new: true }
+                ).populate('members').populate('admin');
+
+                return garage;
+            }
+            throw new AuthenticationError('You need to be logged in and have admin status to delete this garage!');
+
+        },
         // deleteGarage will check is the user's ID matches the admin ID, 
         // deleting Garage will not delete tools nor users but in the future the messages
         deleteGarage: async (parent, args) => {
@@ -325,7 +344,7 @@ const resolvers = {
                 { $pull: { borrowedTools: args._id } },
                 { new: true },
             ).populate('borrowedTools');
-            
+
 
             return await Tool.findOneAndUpdate(
                 { _id: args._id },

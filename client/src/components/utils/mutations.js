@@ -102,6 +102,20 @@ mutation LeaveGarage($invitationCode: String!) {
 }
 `;
 
+export const UPDATE_GARAGE=gql`
+mutation UpdateGarage($invitationCode: String!, $adminIs: Boolean!, $garageName: String, $description: String) {
+  updateGarage(invitationCode: $invitationCode, adminIs: $adminIs, garageName: $garageName, description: $description) {
+    _id
+    admin {
+      _id
+      name
+    }
+    description
+    garageName
+  }
+}
+`;
+
 export const ADD_CHECKOUT = gql`
 mutation addCheckout($toolId: ID!, $outDate: Date!, $dueDate: Date!) {
   addCheckout(toolId: $toolId, outDate: $outDate, dueDate: $dueDate) {
