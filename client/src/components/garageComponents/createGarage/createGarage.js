@@ -6,7 +6,7 @@ import { CREATE_GARAGE } from "../../utils/mutations";
 
 
 const CreateGarage = () => {
-  const [createGarage, { error }] = useMutation(CREATE_GARAGE);
+  const [createGarage] = useMutation(CREATE_GARAGE);
 
   const [formState, setFormState] = useState({
     name: "",
@@ -27,7 +27,7 @@ const CreateGarage = () => {
         }});
 
       if (garage) {
-        console.log("GARAGE createGarage", garage);
+     
         //navigate to this garage
         navigate(`/viewGarage/${garage.data.createGarage._id}`);
       };
@@ -38,28 +38,7 @@ const CreateGarage = () => {
   };
 
 };
-  // const { loading, data } = useQuery(QUERY_ME);
-  // const me = data?.me || [];
-  //     console.log("me==>  ",me);
 
-  // const [createGarage, { error }] = useMutation(CREATE_GARAGE);
-
-  // const handleFormSubmit = async (event) => {
-  //   event.preventDefault();
-
-  //   try {
-  //     const create = await createGarage({
-  //       variables: {
-  //         admin: me._id,
-  //         garageName: formState.name,
-  //         description: formState.description,
-  //       },
-  //     });
-  //     console.log("me==>  ",me);
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // };
 
 const handleChange = (event) => {
   const { name, value } = event.target;

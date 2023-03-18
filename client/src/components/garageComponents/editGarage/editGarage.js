@@ -4,17 +4,24 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useMutation, useQuery } from "@apollo/client";
 import { UPDATE_GARAGE } from "../../utils/mutations";
 import { QUERY_GARAGE } from "../../utils/queries";
+import { Button } from 'semantic-ui-react';
 import Auth from '../../utils/auth';
 
 const EditGarage = () => {
+
   const [formState, setFormState] = useState({
-    name: "Default value",
-    description: "Default value",
+    name: '',
+    description: '',
   });
-  const navigate = useNavigate()
+
+  const [garageUpdate, { error }] = useMutation(UPDATE_GARAGE);
+
+  //to navigate back to the garage
+  const navigate = useNavigate();
+
   //query this garage
   const { garageId } = useParams();
-  // pass URL parameter
+  // pass URL parameter to get garage data
   const { loading, data } = useQuery(QUERY_GARAGE, {
     // pass URL parameter
     variables: { id: garageId },
@@ -22,18 +29,15 @@ const EditGarage = () => {
 
   const garage = data?.garage || [];
 
-  console.log('editGarage garage', garage);
-
-  const [garageUpdate, { error }] = useMutation(UPDATE_GARAGE);
-
-
+  //get user data
   const user = Auth.getProfile();
-  const isAdmin = garage._id === user.data._id ? true : false;
+
+  //set admin false
+  let isAdmin = false;
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     try {
-      // console.log(formState.name,formState.description);
       const updatedGarage = await garageUpdate({
         variables: {
           invitationCode: garage.invitationCode,
@@ -43,12 +47,13 @@ const EditGarage = () => {
         }
       });
 
-      navigate(`/api/viewGarage/${updatedGarage.data.updateGarage._id}`);
+      navigate(`/viewGarage/${updatedGarage.data.updateGarage._id}`,{reload:true});
 
     } catch (e) {
       console.log(e);
     };
   };
+
 
 
 
@@ -60,6 +65,13 @@ const EditGarage = () => {
     </div>);
   }
   else {
+    //check if user is admin
+    isAdmin = garage.admin._id === user.data._id ? true : false;
+
+    const handleGoBackGarage = (event) => {
+      event.preventDefault();
+      navigate(`/viewGarage/${garage._id}`);
+    };
 
     const handleChange = (event) => {
       const { name, value } = event.target;
@@ -71,14 +83,14 @@ const EditGarage = () => {
 
     return (
       <div className="container my-1 createGarage-container">
-        <h2>Edit Garage</h2>
+        <h2>Edit {garage.garageName} Garage</h2>
         <form onSubmit={handleFormSubmit} className="createGarage-form">
           <div className="flex-row space-between my-2">
             <label htmlFor="name">Name:</label>
             <textarea
-              defaultValue={garage.garageName}
-              cols="50"
-              rows="1"
+              placeholder={'Change from ' + garage.garageName + '? Please do not leave this blank on submit.'}
+              cols="40"
+              rows="2"
               name="name"
               type="text"
               id="name"
@@ -91,7 +103,7 @@ const EditGarage = () => {
             <label htmlFor="description">Description:</label>
             <textarea
               rows="3" cols="40"
-              defaultValue={garage.description}
+              placeholder={'Change the description of ' + garage.description + '?'}
               name="description"
               id="description"
               onChange={handleChange}>
@@ -99,12 +111,12 @@ const EditGarage = () => {
 
           </div>
           <div className="flex-row flex-end">
-            <button type="submit">Submit</button>
+            <Button color='olive' type="submit">Submit</Button>
           </div>
         </form>
         <div className="flex-row flex-end">
-            <button >Cancel Edit</button>
-          </div>
+          <Button color='black' onClick={handleGoBackGarage}>Cancel and Back to Garage</Button>
+        </div>
 
         <Link to="/profile">← Go to Profile</Link>
       </div>
