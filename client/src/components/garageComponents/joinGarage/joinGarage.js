@@ -73,7 +73,7 @@ const JoinGarage = () => {
             />
           </div>
           <div className="flex-row flex-end" style={{ color: "black", backgroundColor: "white" }}>
-            <button id='joinBtn' type="submit" style={{ color: "black", backgroundColor: "white" }}>Join</button>
+            <Button id='joinBtn' type="submit" color='green'>Join</Button>
           </div>
         </form>
       </Modal.Content>
