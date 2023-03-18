@@ -37,39 +37,45 @@ function Login(props) {
   };
 
   return (
-    <div className="container my-1 login-container">
-      <h2>Login</h2>
-      <form onSubmit={handleFormSubmit} className="login-form">
-        <div className="flex-row space-between my-2">
-          <label htmlFor="email">Email address:</label>
-          <input
-            placeholder="youremail@test.com"
-            name="email"
-            type="email"
-            id="email"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="flex-row space-between my-2">
-          <label htmlFor="pwd">Password:</label>
-          <input
-            placeholder="******"
-            name="password"
-            type="password"
-            id="pwd"
-            onChange={handleChange}
-          />
-        </div>
-        {error ? (
-          <div>
-            <p className="error-text">The provided credentials are incorrect</p>
+    <div className="ui container">
+      <div className="ui grid">
+        <form onSubmit={handleFormSubmit} className="ui form six wide column centered">
+            <div className="flex-center">
+              <h2>Login</h2>
+            </div>
+          <div className="field">
+            <label htmlFor="email">Email address:</label>
+            <input
+              placeholder="youremail@test.com"
+              name="email"
+              type="email"
+              id="email"
+              onChange={handleChange}
+            />
           </div>
-        ) : null}
-        <div className="flex-row flex-end">
-          <button type="submit">Submit</button>
-        </div>
-      </form>
-      <Link to="/">← Go to Signup</Link>
+          <div className="field">
+            <label htmlFor="pwd">Password:</label>
+            <input
+              placeholder="******"
+              name="password"
+              type="password"
+              id="pwd"
+              onChange={handleChange}
+            />
+          </div>
+          {error ? (
+            <div>
+              <p className="">The provided credentials are incorrect</p>
+            </div>
+          ) : null}
+          <br></br>
+          <div className="flex-center">
+            <button type="submit" className="ui button">Submit</button>
+            <br></br>
+            <Link to="/">Need an account? Sign up!</Link>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }
