@@ -213,6 +213,21 @@ const resolvers = {
       // }
       // throw new AuthenticationError('You need to be logged in!');
     },
+
+    updateTool: async (parent, args, context) => {
+      const updatedTool = await Tool.findOneAndUpdate(
+        {_id: args._id},
+        {
+          $set: {
+              name: args.name,
+              description: args.description
+          }
+      },
+      { new: true }
+      )
+
+      return updatedTool;
+    },
     // garage creation accepts userId (atm ID but TODO: login details), garageName and description
     // create Garage and return it with admin and members populated, the user who created it automatically becomes a member
     createGarage: async (parent, args, context) => {
