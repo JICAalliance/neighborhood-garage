@@ -15,9 +15,14 @@ const GarageList = ({ garage }) => {
   //to navigate 
   const navigate = useNavigate();
 
-  //capture list of members and admin info
-  const adminId = garage.admin._id;
-  const memberArray = garage.members;
+  let adminId = '';
+  let memberArray = '';
+
+  if (garage) {
+    //capture list of members and admin info
+    adminId = garage.admin._id;
+    memberArray = garage.members;
+  }
 
 
 

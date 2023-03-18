@@ -37,41 +37,42 @@ const Profile = () => {
   if (loading) {
     return <div>Loading...</div>;
   }
-  const { name, email, myGarages, myTools, phone, address, borrowedTools } = data.currentUser;
+  else {
+    const { name, email, myGarages, myTools, phone, address, borrowedTools } = data.currentUser;
 
 
 
-  return (
-    <div id="profile">
-      <h1>My Profile</h1>
-      <h3>Welcome {name}!</h3>
+    return (
+      <div id="profile">
+        <h1>My Profile</h1>
+        <h3>Welcome {name}!</h3>
 
-      <div><button onClick={navToCreateGarage}>Create Garage</button></div>
+        <div><button onClick={navToCreateGarage}>Create Garage</button></div>
 
-      <div>
-        {/* <button onClick={navToJoinGarage}> Join Garage</button> */}
-        <JoinGarage />
+        <div>
+          {/* <button onClick={navToJoinGarage}> Join Garage</button> */}
+          <JoinGarage />
         </div>
 
-      {/* product will be what is displayed, index for unique ID; replace the array with dynamic values of garages user is in*/}
-      <select name="garage" onClick={(e) => navToGarage(e)}>
-        <option>Choose Garage</option>
-        {myGarages.map((garage) => {
-          return (
-            <option value={garage._id} key={garage._id} onClick={(e) => navToGarage(e)}>{garage.garageName}</option>
-          )
-        })}
-      </select>
-      <div id='addTool'>
-        <AddTool />
+        {/* product will be what is displayed, index for unique ID; replace the array with dynamic values of garages user is in*/}
+        <select name="garage" onClick={(e) => navToGarage(e)}>
+          <option>Choose Garage</option>
+          {myGarages.map((garage) => {
+            return (
+              <option value={garage._id} key={garage._id} onClick={(e) => navToGarage(e)}>{garage.garageName}</option>
+            )
+          })}
+        </select>
+        <div id='addTool'>
+          <AddTool />
+        </div>
+        <div id='viewTool'>
+          <ViewTool />
+        </div>
       </div>
-      <div id='viewTool'>
-        <ViewTool />
-      </div>
-    </div>
 
-  );
-
+    );
+  }
 };
 
 export default Profile;

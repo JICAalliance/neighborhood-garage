@@ -180,7 +180,7 @@ export const QUERY_CHECKOUT = gql`
 `;
 
 export const QUERY_CHECKOUT_BORROWER = gql`
-query CheckoutBorrower($id: ID!) {
+query CheckoutBorrower($id: ID) {
   checkoutBorrower(_id: $id) {
     _id
     name
