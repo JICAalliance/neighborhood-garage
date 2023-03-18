@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useQuery, useMutation } from "@apollo/client";
 import { LEAVE_GARAGE, DELETE_GARAGE } from '../../utils/mutations';
 import ClipboardCopy from "../../clipboardCopy";
-import ToolCard from "../../toolComponents/toolCard";
+import ToolWrapper from "../../toolComponents/toolWrapper";
 import { Button, Confirm } from 'semantic-ui-react';
 import { Link, useNavigate } from "react-router-dom";
 import Auth from '../../utils/auth';
@@ -136,8 +136,8 @@ const GarageList = ({ garage }) => {
 
           {garageTools.map((tool, index) => (
 
-            <ToolCard tool={tool} key={index} checkoutModal={true}>
-            </ToolCard>
+            <ToolWrapper tool={tool} key={index} checkoutModal={true}>
+            </ToolWrapper>
           )
           )}
 

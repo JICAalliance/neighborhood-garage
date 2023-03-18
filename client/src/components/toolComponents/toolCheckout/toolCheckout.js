@@ -5,7 +5,7 @@ import { QUERY_TOOL_OWNER } from '../../utils/queries';
 import { ADD_CHECKOUT, DELETE_CHECKOUT } from '../../utils/mutations';
 import { useQuery, useMutation } from '@apollo/client';
 
-const ToolCheckout = ({ _id, name, description, image, checkout, setBorrowed, borrowed }) => {
+const ToolCheckout = ({ _id, name, description, image, checkout, setBorrowed, borrowed, borrower }) => {
     const [open, setOpen] = React.useState();
     const [addCheckout] = useMutation(ADD_CHECKOUT);
     const [deleteCheckout] = useMutation(DELETE_CHECKOUT);
@@ -74,7 +74,9 @@ const ToolCheckout = ({ _id, name, description, image, checkout, setBorrowed, bo
                         </p>
                         <p id='{owner.id} owner'>Owner: {owner.name}</p>
                         <p id='ownerContact'>Owner Contact: {owner.phone}</p>
-                        <p id='borrower'>Borrower: </p>
+                        {checkout?
+                        <p id='borrower'>Borrower: {borrower}</p>
+                        : ''}
 
                         {/* <p>Is it okay to use this photo?</p> */}
                     </Modal.Description>

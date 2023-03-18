@@ -101,6 +101,14 @@ export const ADD_TOOL = gql`
   }
 `;
 
+export const REMOVE_TOOL = gql`
+  mutation RemoveTool($id: ID!) {
+    removeTool(_id: $id) {
+      _id
+    }
+  }
+`;
+
 export const JOIN_GARAGE = gql`
   mutation joinGarage($invitationCode: String!) {
     joinGarage(invitationCode: $invitationCode) {

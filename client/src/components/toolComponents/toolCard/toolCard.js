@@ -3,11 +3,12 @@ import React from "react";
 
 import { Card, Icon, Button, Image } from 'semantic-ui-react';
 import ToolCheckout from '../toolCheckout';
+import EditTool from '../editTool';
 import { useQuery } from '@apollo/client';
 import { QUERY_CHECKOUT_BORROWER } from '../../utils/queries';
 
 
-const ToolCard = ({ tool, checkoutModal }) => {
+const ToolCard = ({ tool, checkoutModal, userOwned }) => {
 
   const [borrowed, setBorrowed] = React.useState();
   let checkoutId = null;
@@ -18,9 +19,9 @@ const ToolCard = ({ tool, checkoutModal }) => {
     outDate = new Date(Date.parse(tool.checkout.outDate));
     dueDate = new Date(Date.parse(tool.checkout.dueDate));
   }
-  const {data} = useQuery(QUERY_CHECKOUT_BORROWER, { variables: { id: checkoutId } });
+  const { data } = useQuery(QUERY_CHECKOUT_BORROWER, { variables: { id: checkoutId } });
   const borrower = data?.checkoutBorrower || [];
-  
+
   return <div id='tool-container'>
     <Card key={tool._id} id={tool._id}>
       <Card.Content>
@@ -31,6 +32,11 @@ const ToolCard = ({ tool, checkoutModal }) => {
         />
         <Card.Header>{tool.name}</Card.Header>
         <Card.Meta>
+          {userOwned ?
+            <p>Your tool</p>
+            :
+            ''
+          }
           {borrowed ?
             <div>
               <p>Status: Borrowed</p>
@@ -48,10 +54,16 @@ const ToolCard = ({ tool, checkoutModal }) => {
         </Card.Description>
       </Card.Content>
 
-      {checkoutModal ?
+      {userOwned ?
+        <Card.Content extra>
+          <EditTool _id={tool._id} name={tool.name} description={tool.description} image={tool.image} checkout={tool.checkout} setBorrowed={setBorrowed} borrowed={borrowed} borrower={borrower} />
+        </Card.Content>
+        : ''}
+
+      {(checkoutModal && !userOwned) ?
 
         <Card.Content extra>
-          <ToolCheckout _id={tool._id} name={tool.name} description={tool.description} image={tool.image} checkout={tool.checkout} setBorrowed={setBorrowed} borrowed={borrowed} />
+          <ToolCheckout _id={tool._id} name={tool.name} description={tool.description} image={tool.image} checkout={tool.checkout} setBorrowed={setBorrowed} borrowed={borrowed} borrower={borrower} />
         </Card.Content>
         : ''}
     </Card>
