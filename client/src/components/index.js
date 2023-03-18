@@ -9,6 +9,7 @@ import EditProfile from "./userComponents/editProfile"
 import JoinGarage from "./garageComponents/joinGarage"
 import ViewGarage from "./garageComponents/viewGarage"
 import ViewTool from "./toolComponents/viewTool"
+import ToolWrapper from "./toolComponents/toolWrapper/toolWrapper"
 
 export {Nav, 
     Home, 
@@ -20,4 +21,5 @@ export {Nav,
     EditProfile, 
     JoinGarage, 
     ViewGarage,
-    ViewTool,}
+    ViewTool,
+    ToolWrapper}

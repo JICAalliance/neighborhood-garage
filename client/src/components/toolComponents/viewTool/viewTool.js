@@ -6,7 +6,7 @@ import { useState } from "react";
 import { useQuery } from "@apollo/client";
 // import Auth from "../utils/auth";
 import { QUERY_MY_TOOLS } from "../../utils/queries";
-import ToolCard from "../toolCard";
+import ToolWrapper from "../toolWrapper";
 
 
 function ViewTool(props) {
@@ -39,8 +39,8 @@ function ViewTool(props) {
 
           {tools.map((tool, index) => (
 
-            <ToolCard tool={tool} key={index} checkoutModal={false}>
-            </ToolCard>
+            <ToolWrapper tool={tool} key={index} checkoutModal={false}>
+            </ToolWrapper>
           )
           )}
 
