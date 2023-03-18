@@ -3,16 +3,14 @@ import React from "react";
 import {
   Nav,
   Home,
-  Signup,
   Login,
   Profile,
   CreateGarage,
-  AddTool,
-  // EditProfile,
-  JoinGarage,
   ViewGarage,
 } from "./components";
+
 import EditProfile from './components/userComponents/editProfile'
+import EditGarage from './components/garageComponents/editGarage';
 // import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import {
@@ -59,7 +57,6 @@ const authLink = setContext((_, { headers }) => {
 });
 
 const client = new ApolloClient({
-  // link: from([errorLink, httpLink]),
   // link: authLink.concat(errorLink, httpLink),
   // the authLink sends the token to the back end, please keep line 48
   link: from([errorLink, authLink.concat(httpLink)]),
@@ -82,6 +79,7 @@ function App() {
               {/* <Route path="/login" element={<Login setUser={value.setUser} />} /> */}
               <Route path="/profile" element={loggedIn? <Profile />: <Login />} />
               <Route path="/createGarage" element={loggedIn? <CreateGarage /> : <Login />} />
+              <Route path="/editGarage/:garageId" element={loggedIn? <EditGarage />: <Login />} />
               {/* <Route path="/addTool" element={<AddTool />} /> */}
               <Route path="/editProfile" element={loggedIn? <EditProfile />: <Login />} />
               {/* <Route path="/joinGarage" element={<JoinGarage />} /> */}

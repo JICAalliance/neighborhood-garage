@@ -1,5 +1,5 @@
 import "./profile.scss";
-import React from 'react'
+import React, {useEffect} from 'react'
 import { useParams } from "react-router-dom"
 import { useNavigate } from "react-router-dom";
 //import components
@@ -29,10 +29,6 @@ const Profile = () => {
     return (navigate(`/createGarage`))
   };
 
-  // const navToJoinGarage = () => {
-  //   return (navigate(`/joinGarage`))
-
-  // };
 
   if (loading) {
     return <div>Loading...</div>;
@@ -50,7 +46,7 @@ const Profile = () => {
         <div><button onClick={navToCreateGarage}>Create Garage</button></div>
 
         <div>
-          {/* <button onClick={navToJoinGarage}> Join Garage</button> */}
+          {/* modal to join garage */}
           <JoinGarage />
         </div>
 

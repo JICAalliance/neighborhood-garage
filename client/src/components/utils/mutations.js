@@ -92,7 +92,7 @@ export const CREATE_GARAGE = gql`
 // export const UPDATE_USER = gql``;
 // export const REMOVE_USER = gql``;
 // export const REMOVE_TOOL = gql``;
-// export const DELETE_GARAGE = gql``;
+
 export const LEAVE_GARAGE = gql`
 mutation LeaveGarage($invitationCode: String!) {
   leaveGarage(invitationCode: $invitationCode) {
@@ -102,21 +102,44 @@ mutation LeaveGarage($invitationCode: String!) {
 }
 `;
 
-export const ADD_CHECKOUT = gql`
-mutation addCheckout($toolId: ID!, $outDate: Date!, $dueDate: Date!) {
-  addCheckout(toolId: $toolId, outDate: $outDate, dueDate: $dueDate) {
-    _id
-    checkout {
+export const UPDATE_GARAGE = gql`
+  mutation UpdateGarage($invitationCode: String!, $adminIs: Boolean!, $garageName: String!, $description: String) {
+    updateGarage(invitationCode: $invitationCode, adminIs: $adminIs, garageName: $garageName, description: $description) {
       _id
-      outDate
-      dueDate
+      admin {
+        _id
+        name
+      }
+      description
+      garageName
     }
   }
+`;
+
+export const DELETE_GARAGE = gql`
+  mutation DeleteGarage($adminIs: Boolean!, $invitationCode: String!) {
+    deleteGarage(adminIs: $adminIs, invitationCode: $invitationCode) {
+      garageName
+      _id
+    }
+  }
+`;
+
+export const ADD_CHECKOUT = gql`
+  mutation addCheckout($toolId: ID!, $outDate: Date!, $dueDate: Date!) {
+    addCheckout(toolId: $toolId, outDate: $outDate, dueDate: $dueDate) {
+      _id
+      checkout {
+        _id
+        outDate
+        dueDate
+      }
+    }
 }`;
 
 export const DELETE_CHECKOUT = gql`
-mutation deleteCheckout($id: ID!) {
-  deleteCheckout(_id: $id) {
-    _id
-  }
+  mutation deleteCheckout($id: ID!) {
+    deleteCheckout(_id: $id) {
+      _id
+    }
 }`;
