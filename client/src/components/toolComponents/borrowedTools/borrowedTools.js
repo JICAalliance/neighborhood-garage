@@ -15,7 +15,7 @@ function BorrowedTools(borrowedToolIDs) {
     { variables: { idArray: borrowedToolIDs.borrowedToolIDs} });
 
   if (data) {
-    const borrowedTools = [data.borrowedTools];
+    const borrowedTools = [data.borrowedTools[0]];
 
     return (
       <div className="container my-4">
