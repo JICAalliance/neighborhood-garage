@@ -1,14 +1,57 @@
 import "./editProfile.scss";
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import React from 'react';
+import { Link, useNavigate } from "react-router-dom";
+import React from "react";
+import { useMutation, useQuery } from "@apollo/client";
+import { UPDATE_USER, REMOVE_USER } from "../../utils/mutations";
+import { QUERY_ME } from "../../utils/queries";
+import Auth from "../../utils/auth";
 
 const EditProfile = () => {
   const [formState, setFormState] = useState({
     name: "",
-    email: "",
     phoneNumber: "",
+    email: "",
+    address: "",
   });
+
+  const [updateUser] = useMutation(UPDATE_USER);
+  const [removeUser] = useMutation(REMOVE_USER);
+  const navigate = useNavigate();
+
+  const { loading, data } = useQuery(QUERY_ME);
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+  const { _id } = data.currentUser;
+
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+
+    const mutationResponse = await updateUser({
+      variables: {
+        id: _id,
+        name: formState.name,
+        email: formState.email,
+        phone: formState.phoneNumber,
+        address: formState.address,
+      },
+    });
+
+    navigate(`/profile`);
+  };
+
+  const handleDelete = async (event) => {
+    event.preventDefault();
+
+    const mutationResponse = await removeUser({
+      variables: {
+        id: _id,
+      },
+    });
+
+    Auth.logout();
+  };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -21,11 +64,11 @@ const EditProfile = () => {
   return (
     <div className="container my-1 editProfile-container">
       <h2>Edit Profile</h2>
-      <form className="editProfile-form">
+      <form onSubmit={handleFormSubmit} className="editProfile-form">
         <div className="flex-row space-between my-2">
           <label htmlFor="name">Name:</label>
           <input
-            placeholder="new profile name"
+            placeholder="enter new name"
             name="name"
             type="text"
             id="name"
@@ -35,7 +78,7 @@ const EditProfile = () => {
         <div className="flex-row space-between my-2">
           <label htmlFor="email">Email:</label>
           <input
-            placeholder="new profile email"
+            placeholder="enter new email"
             name="email"
             type="email"
             id="email"
@@ -45,10 +88,20 @@ const EditProfile = () => {
         <div className="flex-row space-between my-2">
           <label htmlFor="phoneNumber">Phone Number:</label>
           <input
-            placeholder="new profile phone number"
+            placeholder="enter new phone number"
             name="phoneNumber"
-            type="number"
+            type="tel"
             id="phoneNumber"
+            onChange={handleChange}
+          />
+        </div>
+        <div className="flex-row space-between my-2">
+          <label htmlFor="address">Address:</label>
+          <input
+            placeholder="enter new address"
+            name="address"
+            type="text"
+            id="address"
             onChange={handleChange}
           />
         </div>
@@ -58,11 +111,15 @@ const EditProfile = () => {
       </form>
 
       {/* DELETE PROFILE OPTION */}
-      <div className="flex-row flex-end">
-        <button type="submit">Delete</button>
-      </div>
+      <form onSubmit={handleDelete} className="editProfile-form">
+        <div className="flex-row flex-end">
+          <button type="submit">Delete Current User and Logout</button>
+        </div>
+      </form>
 
-      <Link reloadDocument to="/profile">← Back to Profile</Link>
+      <Link reloadDocument to="/profile">
+        ← Back to Profile
+      </Link>
     </div>
   );
 };
