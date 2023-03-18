@@ -44,22 +44,6 @@ function Nav() {
               <button>Add Tool</button>
             </Link>
           </li> */}
-
-          {/* PLACEHOLDER TO TEST FUNCTIONALITY OF PROFILE AND LOGOUT BUTTONS: remove once authentication is working */}
-          <li>
-            <Link to="/profile">
-              <button>Profile</button>
-            </Link>
-          </li>
-          <li>
-            <button>
-              <a href="/" onClick={() => Auth.logout()}>
-                Logout
-              </a>
-            </button>
-          </li>
-          {/* END OF PLACEHOLDER */}
-
         </ul>
       );
     }
@@ -67,8 +51,10 @@ function Nav() {
 
   return (
     <header className="logo">
-      <h1 style={{margin: 0}}>
-        <Link to="/" className="logo-text">Neighborhood Garage</Link>
+      <h1 style={{ margin: 0 }}>
+        <Link to="/" className="logo-text">
+          Neighborhood Garage
+        </Link>
       </h1>
 
       <nav>{showNavigation()}</nav>

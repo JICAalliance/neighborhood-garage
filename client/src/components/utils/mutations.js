@@ -49,6 +49,38 @@ export const ADD_USER = gql`
   }
 `;
 
+export const UPDATE_USER = gql`
+  mutation updateUser(
+    $id: ID!
+    $name: String!
+    $phone: String!
+    $email: String!
+    $address: String
+  ) {
+    updateUser(
+      _id: $id
+      name: $name
+      phone: $phone
+      email: $email
+      address: $address
+    ) {
+      _id
+      name
+      email
+      phone
+      address
+    }
+  }
+`;
+
+export const REMOVE_USER = gql`
+  mutation removeUser($id: ID!) {
+    removeUser(_id: $id) {
+      _id
+    }
+  }
+`;
+
 export const ADD_TOOL = gql`
   mutation addTool($name: String!, $description: String, $image: String) {
     addTool(name: $name, description: $description, image: $image) {
@@ -89,17 +121,15 @@ export const CREATE_GARAGE = gql`
   }
 `;
 
-// export const UPDATE_USER = gql``;
-// export const REMOVE_USER = gql``;
 // export const REMOVE_TOOL = gql``;
 
 export const LEAVE_GARAGE = gql`
-mutation LeaveGarage($invitationCode: String!) {
-  leaveGarage(invitationCode: $invitationCode) {
-    _id
-    name
+  mutation LeaveGarage($invitationCode: String!) {
+    leaveGarage(invitationCode: $invitationCode) {
+      _id
+      name
+    }
   }
-}
 `;
 
 export const UPDATE_GARAGE = gql`
@@ -135,11 +165,13 @@ export const ADD_CHECKOUT = gql`
         dueDate
       }
     }
-}`;
+  }
+`;
 
 export const DELETE_CHECKOUT = gql`
   mutation deleteCheckout($id: ID!) {
     deleteCheckout(_id: $id) {
       _id
     }
-}`;
+  }
+`;
