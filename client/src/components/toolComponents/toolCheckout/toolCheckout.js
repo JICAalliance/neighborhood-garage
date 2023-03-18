@@ -75,7 +75,7 @@ const ToolCheckout = ({ _id, name, description, image, checkout, setBorrowed, bo
                         <p id='{owner.id} owner'>Owner: {owner.name}</p>
                         <p id='ownerContact'>Owner Contact: {owner.phone}</p>
                         {checkout?
-                        <p id='borrower'>Borrower: {borrower}</p>
+                        <p id='borrower'>Borrower: {borrower.name}</p>
                         : ''}
 
                         {/* <p>Is it okay to use this photo?</p> */}
