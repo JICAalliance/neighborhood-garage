@@ -30,7 +30,6 @@ query Users {
     myGarages {
       garageName
     }
-
   }
 }
 `;
@@ -117,6 +116,26 @@ export const QUERY_MY_TOOLS = gql`
           outDate
           dueDate
         }
+      }
+      borrowedTools{
+        _id
+      }
+    }
+  }
+
+`;
+
+export const QUERY_BORROWED_TOOLS = gql`
+  query BorrowedTools($idArray: [ID]) {
+    borrowedTools(idArray: $idArray) {
+      _id
+      name
+      description
+      image
+      checkout {
+          _id
+          outDate
+          dueDate
       }
     }
   }

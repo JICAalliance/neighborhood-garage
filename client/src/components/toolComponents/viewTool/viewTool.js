@@ -7,6 +7,7 @@ import { useQuery } from "@apollo/client";
 // import Auth from "../utils/auth";
 import { QUERY_MY_TOOLS } from "../../utils/queries";
 import ToolWrapper from "../toolWrapper";
+import BorrowedTools from "../borrowedTools/borrowedTools";
 
 
 function ViewTool(props) {
@@ -15,18 +16,12 @@ function ViewTool(props) {
   // const [toolSubmit, setToolSubmit] = useState('false');
 
   const { loading, data } = useQuery(QUERY_MY_TOOLS);
-  let tools = [];
+  let myTools = [];
+  let borrowedToolIDs = [];
 
-  if (loading) {
-    <div>
-      <h2>Searching for tools...</h2>
-    </div>
-  };
   if (data) {
-
-    if (data.myTools.myTools) {
-      tools = data.myTools.myTools;
-    };
+    myTools = data.myTools.myTools;
+    borrowedToolIDs = data.myTools.borrowedTools.map((tool) => (tool._id));
 
     return (
       <div className="container my-4 viewTool-container">
@@ -37,12 +32,14 @@ function ViewTool(props) {
         {/* map through tool and display via card */}
         <div id='displayTools'>
 
-          {tools.map((tool, index) => (
+          {myTools.map((tool, index) => (
 
             <ToolWrapper tool={tool} key={index} checkoutModal={false}>
             </ToolWrapper>
           )
           )}
+          {borrowedToolIDs.length ?
+          <BorrowedTools borrowedToolIDs={borrowedToolIDs}/>:''}
 
         </div>
 
@@ -74,7 +71,6 @@ function ViewTool(props) {
   //     [name]: value,
   //   });
   // };
-
 }
 
 export default ViewTool;
