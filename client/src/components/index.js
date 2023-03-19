@@ -1,27 +1,42 @@
 import Nav from "./nav";
 import Home from "./home";
-import Signup from "./userComponents/signUp";
-import Login from "./userComponents/logIn";
-import Profile from "./userComponents/profile";
-import CreateGarage from "./garageComponents/createGarage";
-import AddTool from "./toolComponents/addTool";
-import EditProfile from "./userComponents/editProfile";
-import JoinGarage from "./garageComponents/joinGarage";
-import ViewGarage from "./garageComponents/viewGarage";
-import ViewTool from "./toolComponents/viewTool";
-import ToolWrapper from "./toolComponents/toolWrapper/toolWrapper";
+import { EditProfile, Login, Profile, Signup } from "./userComponents/";
+import {
+  CreateGarage,
+  EditGarage,
+  GarageList,
+  JoinGarage,
+  ViewGarage,
+} from "./garageComponents";
+import {
+  AddTool,
+  BorrowedTools,
+  EditTool,
+  ToolApproval,
+  ToolCard,
+  ToolCheckout,
+  ToolWrapper,
+  ViewTool,
+} from "./toolComponents/";
 
 export {
   Nav,
   Home,
-  Signup,
+  EditProfile,
   Login,
   Profile,
+  Signup,
   CreateGarage,
-  AddTool,
-  EditProfile,
+  EditGarage,
+  GarageList,
   JoinGarage,
   ViewGarage,
-  ViewTool,
+  AddTool,
+  BorrowedTools,
+  EditTool,
+  ToolApproval,
+  ToolCard,
+  ToolCheckout,
   ToolWrapper,
+  ViewTool,
 };

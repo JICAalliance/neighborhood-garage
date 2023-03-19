@@ -14,45 +14,55 @@ const server = new ApolloServer({
   context: authMiddleware,
 });
 
-const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY, {
-  apiVersion: "2022-08-01",
-});
-
-app.use(express.static(process.env.STATIC_DIR));
-
-app.get("/", (req, res) => {
-  res.sendFile(path.resolve(process.env.STATIC_DIR + "/index.html"));
-});
-
-app.get("/config", (req, res) => {
-  res.send({
-    publishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
-  });
-});
-
-app.post("/create-payment-intent", async (req, res) => {
-  try {
-    const paymentIntent = await stripe.paymentIntents.create({
-      currency: "EUR",
-      amount: 1999,
-      automatic_payment_methods: { enabled: true },
-    });
-
-    // Send publishable key and PaymentIntent details to client
-    res.send({
-      clientSecret: paymentIntent.client_secret,
-    });
-  } catch (e) {
-    return res.status(400).send({
-      error: {
-        message: e.message,
-      },
-    });
-  }
-});
-
+var cors = require("cors");
+const stripe = require("stripe")(
+  "sk_test_51Mn5QrGEUClOdAIcPID0Z19PCZ2wQ4nQAmGtN0J5lf8WPDFFFaQ76LahPgKcLO80DyDZuQ7KzfnaO6O1TOiOtgZZ00b3EvqcCR"
+);
+app.use(cors());
 app.use(express.urlencoded({ limit: "50mb", extended: false }));
 app.use(express.json({ limit: "50mb" }));
+
+app.post("/checkout", async (req, res) => {
+  /*
+    req.body.items
+    [
+        {
+            id: 1,
+            quantity: 3
+        }
+    ]
+
+    stripe wants
+    [
+        {
+            price: 1,
+            quantity: 3
+        }
+    ]
+    */
+  console.log(req.body);
+  const items = req.body.items;
+  let lineItems = [];
+  items.forEach((item) => {
+    lineItems.push({
+      price: item.id,
+      quantity: item.quantity,
+    });
+  });
+
+  const session = await stripe.checkout.sessions.create({
+    line_items: lineItems,
+    mode: "payment",
+    success_url: "http://localhost:3000/success",
+    cancel_url: "http://localhost:3000/cancel",
+  });
+
+  res.send(
+    JSON.stringify({
+      url: session.url,
+    })
+  );
+});
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
