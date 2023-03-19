@@ -9,6 +9,7 @@ const ToolCheckout = ({ _id, name, description, image, checkout, setBorrowed, bo
     const [open, setOpen] = React.useState();
     const [addCheckout] = useMutation(ADD_CHECKOUT);
     const [borrowLength, setBorrowLength] = React.useState();
+    const [invalidMessage, setInvalidMessage] = React.useState(false);
 
     const handleChange = (e, { value }) => {
         setBorrowLength(e.target.textContent)
@@ -19,24 +20,28 @@ const ToolCheckout = ({ _id, name, description, image, checkout, setBorrowed, bo
         variables: { id: _id }
     });
 
-    const borrowLengthOptions = Array.from(Array(28), (_,i)=> ({
-        key: i+1,
-        text: i+1,
-        value: i+1
+    const borrowLengthOptions = Array.from(Array(28), (_, i) => ({
+        key: i + 1,
+        text: i + 1,
+        value: i + 1
     }))
 
     const borrowHandler = async () => {
-        console.log(borrowLength);
-        const checkedOut = await addCheckout({
-            variables: {
-                toolId: _id,
-                outDate: Date.now(),
-                dueDate: (Date.now() + (1000 * 60 * 60 * 24 * borrowLength))
+        if (borrowLength) {
+            const checkedOut = await addCheckout({
+                variables: {
+                    toolId: _id,
+                    outDate: Date.now(),
+                    dueDate: (Date.now() + (1000 * 60 * 60 * 24 * borrowLength))
+                }
+            });
+            if (checkedOut) {
+                setBorrowed(true);
+                setOpen(false);
+                setInvalidMessage(false);
             }
-        });
-        if (checkedOut) {
-            setBorrowed(true);
-            setOpen(false);
+        } else {
+            setInvalidMessage(true);
         }
     }
 
@@ -48,7 +53,7 @@ const ToolCheckout = ({ _id, name, description, image, checkout, setBorrowed, bo
                 onClose={() => setOpen(false)}
                 onOpen={() => setOpen(true)}
                 open={open}
-                trigger={<Button content="Checkout"/>}
+                trigger={<Button content="Checkout" />}
             >
                 <Modal.Header>Tool Checkout</Modal.Header>
                 <Modal.Content image>
@@ -60,9 +65,9 @@ const ToolCheckout = ({ _id, name, description, image, checkout, setBorrowed, bo
                         </p>
                         <p id='{owner.id} owner'>Owner: {owner.name}</p>
                         <p id='ownerContact'>Owner Contact: {owner.phone}</p>
-                        {checkout?
-                        <p id='borrower'>Borrower: {borrower.name}</p>
-                        : ''}
+                        {checkout ?
+                            <p id='borrower'>Borrower: {borrower.name}</p>
+                            : ''}
 
                         {/* <p>Is it okay to use this photo?</p> */}
                     </Modal.Description>
@@ -72,13 +77,16 @@ const ToolCheckout = ({ _id, name, description, image, checkout, setBorrowed, bo
                         ''
                         :
                         <div>
+                            {invalidMessage ?
+                                <p>Please enter the number of days.</p>
+                                : ''}
                             <span>Request to borrow for </span>
                             <Dropdown
-                            onChange={handleChange}
-                            placeholder='Select' 
-                            selection
-                            id = 'borrowLength' 
-                            options={borrowLengthOptions} />
+                                onChange={handleChange}
+                                placeholder='Select'
+                                selection
+                                id='borrowLength'
+                                options={borrowLengthOptions} />
                             <span> days</span>
                             <Button
                                 content="Request Tool"
