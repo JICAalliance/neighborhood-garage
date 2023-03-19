@@ -79,6 +79,7 @@ query ToolOwner($id: ID!) {
       _id
       outDate
       dueDate
+      approved
     }
   }
 }
@@ -96,6 +97,7 @@ export const QUERY_TOOLS = gql`
         _id
         dueDate
         outDate
+        approved
       }
     }
   }
@@ -115,6 +117,7 @@ export const QUERY_MY_TOOLS = gql`
           _id
           outDate
           dueDate
+          approved
         }
       }
       borrowedTools{
@@ -136,6 +139,7 @@ export const QUERY_BORROWED_TOOLS = gql`
           _id
           outDate
           dueDate
+          approved
       }
     }
   }
@@ -166,6 +170,7 @@ query Garage($id: ID!) {
           _id
           outDate
           dueDate
+          approved
         }
       }
     }
@@ -194,6 +199,7 @@ export const QUERY_CHECKOUT = gql`
       _id
       outDate
       dueDate
+      approved
     }
   }
 `;

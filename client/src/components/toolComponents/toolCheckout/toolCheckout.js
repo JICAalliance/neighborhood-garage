@@ -53,7 +53,6 @@ const ToolCheckout = ({ _id, name, description, image, checkout, setBorrowed, bo
         }
     }
 
-    //find borrower of tool
     if (data) {
         const owner = data.toolOwner;
 
@@ -62,7 +61,7 @@ const ToolCheckout = ({ _id, name, description, image, checkout, setBorrowed, bo
                 onClose={() => setOpen(false)}
                 onOpen={() => setOpen(true)}
                 open={open}
-                trigger={borrowed ? <Button content="Return"></Button> : <Button content="Checkout"></Button>}
+                trigger={<Button content="Checkout"/>}
             >
                 <Modal.Header>Tool Checkout</Modal.Header>
                 <Modal.Content image>
@@ -83,9 +82,7 @@ const ToolCheckout = ({ _id, name, description, image, checkout, setBorrowed, bo
                 </Modal.Content>
                 <Modal.Actions>
                     {borrowed ?
-                        <Button color='black' onClick={returnHandler}>
-                            Return
-                        </Button>
+                        ''
                         :
                         <div>
                             <span>Request to borrow for </span>

@@ -8,6 +8,9 @@ const checkoutSchema = new Schema(
         },
         dueDate: {
             type: Date
+        },
+        approved: {
+            type: Boolean
         }
     },
     {
