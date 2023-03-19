@@ -13,7 +13,7 @@ const ToolCard = ({ tool, checkout, checkoutModal, userOwned }) => {
 
   console.log(checkout);
 
-  const [borrowed, setBorrowed] = React.useState(Boolean(checkout.length));
+  const [borrowed, setBorrowed] = React.useState(Boolean(checkout));
   const [approved, setApproved] = React.useState(checkout.approved);
 
   let checkoutId = null;

@@ -11,7 +11,7 @@ const ToolWrapper = ({ tool, checkoutModal }) => {
     }
 
     const ownerData = useQuery(QUERY_TOOL_OWNER, { variables: { id: tool._id } });
-    const checkoutData = useQuery(QUERY_CHECKOUT, { variables: { checkoutId } });
+    const checkoutData = useQuery(QUERY_CHECKOUT, { variables: { id: checkoutId } });
 
     const ownerId = ownerData.data?.toolOwner._id || [];
     const checkout = checkoutData.data?.checkout || [];
