@@ -1,0 +1,29 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.viewTool-container {
+    width: fit-content;
+    margin: auto;
+    position: relative;
+    top: 5rem;
+    h2 {
+        margin-bottom: 1.2rem;
+        font-size: 1.2rem;
+    }
+}
+
+.addTool-form {
+    width: fit-content;
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    div {
+        label {
+            margin-right: 1rem;
+        }
+    }
+}

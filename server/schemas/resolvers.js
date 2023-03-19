@@ -1,6 +1,6 @@
 const { AuthenticationError } = require("apollo-server-express");
 const { signToken } = require("../utils/auth");
-const { User, Tool, Garage, Checkout } = require("../models");
+const { User, Tool, Garage, Checkout, Message } = require("../models");
 const uploadImage = require("../utils/uploadImage");
 
 // TODO: NEED TO ADD AUTHENTICATION TO ALL MUTATIONS when all mutations are done and connected to the front end so context can be injected
@@ -61,8 +61,8 @@ const resolvers = {
     borrowedTools: async (parent, args, context) => {
       const tool = await Tool.find(
         { checkout: { $in: args.idArray } }).populate('checkout');
-        console.log(tool);
-        return tool;
+      console.log(tool);
+      return tool;
     },
     //views all the tools
     tools: async () => {
@@ -98,8 +98,26 @@ const resolvers = {
       return borrower;
     },
     checkout: async (parents, args, context) => {
-      return await Checkout.findOne({_id: args._id});
-    }
+      return await Checkout.findOne({ _id: args._id });
+    },
+
+    messages: async (parent, args, context) => {
+      // if (context.user) {
+      // console.log("MESSAGES ARGS ", args);
+      const garageWithMessages = await Garage.findById(args._id)
+        .populate({
+          path: "messages",
+          model: "Message",
+          populate: {
+            path: "author",
+            model: "User",
+          }
+        });
+      // console.log("MESSAGES GARAGE ", garageWithMessages);
+      return garageWithMessages;
+      // }
+      // throw new AuthenticationError("You need to be logged in!");
+    },
   },
   Mutation: {
     // creates user
@@ -303,6 +321,7 @@ const resolvers = {
         );
 
         console.log('GARAGE USER resolver', users);
+        const comments=garage.messages;
 
         // TODO: after deleting garage, parse through it to delete messages. This is done when messages are done.
 
@@ -382,8 +401,8 @@ const resolvers = {
 
     approveCheckout: async (parent, args, context) => {
       return await Checkout.findOneAndUpdate(
-        {_id: args._id},
-        {$set: {approved: true}}
+        { _id: args._id },
+        { $set: { approved: true } }
       );
     },
 
@@ -407,6 +426,49 @@ const resolvers = {
       ).populate('checkout');
       // throw new AuthenticationError('You need to be logged in!');
     },
+
+    addMessage: async (parent, args, context) => {
+      if (context.user) {
+        // create the message
+       const newMessage = await Message.create({
+          author: context.user._id,
+          body: args.body,
+        });
+
+        const message= await Message.findById(newMessage._id).populate('author');
+
+        // push message to garage
+        const garage = await Garage.findByIdAndUpdate(
+          { _id: args.garageId },
+          { $addToSet: { messages: newMessage._id } },
+          { new: true },
+        );
+          // .populate({
+          //   path: "messages",
+          //   model: "Message",
+          //   populate: {
+          //     path: "author",
+          //     model: "User"
+          //   }
+          // }
+          // );
+          console.log("MESSAGE",message);
+
+        return message;
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
+
+    // //delete Message
+    // deleteMessage: async (parent, args, context) => {
+
+    // },
+    // //delete Messages in an entire garage
+    // deleteMessages: async (parent, args, context) => {
+
+    // },
+
+
   },
 };
 

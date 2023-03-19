@@ -202,3 +202,18 @@ export const DELETE_CHECKOUT = gql`
     }
   }
 `;
+
+
+export const ADD_MESSAGE = gql`
+  mutation AddMessage($body: String!, $garageId: ID!) {
+    addMessage(body: $body, garageId: $garageId) {
+      _id
+      author {
+        _id
+        name
+      }
+      body
+      createdAt
+    }
+  }
+`;
