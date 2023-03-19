@@ -13,7 +13,7 @@ function Nav() {
                 Profile
               </Link>
             </div>
-            <div className="right item">
+            <div className="item right-tabs">
               <a href="/" onClick={() => Auth.logout()}>
                 Logout
               </a>
