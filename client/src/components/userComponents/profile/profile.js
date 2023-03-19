@@ -41,32 +41,45 @@ const Profile = () => {
     return (
       <div id="profile">
         <h1>My Profile</h1>
-        <h3>Welcome {name}!</h3>
+        <h2 className="welcome">Welcome {name}!</h2>
+        <div className="ui centered divided three column grid">
+          <div className="five wide column"></div>
+          <div className="five wide column">
+            <div className="ui container">
+              <div className="ui grid">
+                <div className="ui six wide column centered">
+                  <div className="">
+                    <div><button onClick={navToCreateGarage}>Create Garage</button></div>
 
-        <div><button onClick={navToCreateGarage}>Create Garage</button></div>
+                    <div>
+                      {/* modal to join garage */}
+                      <JoinGarage />
+                    </div>
 
-        <div>
-          {/* modal to join garage */}
-          <JoinGarage />
-        </div>
-
-        {/* product will be what is displayed, index for unique ID; replace the array with dynamic values of garages user is in*/}
-        <select name="garage" onClick={(e) => navToGarage(e)}>
-          <option>Choose Garage</option>
-          {myGarages.map((garage) => {
-            return (
-              <option value={garage._id} key={garage._id} onClick={(e) => navToGarage(e)}>{garage.garageName}</option>
-            )
-          })}
-        </select>
-        <div id='addTool'>
-          <AddTool />
-        </div>
-        <div id='viewTool'>
-          <ViewTool />
-        </div>
+                    {/* product will be what is displayed, index for unique ID; replace the array with dynamic values of garages user is in*/}
+                    <select name="garage" onClick={(e) => navToGarage(e)}>
+                      <option>Choose Garage</option>
+                      {myGarages.map((garage) => {
+                        return (
+                          <option value={garage._id} key={garage._id} onClick={(e) => navToGarage(e)}>{garage.garageName}</option>
+                        )
+                      })}
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div id='addTool' className="five wide column">
+            <AddTool />
+          </div>
+          </div>
+          <div id='viewTool'>
+            <ViewTool />
+          </div>
+        
       </div>
-
     );
   }
 };
