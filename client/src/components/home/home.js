@@ -1,4 +1,5 @@
 import "./home.scss";
+import 'animate.css'
 import Signup from "../userComponents/signUp"
 import ExampleComponent from "../exampleComponent";
 

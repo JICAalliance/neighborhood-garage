@@ -4,11 +4,25 @@
     box-sizing: border-box;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Golos+Text&display=swap');
+
+h1, h2, h3 {
+    font-family: 'Golos Text', sans-serif !important;
+}
+
+h1 {
+    font-size: 3rem !important;
+}
+
 .flex-center {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+.showcase {
+    height: 100%;
 }
 
 .showcase video
@@ -21,3 +35,41 @@
   object-fit: cover;
   opacity: 0.8;
 }
+
+// .form-div {
+//     background-color: white;
+//     z-index: 2;
+//     position: relative;
+// }
+
+form {
+    background-color: white;
+    border-radius: 10px;
+    
+}
+
+.info-div {
+    height: 40vh;
+    
+}
+
+section {
+    height: 100%;
+}
+
+.reveal{
+    position: relative;
+    opacity: 0;
+    transition: 2s all ease;
+  }
+.reveal.active{
+    transform: translateY(0);
+    opacity: 1;
+}
+
+img.rounded {
+    object-fit: cover;
+    height:200px;
+    width: 200px;
+    border-radius: 10%;
+  }
