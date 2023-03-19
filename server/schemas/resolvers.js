@@ -61,11 +61,10 @@ const resolvers = {
     },
     // A query that returns all of the tool objects assosciate with an array of checkout ids, used in succesion with the myTools query
     borrowedTools: async (parent, args, context) => {
-      console.log(args.idArray);
       const tool = await Tool.find(
-        { _id: { $in: args.idArray } }).populate('checkout');
+        { checkout: { $in: args.idArray } }).populate('checkout');
         console.log(tool);
-      return tool
+        return tool;
     },
     //views all the tools
     tools: async () => {

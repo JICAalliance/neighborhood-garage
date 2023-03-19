@@ -59,7 +59,7 @@ const typeDefs = gql`
     toolOwner(_id:ID!): User
     tools: [Tool]
     myTools: User
-    borrowedTools(idArray: [ID]): Tool
+    borrowedTools(idArray: [ID]): [Tool]
     tool(_id:ID!): Tool
 
     garages: [Garage]
