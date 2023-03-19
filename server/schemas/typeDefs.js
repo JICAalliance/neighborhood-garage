@@ -68,6 +68,8 @@ const typeDefs = gql`
     garage(_id:ID!): Garage
 
     checkoutBorrower(_id:ID): User
+
+    messages(_id:ID): Garage
   }
 
   type Mutation {
@@ -89,6 +91,8 @@ const typeDefs = gql`
     addCheckout(outDate: Date!, dueDate: Date!, toolId: ID!): Tool
     approveCheckout(_id:ID!): Checkout
     deleteCheckout(_id:ID!): Tool
+
+    addMessage(body: String!, garageId:ID!): Message
   }
 `;
 

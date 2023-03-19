@@ -231,4 +231,21 @@ export const QUERY_USER_GARAGES = gql`
   }
 `;
 
+
+export const QUERY_GARAGE_MESSAGES = gql`
+  query Messages($id: ID) {
+    messages(_id: $id) {
+      garageName
+      messages {
+        _id
+        author {
+          _id
+          name
+        }
+        body
+        createdAt
+      }
+    }
+  }
+  `;
 // export const QUERY_GARAGE = gql``;
