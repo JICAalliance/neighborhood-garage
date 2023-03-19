@@ -18,11 +18,14 @@ var cors = require("cors");
 const stripe = require("stripe")(
   "sk_test_51Mn5QrGEUClOdAIcPID0Z19PCZ2wQ4nQAmGtN0J5lf8WPDFFFaQ76LahPgKcLO80DyDZuQ7KzfnaO6O1TOiOtgZZ00b3EvqcCR"
 );
+const myDomain = "http://localhost:3000";
+
 app.use(cors());
 app.use(express.urlencoded({ limit: "50mb", extended: false }));
 app.use(express.json({ limit: "50mb" }));
 
 app.post("/checkout", async (req, res) => {
+  console.log("SUCCESS DIRECTORY: ", path.join(__dirname, "success"));
   /*
     req.body.items
     [
@@ -53,8 +56,10 @@ app.post("/checkout", async (req, res) => {
   const session = await stripe.checkout.sessions.create({
     line_items: lineItems,
     mode: "payment",
-    success_url: "/success",
-    cancel_url: "/cancel",
+
+    success_url: `${myDomain}/success`,
+    cancel_url: `${myDomain}/cancel`,
+
   });
 
   res.send(
