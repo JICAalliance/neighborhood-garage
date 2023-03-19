@@ -82,14 +82,13 @@ const EditGarage = () => {
     };
 
     return (
-      <div className="container my-1 createGarage-container">
+      <div className="createGarage-container">
         <h2>Edit {garage.garageName} Garage</h2>
         <form onSubmit={handleFormSubmit} className="createGarage-form">
           <div className="flex-row space-between my-2">
             <label htmlFor="name">Name:</label>
             <textarea
               placeholder={'Change from ' + garage.garageName + '? Please do not leave this blank on submit.'}
-              cols="40"
               rows="2"
               name="name"
               type="text"
@@ -102,7 +101,7 @@ const EditGarage = () => {
           <div className="flex-row space-between my-2">
             <label htmlFor="description">Description:</label>
             <textarea
-              rows="3" cols="40"
+              rows="3" 
               placeholder={'Change the description of ' + garage.description + '?'}
               name="description"
               id="description"
@@ -111,12 +110,10 @@ const EditGarage = () => {
 
           </div>
           <div className="flex-row flex-end">
-            <Button color='olive' type="submit">Submit</Button>
+            <Button color='olive' type="submit">Submit</Button>   
+            <Button color='black' onClick={handleGoBackGarage}>Cancel and Back to Garage</Button>
           </div>
         </form>
-        <div className="flex-row flex-end">
-          <Button color='black' onClick={handleGoBackGarage}>Cancel and Back to Garage</Button>
-        </div>
 
         <Link to="/profile">← Go to Profile</Link>
       </div>

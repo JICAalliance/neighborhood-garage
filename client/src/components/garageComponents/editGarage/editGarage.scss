@@ -5,12 +5,12 @@
 }
 
 .createGarage-container {
-    width: fit-content;
+    width: 90vw !important;
     margin: auto;
     position: relative;
     top: 5rem;
     h2 {
-        margin-bottom: 1.2rem;
+        margin-bottom: 1.2rem !important;
         font-size: 1.2rem;
     }
 }
@@ -27,3 +27,10 @@
         }
     }
 }
+
+
+textarea {
+    resize: none !important;
+    width:90vw !important;
+
+  }

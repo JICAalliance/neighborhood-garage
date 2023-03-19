@@ -13,20 +13,6 @@ import { QUERY_MY_TOOLS } from "../../utils/queries";
 function ChatRender({message}) {
   console.log("PROPS in CHAT RENDER", message)
 
-  // const { loading, data } = useQuery(QUERY_MY_TOOLS);
-  // let tools = [];
-
-  // if (loading) {
-  //   <div>
-  //     <h2>Searching for tools...</h2>
-  //   </div>
-  // };
-  // if (data) {
-
-  //   if (data.myTools.myTools) {
-  //     tools = data.myTools.myTools;
-  //   };
-
   return (
 
 

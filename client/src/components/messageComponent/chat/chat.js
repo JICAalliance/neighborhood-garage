@@ -72,31 +72,31 @@ function Chat({ initMessage, garageId }) {
       <Header as='h3' dividing>
         Garage Bulletin
       </Header>
-      <div className="bulletin">
+      <div className="bulletin container">
         <div className="chat">
           {/* map here to send in chat */}
           {initMessage.map((message1, index) => {
 
             return <ChatRender message={message1} key={index + 1000} />;
           })}
+           <div ref={messagesEndRef} />
           {newChat ? <ChatRender message={newChat} key={newChat._id} /> : ''}
-          <div ref={messagesEndRef} />
+         
 
         </div>
       </div>
 
 
       <Form reply onSubmit={handleFormSubmit} >
-        <label htmlFor="message">What's in your mind? </label>
+        {/* <label htmlFor="message">What's in your mind? </label> */}
         <Form.TextArea
           id="message"
-          placeholder="Type your message here."
+          placeholder="What's on your mind? Type your message here."
           name="body"
           type="text"
-          size="40"
-          rows="5"
-          onChange={handleChange}
-        >
+          size="50"
+          rows="3"
+          onChange={handleChange}>
         </Form.TextArea>
         <Button content='Add Message' labelPosition='left' icon='edit' primary />
       </Form>
