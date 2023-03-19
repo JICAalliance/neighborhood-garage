@@ -49,6 +49,7 @@ const typeDefs = gql`
     _id: ID
     outDate: Date
     dueDate: Date
+    approved: Boolean
   }
         
   type Query {
@@ -85,6 +86,7 @@ const typeDefs = gql`
     leaveGarage(invitationCode: String!): User
 
     addCheckout(outDate: Date!, dueDate: Date!, toolId: ID!): Tool
+    approveCheckout(_id:ID!): Checkout
     deleteCheckout(_id:ID!): Tool
   }
 `;

@@ -361,6 +361,7 @@ const resolvers = {
       const checkout = await Checkout.create({
         outDate: args.outDate,
         dueDate: args.dueDate,
+        approved: false
       });
 
       await User.findOneAndUpdate(
@@ -376,6 +377,13 @@ const resolvers = {
       ).populate("checkout");
       // }
       // throw new AuthenticationError('You need to be logged in!');
+    },
+
+    approveCheckout: async (parent, args, context) => {
+      return await Checkout.findOneAndUpdate(
+        {_id: args._id},
+        {$set: {approved: true}}
+      );
     },
 
     // user removes tool
