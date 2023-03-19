@@ -9,23 +9,21 @@ import { useQuery } from '@apollo/client';
 import { QUERY_CHECKOUT_BORROWER } from '../../utils/queries';
 
 
-const ToolCard = ({ tool, checkoutModal, userOwned }) => {
+const ToolCard = ({ tool, checkout, checkoutModal, userOwned }) => {
 
-  let approval = false;
-  if (tool.checkout){
-    approval = tool.checkout.approved;
-  }
+  const [borrowed, setBorrowed] = React.useState(Boolean(checkout));
+  const [approved, setApproved] = React.useState(checkout.approved);
 
-  const [borrowed, setBorrowed] = React.useState(Boolean(tool.checkout));
-  const [approved, setApproved] = React.useState(approval);
+  console.log(checkout.approved);
+  console.log(approved);
 
   let checkoutId = null;
   let outDate = null;
   let dueDate = null;
-  if (borrowed && tool.checkout) {
-    checkoutId = tool.checkout._id;
-    outDate = new Date(Date.parse(tool.checkout.outDate));
-    dueDate = new Date(Date.parse(tool.checkout.dueDate));
+  if (borrowed && checkout) {
+    checkoutId = checkout._id;
+    outDate = new Date(Date.parse(checkout.outDate));
+    dueDate = new Date(Date.parse(checkout.dueDate));
   }
   const { data } = useQuery(QUERY_CHECKOUT_BORROWER, { variables: { id: checkoutId } });
   const borrower = data?.checkoutBorrower || [];
@@ -74,9 +72,9 @@ const ToolCard = ({ tool, checkoutModal, userOwned }) => {
 
       {userOwned ?
         <Card.Content extra>
-          <EditTool _id={tool._id} name={tool.name} description={tool.description} image={tool.image} checkout={tool.checkout} setBorrowed={setBorrowed} borrowed={borrowed} borrower={borrower} />
+          <EditTool _id={tool._id} name={tool.name} description={tool.description} image={tool.image} checkout={checkout} setBorrowed={setBorrowed} borrowed={borrowed} borrower={borrower} />
           {borrowed ?
-            <ToolApproval borrower={borrower} tool={tool} approved={approved} setApproved={setApproved} setBorrowed={setBorrowed}/>
+            <ToolApproval borrower={borrower} checkout={checkout} tool={tool} approved={approved} setApproved={setApproved} setBorrowed={setBorrowed}/>
             : ''
           }
         </Card.Content>
@@ -84,7 +82,7 @@ const ToolCard = ({ tool, checkoutModal, userOwned }) => {
         <div>
           {(checkoutModal && !borrowed) ?
             <Card.Content extra>
-              <ToolCheckout _id={tool._id} name={tool.name} description={tool.description} image={tool.image} checkout={tool.checkout} setBorrowed={setBorrowed} borrowed={borrowed} borrower={borrower} />
+              <ToolCheckout _id={tool._id} name={tool.name} description={tool.description} image={tool.image} checkout={checkout} setBorrowed={setBorrowed} borrowed={borrowed} borrower={borrower} />
             </Card.Content>
             :
             ''

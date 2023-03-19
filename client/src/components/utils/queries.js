@@ -122,6 +122,9 @@ export const QUERY_MY_TOOLS = gql`
       }
       borrowedTools{
         _id
+        outDate
+        dueDate
+        approved
       }
     }
   }
@@ -194,8 +197,8 @@ query Tool($id: ID!) {
 `;
 
 export const QUERY_CHECKOUT = gql`
-  query Checkout {
-    checkouts {
+  query Checkout ($id: ID!){
+    checkout (_id: $id){
       _id
       outDate
       dueDate

@@ -53,9 +53,7 @@ const resolvers = {
     },
     myTools: async (parent, args, context) => {
       if (context.user) {
-        return await User.findOne({ _id: context.user._id }).populate(
-          "myTools borrowedTools"
-        );
+        return await User.findOne({ _id: context.user._id }).populate("myTools borrowedTools");
       }
       throw new AuthenticationError("You need to be logged in!");
     },
@@ -99,6 +97,9 @@ const resolvers = {
       const borrower = await User.findOne({ borrowedTools: args._id });
       return borrower;
     },
+    checkout: async (parents, args, context) => {
+      return await Checkout.findOne({_id: args._id});
+    }
   },
   Mutation: {
     // creates user

@@ -2,13 +2,12 @@ import './toolCheckout.scss';
 import React from "react";
 import { Button, Dropdown, Header, Image, Modal } from 'semantic-ui-react'
 import { QUERY_TOOL_OWNER } from '../../utils/queries';
-import { ADD_CHECKOUT, DELETE_CHECKOUT } from '../../utils/mutations';
+import { ADD_CHECKOUT } from '../../utils/mutations';
 import { useQuery, useMutation } from '@apollo/client';
 
 const ToolCheckout = ({ _id, name, description, image, checkout, setBorrowed, borrowed, borrower }) => {
     const [open, setOpen] = React.useState();
     const [addCheckout] = useMutation(ADD_CHECKOUT);
-    const [deleteCheckout] = useMutation(DELETE_CHECKOUT);
     const [borrowLength, setBorrowLength] = React.useState();
 
     const handleChange = (e, { value }) => {
@@ -37,18 +36,6 @@ const ToolCheckout = ({ _id, name, description, image, checkout, setBorrowed, bo
         });
         if (checkedOut) {
             setBorrowed(true);
-            setOpen(false);
-        }
-    }
-
-    const returnHandler = async () => {
-        const returned = await deleteCheckout({
-            variables: {
-                id: _id
-            }
-        });
-        if (returned) {
-            setBorrowed(false);
             setOpen(false);
         }
     }
