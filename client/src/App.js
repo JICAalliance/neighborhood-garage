@@ -10,8 +10,7 @@ import {
 } from "./components";
 import EditProfile from "./components/userComponents/editProfile";
 import EditGarage from "./components/garageComponents/editGarage";
-import Payment from "./components/stripeComponents/Payment";
-import Completion from "./components/stripeComponents/Completion";
+
 // import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import {
@@ -22,7 +21,11 @@ import {
   createHttpLink,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
-import { ContextProvider } from "./components/utils/GlobalState";
+
+import Cancel from "./components/pages/Cancel";
+import Store from "./components/pages/Store";
+import Success from "./components/pages/Success";
+import CartProvider from "./components/stripeComponents/CartContext";
 
 //error handling on Apollo
 import { onError } from "@apollo/client/link/error";
@@ -71,18 +74,19 @@ function App() {
       <Router>
         <div>
           <Nav />
-          <ContextProvider>
+          <CartProvider>
             <Routes>
-              <Route path="/" element={<Home />} />
-              {/* <Route path="/signup" element={<Signup />} /> */}
-              <Route path="/login" element={<Login />} />
-              {/* <Route path="/login" element={<Login setUser={value.setUser} />} /> */}
+              <Route index element={loggedIn ? <Profile /> : <Home />} />
               <Route
-                path="/profile"
+                path="login"
                 element={loggedIn ? <Profile /> : <Login />}
               />
               <Route
-                path="/createGarage"
+                path="profile"
+                element={loggedIn ? <Profile /> : <Login />}
+              />
+              <Route
+                path="createGarage"
                 element={loggedIn ? <CreateGarage /> : <Login />}
               />
               <Route
@@ -91,7 +95,7 @@ function App() {
               />
               {/* <Route path="/addTool" element={<AddTool />} /> */}
               <Route
-                path="/editProfile"
+                path="editProfile"
                 element={loggedIn ? <EditProfile /> : <Login />}
               />
               {/* <Route path="/joinGarage" element={<JoinGarage />} /> */}
@@ -99,10 +103,13 @@ function App() {
                 path="/viewGarage/:garageId"
                 element={loggedIn ? <ViewGarage /> : <Login />}
               />
-              <Route path="/payment" element={<Payment />} />
-              <Route path="/completion" element={<Completion />} />
+                            
+              <Route path="success" element={<Success />} />
+              <Route path="cancel" element={<Cancel />} />
+              <Route path="store" element={<Store />} />
+              
             </Routes>
-          </ContextProvider>
+          </CartProvider>
         </div>
       </Router>
     </ApolloProvider>
