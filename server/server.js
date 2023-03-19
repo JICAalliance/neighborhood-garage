@@ -18,7 +18,8 @@ var cors = require("cors");
 const stripe = require("stripe")(
   "sk_test_51Mn5QrGEUClOdAIcPID0Z19PCZ2wQ4nQAmGtN0J5lf8WPDFFFaQ76LahPgKcLO80DyDZuQ7KzfnaO6O1TOiOtgZZ00b3EvqcCR"
 );
-const myDomain = "http://localhost:3000";
+const myDomain = "https://neighborhood-garage.herokuapp.com/";
+// const myDomain = "http://localhost:3000";
 
 app.use(cors());
 app.use(express.urlencoded({ limit: "50mb", extended: false }));
