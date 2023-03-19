@@ -78,42 +78,45 @@ function AddTool(props) {
   // }
 
   return (
-    <div className="container my-1 addTool-container">
-
-      <h2>Add A Tool</h2>
-      <form onSubmit={handleFormSubmit} className="addTool-form">
-        <div className="flex-row space-between my-1">
-          <label htmlFor="name">Name:</label>
-          <input
-            placeholder="tool name"
-            name="name"
-            type="name"
-            id="name"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="flex-row space-between my-1">
-          <label htmlFor="description">Description:</label>
-          <textarea
-            placeholder="Enter a description"
-            name="description"
-            id="description"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="flex-row space-between my-1 ui file input">
-          <label htmlFor="image">Upload a picture</label>
-          <input
-            name="image"
-            type="file"
-            id="image"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="flex-row flex-end">
-          <button type="submit">Submit</button>
-        </div>
-      </form>
+    <div className="ui container">
+      <div className="ui grid">
+        <form onSubmit={handleFormSubmit} className="ui form six wide column centered">
+          <div className="flex-center">
+            <h2>Add Tool</h2>
+          </div>
+          <div className="field">
+            <label htmlFor="name">Name:</label>
+            <input
+              placeholder="tool name"
+              name="name"
+              type="text"
+              id="name"
+              onChange={handleChange}
+            />
+          </div>
+          <div className="field">
+            <label htmlFor="description">Description:</label>
+            <textarea
+              placeholder="Enter a description"
+              name="description"
+              id="description"
+              onChange={handleChange}
+            />
+          </div>
+          <div className="field">
+            <label htmlFor="image">Upload a picture</label>
+            <input
+              name="image"
+              type="file"
+              id="image"
+              onChange={handleChange}
+            />
+          </div>
+          <div className="flex-row flex-end">
+            <button type="submit" className="ui button">Submit</button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }
