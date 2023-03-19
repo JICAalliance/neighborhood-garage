@@ -37,64 +37,70 @@ function Signup(props) {
   };
 
   return (
-    <div className="container my-1 signup-container">
-      <h2>Signup</h2>
-      <form onSubmit={handleFormSubmit} className="signup-form">
-        <div className="flex-row space-between my-2">
-          <label htmlFor="name">Name:</label>
-          <input
-            placeholder="your name"
-            name="name"
-            type="name"
-            id="name"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="flex-row space-between my-2">
-          <label htmlFor="email">Email:</label>
-          <input
-            placeholder="youremail@test.com"
-            name="email"
-            type="email"
-            id="email"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="flex-row space-between my-2">
-          <label htmlFor="pwd">Password:</label>
-          <input
-            placeholder="******"
-            name="password"
-            type="password"
-            id="pwd"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="flex-row space-between my-2">
-          <label htmlFor="phone">Phone:</label>
-          <input
-            placeholder="XXX-XXX-XXXX"
-            name="phone"
-            type="phone"
-            id="phone"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="flex-row space-between my-2">
-          <label htmlFor="address">Address:</label>
-          <input
-            placeholder="type address here"
-            name="address"
-            type="address"
-            id="address"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="flex-row flex-end">
-          <button type="submit">Submit</button>
-        </div>
-      </form>
-      <Link to="/login">← Go to Login</Link>
+    <div className="ui container">
+      <div className="ui grid">
+        <form onSubmit={handleFormSubmit} className="ui form six wide column centered">
+          <div className="flex-center">
+            <h2>Sign Up</h2>
+          </div>
+          <div className="field">
+            <label htmlFor="name">Name:</label>
+            <input
+              placeholder="First and Last"
+              name="name"
+              type="text"
+              id="email"
+              onChange={handleChange}
+            />
+          </div>
+          <div className="field">
+            <label htmlFor="email">Email:</label>
+            <input
+              placeholder="youremail@example.com"
+              name="email"
+              type="email"
+              id="email"
+              onChange={handleChange}
+            />
+          </div>
+          <div className="field">
+            <label htmlFor="pwd">Password:</label>
+            <input
+              placeholder="******"
+              name="password"
+              type="password"
+              id="pwd"
+              onChange={handleChange}
+            />
+          </div>
+          <div className="field">
+            <label htmlFor="phone">Phone:</label>
+            <input
+              placeholder="XXX-XXX-XXXX"
+              name="phone"
+              type="text"
+              id="phone"
+              onChange={handleChange}
+            />
+          </div>
+          <div className="field">
+            <label htmlFor="address">Address:</label>
+            <input
+              placeholder="Enter address here"
+              name="address"
+              type="text"
+              id="address"
+              onChange={handleChange}
+            />
+          </div>
+          <br></br>
+          <div className="flex-center">
+            <button type="submit" className="ui button">Submit</button>
+            <br></br>
+            <Link to="/login">Already a member? Log in!</Link>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

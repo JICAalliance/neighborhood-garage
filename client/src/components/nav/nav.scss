@@ -4,37 +4,10 @@
     box-sizing: border-box;
 }
 
-.logo {
-    text-decoration: none;
-    background-color: #b1b1b1;
-    position: fixed;
-    width: 100vw;
-    height: 8vh;
-    top: 0;
-    left: 0;
-    backdrop-filter:var(1.2rem);
-    a{
-        text-decoration: none;
-        color: white;
-    }
-    display: flex;
-    align-items: center;
+.navbar {
+    margin-bottom: 10vh;
 }
 
-.logo-text {
-    height: fit-content;
-    width: fit-content;
-    font-size: 2rem;
+.right-tabs {
+    margin-left: 0 !important;
 }
-
-.navlinks {
-    display: flex;
-    width: 40vw;
-    height: 8vh;
-    align-items: center;
-    position: fixed;
-    right: 0;
-    top: 0;
-    justify-content: space-around;
-}
-

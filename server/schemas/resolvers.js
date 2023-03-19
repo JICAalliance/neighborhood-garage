@@ -54,10 +54,17 @@ const resolvers = {
     myTools: async (parent, args, context) => {
       if (context.user) {
         return await User.findOne({ _id: context.user._id }).populate(
-          "myTools"
+          "myTools borrowedTools"
         );
       }
       throw new AuthenticationError("You need to be logged in!");
+    },
+    // A query that returns all of the tool objects assosciate with an array of checkout ids, used in succesion with the myTools query
+    borrowedTools: async (parent, args, context) => {
+      const tool = await Tool.find(
+        { checkout: { $in: args.idArray } }).populate('checkout');
+        console.log(tool);
+        return tool;
     },
     //views all the tools
     tools: async () => {
@@ -216,14 +223,14 @@ const resolvers = {
 
     updateTool: async (parent, args, context) => {
       const updatedTool = await Tool.findOneAndUpdate(
-        {_id: args._id},
+        { _id: args._id },
         {
           $set: {
-              name: args.name,
-              description: args.description
+            name: args.name,
+            description: args.description
           }
-      },
-      { new: true }
+        },
+        { new: true }
       )
 
       return updatedTool;
@@ -255,54 +262,54 @@ const resolvers = {
           { new: true }
         );
 
-                return garage;
+        return garage;
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
+    //TODO: Do UPDATE the Garage. Only the admin can update the garage
+    updateGarage: async (parents, args, context) => {
+      if (context.user && args.adminIs) {
+        const garage = await Garage.findOneAndUpdate(
+          { invitationCode: args.invitationCode },
+          {
+            $set: {
+              garageName: args.garageName,
+              description: args.description
             }
-            throw new AuthenticationError('You need to be logged in!');
-        },
-        //TODO: Do UPDATE the Garage. Only the admin can update the garage
-        updateGarage: async (parents, args, context) => {
-            if (context.user && args.adminIs) {
-                const garage = await Garage.findOneAndUpdate(
-                    { invitationCode: args.invitationCode },
-                    {
-                        $set: {
-                            garageName: args.garageName,
-                            description: args.description
-                        }
-                    },
-                    { new: true }
-                ).populate('members').populate('admin');
+          },
+          { new: true }
+        ).populate('members').populate('admin');
 
-                return garage;
-            }
-            throw new AuthenticationError('You need to be logged in and have admin status to update this garage!');
+        return garage;
+      }
+      throw new AuthenticationError('You need to be logged in and have admin status to update this garage!');
 
-        },
-        // deleteGarage will check is the user's ID matches the admin ID, 
-        // deleting Garage will not delete tools nor users but in the future the messages
-        deleteGarage: async (parent, args, context) => {
-            if (context.user && args.adminIs) {
-                const garage = await Garage.findOneAndDelete(
-                    { invitationCode: args.invitationCode }
-                );
-                console.log('GARAGE resolver', garage);
+    },
+    // deleteGarage will check is the user's ID matches the admin ID, 
+    // deleting Garage will not delete tools nor users but in the future the messages
+    deleteGarage: async (parent, args, context) => {
+      if (context.user && args.adminIs) {
+        const garage = await Garage.findOneAndDelete(
+          { invitationCode: args.invitationCode }
+        );
+        console.log('GARAGE resolver', garage);
 
-                //remove garage reference from all the members (this includes the admin)
-                const users = await User.updateMany(
-                    { myGarages: garage._id },
-                    { $pull: { myGarages: garage._id } },
-                    { new: true }
-                );
+        //remove garage reference from all the members (this includes the admin)
+        const users = await User.updateMany(
+          { myGarages: garage._id },
+          { $pull: { myGarages: garage._id } },
+          { new: true }
+        );
 
-                console.log('GARAGE USER resolver', users);
+        console.log('GARAGE USER resolver', users);
 
-                // TODO: after deleting garage, parse through it to delete messages. This is done when messages are done.
+        // TODO: after deleting garage, parse through it to delete messages. This is done when messages are done.
 
-                return garage;
+        return garage;
 
-            }
-            throw new AuthenticationError('You need to be logged in and have admin status to delete this garage!');
-        },
+      }
+      throw new AuthenticationError('You need to be logged in and have admin status to delete this garage!');
+    },
 
     //TODO: Do UPDATE the Garage. Only the admin can update the garage
 
@@ -354,6 +361,7 @@ const resolvers = {
       const checkout = await Checkout.create({
         outDate: args.outDate,
         dueDate: args.dueDate,
+        approved: false
       });
 
       await User.findOneAndUpdate(
@@ -371,27 +379,34 @@ const resolvers = {
       // throw new AuthenticationError('You need to be logged in!');
     },
 
+    approveCheckout: async (parent, args, context) => {
+      return await Checkout.findOneAndUpdate(
+        {_id: args._id},
+        {$set: {approved: true}}
+      );
+    },
+
     // user removes tool
     deleteCheckout: async (parent, args, context) => {
       // if (context.user) {
       const parentTool = await Tool.findOne({ _id: args._id });
       await Checkout.findByIdAndDelete(parentTool.checkout._id);
 
-            await User.findOneAndUpdate(
-                { borrowedTools: context.user._id },
-                { $pull: { borrowedTools: args._id } },
-                { new: true },
-            ).populate('borrowedTools');
+      await User.findOneAndUpdate(
+        { borrowedTools: context.user._id },
+        { $pull: { borrowedTools: args._id } },
+        { new: true },
+      ).populate('borrowedTools');
 
 
-            return await Tool.findOneAndUpdate(
-                { _id: args._id },
-                { checkout: null },
-                { new: true }
-            ).populate('checkout');
-            // throw new AuthenticationError('You need to be logged in!');
-        },
+      return await Tool.findOneAndUpdate(
+        { _id: args._id },
+        { checkout: null },
+        { new: true }
+      ).populate('checkout');
+      // throw new AuthenticationError('You need to be logged in!');
     },
+  },
 };
 
 module.exports = resolvers;

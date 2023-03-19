@@ -4,17 +4,25 @@ import React from "react";
 import { Card, Icon, Button, Image } from 'semantic-ui-react';
 import ToolCheckout from '../toolCheckout';
 import EditTool from '../editTool';
+import ToolApproval from '../toolApproval';
 import { useQuery } from '@apollo/client';
 import { QUERY_CHECKOUT_BORROWER } from '../../utils/queries';
 
 
 const ToolCard = ({ tool, checkoutModal, userOwned }) => {
 
-  const [borrowed, setBorrowed] = React.useState();
+  let approval = false;
+  if (tool.checkout){
+    approval = tool.checkout.approved;
+  }
+
+  const [borrowed, setBorrowed] = React.useState(Boolean(tool.checkout));
+  const [approved, setApproved] = React.useState(approval);
+
   let checkoutId = null;
   let outDate = null;
   let dueDate = null;
-  if (borrowed) {
+  if (borrowed && tool.checkout) {
     checkoutId = tool.checkout._id;
     outDate = new Date(Date.parse(tool.checkout.outDate));
     dueDate = new Date(Date.parse(tool.checkout.dueDate));
@@ -39,10 +47,20 @@ const ToolCard = ({ tool, checkoutModal, userOwned }) => {
           }
           {borrowed ?
             <div>
-              <p>Status: Borrowed</p>
-              <p>Borrowed by: {borrower.name}</p>
-              <p>Checked out on: {outDate.toLocaleDateString()}</p>
-              <p>Due on: {dueDate.toLocaleDateString()}</p>
+              {approved ?
+                <div>
+                  <p>Status: Borrowed</p>
+                  <p>Borrowed by: {borrower.name}</p>
+                  <p>Checked out on: {outDate.toLocaleDateString()}</p>
+                  <p>Due on: {dueDate.toLocaleDateString()}</p>
+                </div>
+                :
+                <div>
+                  <p>Status: Pending Approval</p>
+                  <p>Requested by: {borrower.name}</p>
+                </div>
+              }
+
             </div>
             :
             <div>
@@ -57,15 +75,21 @@ const ToolCard = ({ tool, checkoutModal, userOwned }) => {
       {userOwned ?
         <Card.Content extra>
           <EditTool _id={tool._id} name={tool.name} description={tool.description} image={tool.image} checkout={tool.checkout} setBorrowed={setBorrowed} borrowed={borrowed} borrower={borrower} />
+          {borrowed ?
+            <ToolApproval borrower={borrower} tool={tool} approved={approved} setApproved={setApproved} setBorrowed={setBorrowed}/>
+            : ''
+          }
         </Card.Content>
-        : ''}
-
-      {(checkoutModal && !userOwned) ?
-
-        <Card.Content extra>
-          <ToolCheckout _id={tool._id} name={tool.name} description={tool.description} image={tool.image} checkout={tool.checkout} setBorrowed={setBorrowed} borrowed={borrowed} borrower={borrower} />
-        </Card.Content>
-        : ''}
+        :
+        <div>
+          {(checkoutModal && !borrowed) ?
+            <Card.Content extra>
+              <ToolCheckout _id={tool._id} name={tool.name} description={tool.description} image={tool.image} checkout={tool.checkout} setBorrowed={setBorrowed} borrowed={borrowed} borrower={borrower} />
+            </Card.Content>
+            :
+            ''
+          }
+        </div>}
     </Card>
   </div>
 

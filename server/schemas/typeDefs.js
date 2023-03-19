@@ -49,6 +49,7 @@ const typeDefs = gql`
     _id: ID
     outDate: Date
     dueDate: Date
+    approved: Boolean
   }
         
   type Query {
@@ -59,6 +60,7 @@ const typeDefs = gql`
     toolOwner(_id:ID!): User
     tools: [Tool]
     myTools: User
+    borrowedTools(idArray: [ID]): [Tool]
     tool(_id:ID!): Tool
 
     garages: [Garage]
@@ -84,6 +86,7 @@ const typeDefs = gql`
     leaveGarage(invitationCode: String!): User
 
     addCheckout(outDate: Date!, dueDate: Date!, toolId: ID!): Tool
+    approveCheckout(_id:ID!): Checkout
     deleteCheckout(_id:ID!): Tool
   }
 `;

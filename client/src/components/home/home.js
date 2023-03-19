@@ -4,9 +4,8 @@ import ExampleComponent from "../exampleComponent";
 
 const Home = () => (
   <div id="home">
-    <h1>This is the homepage</h1>
     <Signup/>
-    <ExampleComponent/>
+    {/* <ExampleComponent/> */}
   </div>
 );
 

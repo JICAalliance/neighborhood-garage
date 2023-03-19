@@ -186,6 +186,14 @@ export const ADD_CHECKOUT = gql`
   }
 `;
 
+export const APPROVE_CHECKOUT = gql`
+  mutation ApproveCheckout ($id: ID!){
+    approveCheckout (_id: $id) {
+      _id
+    }
+  }
+`;
+
 export const DELETE_CHECKOUT = gql`
   mutation deleteCheckout($id: ID!) {
     deleteCheckout(_id: $id) {

@@ -6,56 +6,58 @@ function Nav() {
   function showNavigation() {
     if (Auth.loggedIn()) {
       return (
-        <ul>
-          <li>
-            <Link to="/profile">
-              <button>Profile</button>
-            </Link>
-          </li>
-          <li>
-            <button>
+        <div className="ui">
+          <div className="ui stackable menu">
+            <div className="right item">
+              <Link to="/profile">
+                Profile
+              </Link>
+            </div>
+            <div className="item right-tabs">
               <a href="/" onClick={() => Auth.logout()}>
                 Logout
               </a>
-            </button>
-          </li>
-        </ul>
+            </div>
+          </div>
+        </div>
       );
     } else {
       return (
-        <ul className="navlinks">
-          {/* <li>
-            <Link to="/signup">
-              <button>Signup</button>
-            </Link>
-          </li> */}
-          <li>
-            <Link to="/login">
-              <button>Login</button>
-            </Link>
-          </li>
-          {/* <li>
-            <Link to="/createGarage">
-              <button>Create Garage</button>
-            </Link>
-          </li> */}
-          {/* <li>
-            <Link to="/addTool">
-              <button>Add Tool</button>
-            </Link>
-          </li> */}
-        </ul>
+        <div className="ui">
+          <div className="ui stackable menu">
+            {/* <li>
+              <Link to="/signup">
+                <button>Signup</button>
+              </Link>
+            </li> */}
+            <div className="right item">
+              <Link to="/login">
+                Login
+              </Link>
+            </div>
+            {/* <li>
+              <Link to="/createGarage">
+                <button>Create Garage</button>
+              </Link>
+            </li> */}
+            {/* <li>
+              <Link to="/addTool">
+                <button>Add Tool</button>
+              </Link>
+            </li> */}
+          </div>
+        </div>
       );
     }
   }
 
   return (
-    <header className="logo">
-      <h1 style={{ margin: 0 }}>
+    <header className="navbar">
+      {/* <h1 style={{ margin: 0 }}>
         <Link to="/" className="logo-text">
           Neighborhood Garage
         </Link>
-      </h1>
+      </h1> */}
 
       <nav>{showNavigation()}</nav>
     </header>
