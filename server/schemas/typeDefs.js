@@ -62,6 +62,7 @@ const typeDefs = gql`
     myTools: User
     borrowedTools(idArray: [ID]): [Tool]
     tool(_id:ID!): Tool
+    checkout(_id: ID!): Checkout
 
     garages: [Garage]
     garage(_id:ID!): Garage

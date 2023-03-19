@@ -190,6 +190,7 @@ export const APPROVE_CHECKOUT = gql`
   mutation ApproveCheckout ($id: ID!){
     approveCheckout (_id: $id) {
       _id
+      approved
     }
   }
 `;

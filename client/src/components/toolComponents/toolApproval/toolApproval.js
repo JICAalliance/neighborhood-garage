@@ -5,17 +5,17 @@ import {Button} from 'semantic-ui-react';
 import { useMutation } from '@apollo/client';
 
 
-const ToolApproval = ({ borrower, tool, approved, setApproved, setBorrowed }) => {
+const ToolApproval = ({ borrower, checkout, tool, approved, setApproved, setBorrowed }) => {
 
   const [deleteCheckout] = useMutation(DELETE_CHECKOUT);
   const [approveCheckout] = useMutation(APPROVE_CHECKOUT);
 
   const approvalHandler = async () => {
-    console.log(tool.checkout._id)
     const approved = await approveCheckout({
-      variables: {id: tool.checkout._id}
+      variables: {id: checkout._id}
     })
     if (approved) {
+      console.log(approved);
       setApproved(true);
     }
   }
