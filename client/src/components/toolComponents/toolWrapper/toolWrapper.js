@@ -5,8 +5,13 @@ import { QUERY_CHECKOUT, QUERY_TOOL_OWNER } from "../../utils/queries";
 import Auth from '../../utils/auth';
 
 const ToolWrapper = ({ tool, checkoutModal }) => {
+    let checkoutId = null;
+    if (tool.checkout){
+        checkoutId = tool.checkout._id
+    }
+
     const ownerData = useQuery(QUERY_TOOL_OWNER, { variables: { id: tool._id } });
-    const checkoutData = useQuery(QUERY_CHECKOUT, { variables: { id: tool.checkout._id } });
+    const checkoutData = useQuery(QUERY_CHECKOUT, { variables: { checkoutId } });
 
     const ownerId = ownerData.data?.toolOwner._id || [];
     const checkout = checkoutData.data?.checkout || [];
