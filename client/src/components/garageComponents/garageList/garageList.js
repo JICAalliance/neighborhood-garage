@@ -154,7 +154,10 @@ const GarageList = ({ garage }) => {
 
           {/* Only for non Admins... admins to leave must delete */}
           {!isAdmin
-            ? <h5><Button color='red' data-value={garage.invitationCode} onClick={leaveGarageHandler}>Leave This Garage</Button></h5>
+            ? <h5>
+              <Button color='red' data-value={garage.invitationCode} onClick={leaveGarageHandler}>Leave This Garage</Button>
+              <Button color='olive' onClick={event => window.location.href = `/profile`}>To Dashboard</Button>
+            </h5>
             : ''
           }
 
@@ -165,19 +168,19 @@ const GarageList = ({ garage }) => {
 
           <h4>Garage Tools:</h4>
           <div id='displayTools'>
-            <ErrorBoundary fallback={"Something went wrong"}>
-              {garageTools.map((tool, index) => (
+    <ErrorBoundary fallback={"Something went wrong"}>
+      {garageTools.map((tool, index) => (
 
-                <ToolWrapper tool={tool} key={index} checkoutModal={true}>
-                </ToolWrapper>
+        <ToolWrapper tool={tool} key={index} checkoutModal={true}>
+        </ToolWrapper>
 
-              )
-              )}
-            </ErrorBoundary>
+      )
+      )}
+    </ErrorBoundary>
 
-          </div>
-        </div>
-      </div>
+          </div >
+        </div >
+      </div >
     );
   }
 

@@ -49,10 +49,9 @@ const ToolCheckout = ({ _id, name, description, image, checkout, setBorrowed, bo
         }
     }
 
-    if (loading) {
+    if(loading) {
         return <div>Loading...</div>;
-    }
-
+    }    
     if (data) {
         const owner = data.toolOwner;
 

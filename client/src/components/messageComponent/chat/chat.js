@@ -27,7 +27,11 @@ function Chat({ initMessage, garageId }) {
   });
   const [savedChat, setSavedChat] = useState(initMessage);
   const [newChat, setNewChat] = useState([]);
-  
+
+
+
+
+
   const handleFormSubmit = async (event) => {
 
     try {
