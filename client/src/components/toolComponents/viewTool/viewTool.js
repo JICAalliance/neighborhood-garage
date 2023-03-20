@@ -24,7 +24,7 @@ function ViewTool(props) {
     borrowedToolIDs = data.myTools.borrowedTools.map((tool) => (tool._id));
 
     return (
-      <div className="container my-4 viewTool-container">
+      <div className="container my-4 ">
 
         {/* <AddTool toolSubmit={toolSubmit} setToolSubmit={setToolSubmit}/> */}
 

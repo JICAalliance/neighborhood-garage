@@ -1,5 +1,5 @@
 import "./profile.scss";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 //import components
 import {
@@ -14,8 +14,12 @@ import { QUERY_ME } from "../../utils/queries";
 import { useQuery } from "@apollo/client";
 
 const Profile = () => {
+  
   const { loading, data } = useQuery(QUERY_ME);
   const navigate = useNavigate();
+  
+
+
 
   const navToGarage = (e) => {
     // navigate(e.target.value)
@@ -43,9 +47,25 @@ const Profile = () => {
 
     return (
       <div id="profile">
-        <h1>My Profile</h1>
-        <h2 className="welcome">Welcome {name}!</h2>
-        <div className="ui centered divided three column grid">
+        <h1 className="welcome">Dashboard</h1>
+        {/* <h2 className="welcome">Welcome {name}!</h2> */}
+          <div id="info" className="six wide column">
+            <h2 className="welcome">Info</h2>
+            <p>Name: {name} </p>
+            <p>Email: {email}</p>
+            <p>Phone number: {phone}</p>
+            <p>Address: {address}</p>
+            <button onClick={navToEditProfile}>Edit Profile</button>
+          </div>
+          <div id="garages" className="ten wide column welcome">
+              <h2>My Garages</h2>
+          </div>
+        
+        
+        <div >
+            <ViewTool />
+          </div>
+        {/* <div className="ui centered divided three column grid">
           <div className="five wide column"></div>
           <div className="five wide column">
             <div className="ui container">
@@ -56,10 +76,8 @@ const Profile = () => {
                       <button onClick={navToCreateGarage}>Create Garage</button>
                     </div>
                     <div>
-                      {/* modal to join garage */}
                       <JoinGarage />
                     </div>
-                    {/* product will be what is displayed, index for unique ID; replace the array with dynamic values of garages user is in*/}
                     <select name="garage" onClick={(e) => navToGarage(e)}>
                       <option>Choose Garage</option>
                       {myGarages.map((garage) => {
@@ -85,10 +103,8 @@ const Profile = () => {
           <div id="addTool" className="five wide column">
             <AddTool />
           </div>
-        </div>
-        <div id="viewTool">
-          <ViewTool />
-        </div>
+        </div> */}
+        
       </div>
     );
   }
