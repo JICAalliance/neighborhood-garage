@@ -93,6 +93,7 @@ const typeDefs = gql`
     deleteCheckout(_id:ID!): Tool
 
     addMessage(body: String!, garageId:ID!): Message
+    deleteMessage(_id:ID!): Message
   }
 `;
 
