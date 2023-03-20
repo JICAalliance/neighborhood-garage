@@ -1,6 +1,6 @@
 import "./profile.scss";
-import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 //import components
 import {
   ViewTool,
@@ -22,7 +22,6 @@ const Profile = () => {
     if (e.target.value !== "Choose Garage") {
       return navigate(`/viewGarage/${e.target.value}`);
     }
-    // console.log(e.target.value)
   };
 
   const navToCreateGarage = () => {
@@ -31,9 +30,9 @@ const Profile = () => {
   const navToEditProfile = () => {
     return navigate(`/editProfile`);
   };
-  const navToDonate = () => {
-    return navigate(`/store`);
-  };
+  // const navToDonate = () => {
+  //   return navigate(`/store`);
+  // };
 
   if (loading) {
     return <div>Loading...</div>;
@@ -94,7 +93,7 @@ const Profile = () => {
           </div>
 
           {/* View Garage Dropdown */}
-          {/* <select name="garage" onClick={(e) => navToGarage(e)}>
+          <select name="garage" onClick={(e) => navToGarage(e)}>
             <option>Choose Garage</option>
             {myGarages.map((garage) => {
               return (
@@ -107,12 +106,12 @@ const Profile = () => {
                 </option>
               );
             })}
-          </select> */}
+          </select>
 
           <div class="three column row">
-            {/* <div id="addTool" className="five wide column">
+            <div id="addTool" className="five wide column">
               <AddTool />
-            </div> */}
+            </div>
             <div class="column">
               <h2 className="welcome">Toolbox</h2>
             </div>

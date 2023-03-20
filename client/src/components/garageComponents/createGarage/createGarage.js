@@ -8,10 +8,12 @@ import { CREATE_GARAGE } from "../../utils/mutations";
 const CreateGarage = () => {
   const [createGarage] = useMutation(CREATE_GARAGE);
 
+  //set States
   const [formState, setFormState] = useState({
     name: "",
     description: "",
   });
+  const [errorResponse, setError] = useState(null);
 
     //to navigate to profile once joined
   const navigate = useNavigate();
@@ -34,7 +36,9 @@ const CreateGarage = () => {
 
 
     }catch (e) {
-    console.log(e);
+    console.log("Cannot create garage.",e);
+    setError(e);
+
   };
 
 };
@@ -51,6 +55,7 @@ const handleChange = (event) => {
 return (
   <div className="container my-1 createGarage-container">
     <h2>Create a Neighborhood Garage</h2>
+    <div>{errorResponse? "Something went wrong..." : ''}</div>
     <form onSubmit={handleFormSubmit} className="createGarage-form">
       <div className="flex-row space-between my-2">
         <label htmlFor="name">Name:</label>
@@ -59,6 +64,7 @@ return (
           name="name"
           type="text"
           id="name"
+          required
           onChange={handleChange}
         />
       </div>

@@ -1,8 +1,7 @@
 import "./chat.scss";
 import React from 'react'
 import { Button, Comment, Form, Header } from 'semantic-ui-react'
-import ChatRender from '../chatRender';
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import { useMutation } from "@apollo/client";
 import Auth from "../../utils/auth";
 import { ADD_MESSAGE, DELETE_MESSAGE } from "../../utils/mutations";
@@ -17,6 +16,8 @@ function Chat({ initMessage, garageId }) {
   console.log("USER", user.data._id);
   const userId = user.data._id;
 
+  //error response
+  const [errorResponse, setError] = useState(null);
 
   //initiate mutations
   const [deleteMessage] = useMutation(DELETE_MESSAGE);
@@ -29,11 +30,7 @@ function Chat({ initMessage, garageId }) {
   const [savedChat, setSavedChat] = useState(initMessage);
   const [newChat, setNewChat] = useState([]);
 
-  const messagesEndRef = useRef(null)
 
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
-  }
 
 
 
@@ -57,6 +54,7 @@ function Chat({ initMessage, garageId }) {
       event.target.reset();
     } catch (e) {
       console.log(e);
+      setError(e);
     }
 
   };
@@ -106,6 +104,7 @@ function Chat({ initMessage, garageId }) {
       return messageDeleted;
     } catch (e) {
       console.log(e);
+      setError(e);
     }
   }
 
@@ -115,6 +114,7 @@ function Chat({ initMessage, garageId }) {
       <Header as='h3' dividing>
         Garage Bulletin
       </Header>
+      <div>{errorResponse ? "Something went wrong..." : ''}</div>
 
       <div className="bulletin container">
         <div className="chat">
@@ -170,7 +170,6 @@ function Chat({ initMessage, garageId }) {
             );
           })
           }
-          {scrollToBottom()}
         </div>
       </div>
 

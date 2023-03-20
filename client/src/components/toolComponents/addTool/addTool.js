@@ -1,18 +1,14 @@
 import "./addTool.scss";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import { useMutation } from "@apollo/client";
-import Auth from "../../utils/auth";
 import { ADD_TOOL } from "../../utils/mutations";
-
-// import ViewTool from '../viewTool';
 
 
 function AddTool(props) {
-  // console.log(props);
+
   const [formState, setFormState] = useState({ name: "", description: "", image: "" });
   const [addTool, { error }] = useMutation(ADD_TOOL);
-  const [file, setFile] = useState([]);
+  const [errorResponse, setError] = useState(null);
 
   const convertBase64 = (file) => {
     //if it's successful or if there's an error
@@ -32,18 +28,12 @@ function AddTool(props) {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    const file = formState.image;
-    console.log(file);
 
     const { files } = document.querySelector('input[type="file"]')
 
     const tool_image = await convertBase64(files[0]);
     console.log('tool image', tool_image)
-    // const formData = new FormData();
-    // formData.append("fileupload", file);
-    // console.log(formData);
 
-    // Image is simply 'placeholder' for now
     try {
       const user = await addTool({
         variables: {
@@ -55,11 +45,12 @@ function AddTool(props) {
       if (user) {
         console.log("USER AddTool", user);
       };
-      //TODO: clear form?
-      // window.location.reload();
+      //clear form
+      event.target.reset();
 
     } catch (e) {
       console.log(e);
+      setError(e);
     }
   };
 
@@ -71,14 +62,10 @@ function AddTool(props) {
     });
   };
 
-  // const handleUpload = (event) => {
-  //   setFile(
-  //     URL.createObjectURL(event.target.files[0])
-  //     );
-  // }
 
   return (
     <div className="ui container">
+      <div>{errorResponse ? "Something went wrong..." : ''}</div>
       <div className="ui grid">
         <form onSubmit={handleFormSubmit} className="ui form six wide column centered">
           <div className="flex-center">
@@ -91,6 +78,7 @@ function AddTool(props) {
               name="name"
               type="text"
               id="name"
+              required
               onChange={handleChange}
             />
           </div>
@@ -100,6 +88,7 @@ function AddTool(props) {
               placeholder="Enter a description"
               name="description"
               id="description"
+              required
               onChange={handleChange}
             />
           </div>
@@ -109,6 +98,7 @@ function AddTool(props) {
               name="image"
               type="file"
               id="image"
+              required
               onChange={handleChange}
             />
           </div>

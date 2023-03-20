@@ -1,15 +1,9 @@
 import "./viewChat.scss";
 import React from 'react'
 import Chat from '../chat';
-import { Button, Comment, Form, Header } from 'semantic-ui-react'
-import ChatRender from '../chatRender';
-import { useState } from "react";
-
-// import { Link } from "react-router-dom";
-import { useQuery, useMutation } from "@apollo/client";
-import Auth from "../../utils/auth"
-import { ADD_MESSAGE } from "../../utils/mutations";
+import { useQuery } from "@apollo/client";
 import { QUERY_GARAGE_MESSAGES } from "../../utils/queries";
+import ErrorBoundary from '../../errorBoundary';
 
 
 
@@ -24,6 +18,7 @@ function ViewChat(props) {
   if (loading) {
     return <div>Loading ...</div>;
   }
+
   else {
     console.log('currentGarage', data);
     data.messages.messages.forEach((message) => {
@@ -34,7 +29,9 @@ function ViewChat(props) {
 
 
     return (
-      <Chat  className="chat" initMessage={chatHolder} garageId={props.garageId} />
+      <ErrorBoundary fallback={"Something went wrong"}>
+        <Chat className="chat" initMessage={chatHolder} garageId={props.garageId} />
+      </ErrorBoundary>
     );
   };
 }

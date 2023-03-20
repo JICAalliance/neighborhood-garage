@@ -13,6 +13,8 @@ const EditGarage = () => {
     name: '',
     description: '',
   });
+  //error response
+  const [errorResponse, setError] = useState(null);
 
   const [garageUpdate, { error }] = useMutation(UPDATE_GARAGE);
 
@@ -28,6 +30,8 @@ const EditGarage = () => {
   });
 
   const garage = data?.garage || [];
+
+  
 
   //get user data
   const user = Auth.getProfile();
@@ -50,7 +54,9 @@ const EditGarage = () => {
       navigate(`/viewGarage/${updatedGarage.data.updateGarage._id}`,{reload:true});
 
     } catch (e) {
-      console.log(e);
+      console.log('Not able to update.',e);
+      setError(e);
+      alert("Our apologies, we cannot update your garage at this time.");
     };
   };
 
@@ -83,6 +89,7 @@ const EditGarage = () => {
 
     return (
       <div className="createGarage-container">
+        <div>{errorResponse? "Something went wrong..." : ''}</div>
         <h2>Edit {garage.garageName} Garage</h2>
         <form onSubmit={handleFormSubmit} className="createGarage-form">
           <div className="flex-row space-between my-2">
@@ -93,6 +100,7 @@ const EditGarage = () => {
               name="name"
               type="text"
               id="name"
+              required
               onChange={handleChange}
             >
 

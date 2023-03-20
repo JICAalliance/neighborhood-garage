@@ -3,6 +3,7 @@ import ToolCard from "../toolCard/toolCard";
 import { useQuery } from '@apollo/client';
 import { QUERY_CHECKOUT, QUERY_TOOL_OWNER } from "../../utils/queries";
 import Auth from '../../utils/auth';
+import ErrorBoundary from '../../errorBoundary';
 
 const ToolWrapper = ({ tool, checkoutModal }) => {
     let checkoutId = null;

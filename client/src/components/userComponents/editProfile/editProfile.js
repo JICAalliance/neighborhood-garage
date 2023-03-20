@@ -14,6 +14,8 @@ const EditProfile = () => {
     email: "",
     address: "",
   });
+  //error response
+  const [errorResponse, setError] = React.useState(null);
 
   const [updateUser] = useMutation(UPDATE_USER);
   const [removeUser] = useMutation(REMOVE_USER);
@@ -28,29 +30,41 @@ const EditProfile = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
-    const mutationResponse = await updateUser({
-      variables: {
-        id: _id,
-        name: formState.name,
-        email: formState.email,
-        phone: formState.phoneNumber,
-        address: formState.address,
-      },
-    });
+    try {
 
-    navigate(`/profile`);
+      const mutationResponse = await updateUser({
+        variables: {
+          id: _id,
+          name: formState.name,
+          email: formState.email,
+          phone: formState.phoneNumber,
+          address: formState.address,
+        },
+      });
+
+      navigate(`/profile`);
+    } catch (e) {
+      console.log(e);
+      setError(e);
+    };
   };
 
   const handleDelete = async (event) => {
     event.preventDefault();
+    try {
 
-    const mutationResponse = await removeUser({
-      variables: {
-        id: _id,
-      },
-    });
+      const mutationResponse = await removeUser({
+        variables: {
+          id: _id,
+        },
+      });
 
-    Auth.logout();
+      Auth.logout();
+      
+    } catch (e) {
+      console.log(e);
+      setError(e);
+    };
   };
 
   const handleChange = (event) => {
@@ -64,6 +78,7 @@ const EditProfile = () => {
   return (
     <div className="container my-1 editProfile-container">
       <h2>Edit Profile</h2>
+      {errorResponse ? <div>'Something went wrong ..'</div> : ''}
       <form onSubmit={handleFormSubmit} className="editProfile-form">
         <div className="flex-row space-between my-2">
           <label htmlFor="name">Name:</label>

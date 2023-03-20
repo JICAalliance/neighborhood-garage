@@ -19,25 +19,31 @@ function Signup(props) {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    //test
-    console.log(
-      formState.name,
-      formState.email,
-      formState.password,
-      formState.address
-    );
-    const mutationResponse = await addUser({
-      variables: {
-        name: formState.name,
-        email: formState.email,
-        password: formState.password,
-        phone: formState.phone,
-        address: formState.address,
-      },
-    });
-    const token = mutationResponse.data.addUser.token;
-    Auth.login(token);
-    navigate(`/profile`);
+    try {
+      //test
+      // console.log(
+      //   formState.name,
+      //   formState.email,
+      //   formState.password,
+      //   formState.address
+      // );
+      const mutationResponse = await addUser({
+        variables: {
+          name: formState.name,
+          email: formState.email,
+          password: formState.password,
+          phone: formState.phone,
+          address: formState.address,
+        },
+      });
+      const token = mutationResponse.data.addUser.token;
+      Auth.login(token);
+      navigate(`/profile`);
+    } catch (e) {
+      console.log("Cannot add user.", e);
+      alert("Our apologies, we cannot add you as a user at this time.");
+      
+    };
   };
 
   const handleChange = (event) => {

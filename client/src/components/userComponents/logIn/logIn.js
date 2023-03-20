@@ -24,7 +24,7 @@ function Login(props) {
       //navigate to profile when login successful
       navigate(`/profile`);
     } catch (e) {
-      console.log(e);
+      console.log("Cannot login.",e);
     }
   };
 
