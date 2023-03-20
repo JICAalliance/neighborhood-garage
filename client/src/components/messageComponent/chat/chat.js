@@ -82,7 +82,7 @@ function Chat({ initMessage, garageId }) {
         <div className="chat">
           {/* map here to send in chat */}
           {initMessage.map((message1, index) => {
-            return <ChatRender message={message1} key={index + 1000} />;
+            return <ChatRender message={message1} key={message1._id} />;
           })}
           {/* <div ref={messagesEndRef} /> */}
           {newChat.map((message2) => {

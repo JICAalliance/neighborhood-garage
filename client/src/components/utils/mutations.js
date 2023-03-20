@@ -217,3 +217,16 @@ export const ADD_MESSAGE = gql`
     }
   }
 `;
+
+export const DELETE_MESSAGE = gql`
+mutation DeleteMessage($id: ID!) {
+  deleteMessage(_id: $id) {
+    _id
+    author {
+      _id
+      name
+    }
+    body
+  }
+}
+`;

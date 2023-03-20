@@ -132,8 +132,8 @@ const GarageList = ({ garage }) => {
         </h5>
 
         <h5><Button color='red' data-value={garage.invitationCode} onClick={leaveGarageHandler}>Leave This Garage</Button></h5>
-{/* GARAGE BULLETIN */}
-        <ViewChat garageId={garage._id}/>
+        {/* GARAGE BULLETIN */}
+        <ViewChat garageId={garage._id} />
 
         <h4>Garage Tools:</h4>
         <div id='displayTools'>
@@ -147,7 +147,7 @@ const GarageList = ({ garage }) => {
 
         </div>
       </div>
-      
+
     );
   }
 

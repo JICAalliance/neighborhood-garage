@@ -451,10 +451,11 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
 
-    // //delete Message
-    // deleteMessage: async (parent, args, context) => {
-    //   const delMessage = await Message.findById()
-    // },
+    //delete Message
+    deleteMessage: async (parent, args, context) => {
+      const delMessage = await Message.findByIdAndDelete(args._id);
+      return delMessage;
+    },
 
   },
 };
