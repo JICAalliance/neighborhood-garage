@@ -27,28 +27,32 @@ const ToolCheckout = ({ _id, name, description, image, checkout, setBorrowed, bo
     }))
 
     const borrowHandler = async () => {
-        if (borrowLength) {
-            const checkedOut = await addCheckout({
-                variables: {
-                    toolId: _id,
-                    outDate: Date.now(),
-                    dueDate: (Date.now() + (1000 * 60 * 60 * 24 * borrowLength))
+        try {
+            if (borrowLength) {
+                const checkedOut = await addCheckout({
+                    variables: {
+                        toolId: _id,
+                        outDate: Date.now(),
+                        dueDate: (Date.now() + (1000 * 60 * 60 * 24 * borrowLength))
+                    }
+                });
+                if (checkedOut) {
+                    setBorrowed(true);
+                    setOpen(false);
+                    setInvalidMessage(false);
                 }
-            });
-            if (checkedOut) {
-                setBorrowed(true);
-                setOpen(false);
-                setInvalidMessage(false);
+            } else {
+                setInvalidMessage(true);
             }
-        } else {
-            setInvalidMessage(true);
+        } catch (e) {
+            console.log(e);
         }
     }
 
-    if(loading) {
+    if (loading) {
         return <div>Loading...</div>;
     }
-    
+
     if (data) {
         const owner = data.toolOwner;
 

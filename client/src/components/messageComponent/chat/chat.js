@@ -7,13 +7,11 @@ import Auth from "../../utils/auth";
 import { ADD_MESSAGE, DELETE_MESSAGE } from "../../utils/mutations";
 
 
-
-
 function Chat({ initMessage, garageId }) {
 
   //find out who the user is
   const user = Auth.getProfile();
-  console.log("USER", user.data._id);
+
   const userId = user.data._id;
 
   //error response
@@ -69,8 +67,7 @@ function Chat({ initMessage, garageId }) {
     try {
       // get message ID
       const messageId = event.currentTarget.getAttribute("data-value");
-      console.log(" CHAT messageId", messageId);
-
+  
       const messageDeleted = await deleteMessage({
         variables: {
           id: messageId,
@@ -138,8 +135,6 @@ function Chat({ initMessage, garageId }) {
               </Comment>
 
             );
-
-            // return <ChatRender message={message1} key={message1._id} />;
           })}
           {/* <div ref={messagesEndRef} /> */}
           {newChat.map((message2) => {

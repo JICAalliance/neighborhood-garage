@@ -108,6 +108,7 @@ const GarageList = ({ garage }) => {
       }
 
     });
+    console.log("garageTools", garageTools)
 
 
     return (
@@ -117,7 +118,7 @@ const GarageList = ({ garage }) => {
           <h3>Welcome to {garage.garageName}!!!</h3>
           <h4><em>{garage.description}...</em></h4>
 
-          <h4 id='invitationCode' key={garage.invitationCode} >
+          <h4 id='invitationCode' >
             <ErrorBoundary fallback={"Something went wrong"}>
               <ClipboardCopy copyText={garage.invitationCode} />
             </ErrorBoundary>
