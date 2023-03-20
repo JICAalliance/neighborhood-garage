@@ -73,7 +73,23 @@ const Profile = () => {
             <div className="column">
               <h2 className="welcome">Garages</h2>
             </div>
-            <div className="column"></div>
+            <div className="column flex-center">
+              {/* View Garage Dropdown */}
+              <select name="garage" onClick={(e) => navToGarage(e)}>
+                <option>Choose Garage</option>
+                {myGarages.map((garage) => {
+                  return (
+                    <option
+                      value={garage._id}
+                      key={garage._id}
+                      onClick={(e) => navToGarage(e)}
+                    >
+                      {garage.garageName}
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
             <div className="column flex-center">
               <div className="">
                 <button
@@ -92,31 +108,17 @@ const Profile = () => {
             </div>
           </div>
 
-          {/* View Garage Dropdown */}
-          <select name="garage" onClick={(e) => navToGarage(e)}>
-            <option>Choose Garage</option>
-            {myGarages.map((garage) => {
-              return (
-                <option
-                  value={garage._id}
-                  key={garage._id}
-                  onClick={(e) => navToGarage(e)}
-                >
-                  {garage.garageName}
-                </option>
-              );
-            })}
-          </select>
+
 
           <div class="three column row">
-            <div id="addTool" className="five wide column">
-              <AddTool />
-            </div>
             <div class="column">
               <h2 className="welcome">Toolbox</h2>
             </div>
             <div class="column">
               <ViewTool />
+            </div>
+            <div id="addTool" className="five wide column">
+              <AddTool />
             </div>
           </div>
         </div>

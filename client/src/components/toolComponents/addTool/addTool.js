@@ -67,7 +67,7 @@ function AddTool(props) {
     <div className="ui container">
       <div>{errorResponse ? "Something went wrong..." : ''}</div>
       <div className="ui grid">
-        <form onSubmit={handleFormSubmit} className="ui form six wide column centered">
+        <form onSubmit={handleFormSubmit} className="ui form ten wide column centered">
           <div className="flex-center">
             <h2>Add Tool</h2>
           </div>
@@ -84,7 +84,7 @@ function AddTool(props) {
           </div>
           <div className="field">
             <label htmlFor="description">Description:</label>
-            <textarea
+            <input
               placeholder="Enter a description"
               name="description"
               id="description"
@@ -102,7 +102,7 @@ function AddTool(props) {
               onChange={handleChange}
             />
           </div>
-          <div className="flex-row flex-end">
+          <div className="flex-row flex-end flex-center">
             <button type="submit" className="ui button">Submit</button>
           </div>
         </form>
