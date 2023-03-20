@@ -29,7 +29,7 @@ function ViewTool(props) {
         {/* <AddTool toolSubmit={toolSubmit} setToolSubmit={setToolSubmit}/> */}
 
         {/* map through tool and display via card */}
-        <div id='displayTools' className="ui four column grid">
+        <div id='displayTools' className="ui two column grid">
 
           {myTools.map((tool, index) => (
             <div className="column">

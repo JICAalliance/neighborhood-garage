@@ -50,10 +50,10 @@ const Profile = () => {
       <div id="profile">
         <h1 className="welcome">Dashboard</h1>
         {/* <h2 className="welcome">Welcome {name}!</h2> */}
-        <div class="ui stackable three column grid">
-          <div class="row">
-            <div class="column"><h2 className="welcome">Info</h2></div>
-            <div class="column">
+        <div className="ui stackable three column grid">
+          <div className="row">
+            <div className="column"><h2 className="welcome">Info</h2></div>
+            <div className="column">
               <div id="info" className="welcome">
                 <p>Name: {name} </p>
                 <p>Email: {email}</p>
@@ -61,19 +61,22 @@ const Profile = () => {
                 <p>Address: {address}</p>
               </div>
             </div>
-            <div class="column"><button onClick={navToEditProfile}>Edit Profile</button></div>
+            <div className="column flex-center"><button onClick={navToEditProfile} className="button-30" role="button">Edit Profile</button></div>
           </div>
-          <div class="row">
-              <div class="column"><h2 className="welcome">Garages</h2></div>
-              <div class="column"></div>
-              <div class="column">
-                <button onClick={navToCreateGarage}>Create Garage</button>
+          <div className="row">
+              <div className="column"><h2 className="welcome">Garages</h2></div>
+              <div className="column"></div>
+              <div className="column flex-center">
+                <div className="">
+                  <button className="button-30" role="button" onClick={navToCreateGarage}>Create Garage</button>
+                </div>
+                <br></br>
                 <div>
                     <JoinGarage />
                 </div>
               </div>
           </div>
-          <div class="row">
+          <div class="three column row">
               <div class="column"><h2 className="welcome">Toolbox</h2></div>
               <div class="column"><ViewTool /></div>
           </div>
