@@ -13,6 +13,7 @@ import { ADD_MESSAGE } from "../../utils/mutations";
 function Chat({ initMessage, garageId }) {
 
   console.log("PROPS IN CHAT", initMessage, "garageID", garageId);
+
   let newMessages = [];
 
   const [addMessage] = useMutation(ADD_MESSAGE);
@@ -20,7 +21,9 @@ function Chat({ initMessage, garageId }) {
   const [formState, setFormState] = useState({
     body: "",
   });
+  
   let [newChat, setNewChat] = useState([]);
+
 
   // let chatHolder = [];
 
@@ -29,6 +32,7 @@ function Chat({ initMessage, garageId }) {
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
   }
+
 
   // useEffect(() => {
   //   scrollToBottom()
@@ -49,6 +53,7 @@ function Chat({ initMessage, garageId }) {
       // console.log("CHATCHAIN", chatChain)
       console.log("intiMessage chat", initMessage);
       setNewChat(newMessages);
+
 
       // }
     } catch (e) {
@@ -73,6 +78,7 @@ function Chat({ initMessage, garageId }) {
       <Header as='h3' dividing>
         Garage Bulletin
       </Header>
+
       <div className="bulletin container">
         <div className="chat">
           {/* map here to send in chat */}
@@ -97,6 +103,7 @@ function Chat({ initMessage, garageId }) {
           size="50"
           rows="3"
           onChange={handleChange}>
+
         </Form.TextArea>
         <Button content='Add Message' labelPosition='left' icon='edit' primary />
       </Form>
