@@ -4,16 +4,18 @@
     box-sizing: border-box;
 }
 
-.viewTool-container {
-    width: fit-content;
-    margin: auto;
-    position: relative;
-    top: 5rem;
-    h2 {
-        margin-bottom: 1.2rem;
-        font-size: 1.2rem;
-    }
+h2 {
+    text-align: center;
 }
+// .viewTool-container {
+//     width: fit-content;
+//     position: relative;
+//     top: 5rem;
+//     h2 {
+//         margin-bottom: 1.2rem;
+//         font-size: 1.2rem;
+//     }
+// }
 
 .addTool-form {
     width: fit-content;

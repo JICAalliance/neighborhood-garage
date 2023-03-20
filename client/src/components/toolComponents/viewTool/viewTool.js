@@ -24,18 +24,18 @@ function ViewTool(props) {
     borrowedToolIDs = data.myTools.borrowedTools.map((tool) => (tool._id));
 
     return (
-      <div className="container my-4 viewTool-container">
+      <div className="container my-4 ">
 
         {/* <AddTool toolSubmit={toolSubmit} setToolSubmit={setToolSubmit}/> */}
 
-        <h2>My Inventory of Tools</h2>
         {/* map through tool and display via card */}
-        <div id='displayTools'>
+        <div id='displayTools' className="ui four column grid">
 
           {myTools.map((tool, index) => (
-
-            <ToolWrapper tool={tool} key={index} checkoutModal={false}>
-            </ToolWrapper>
+            <div className="column">
+              <ToolWrapper tool={tool} key={index} checkoutModal={false}>
+              </ToolWrapper>
+            </div>
           )
           )}
           {borrowedToolIDs.length ?

@@ -11,11 +11,8 @@ import { QUERY_CHECKOUT_BORROWER } from '../../utils/queries';
 
 const ToolCard = ({ tool, checkout, checkoutModal, userOwned }) => {
 
-  const [borrowed, setBorrowed] = React.useState(Boolean(checkout));
+  const [borrowed, setBorrowed] = React.useState(Boolean(!(checkout.length == 0)));
   const [approved, setApproved] = React.useState(checkout.approved);
-
-  console.log(checkout.approved);
-  console.log(approved);
 
   let checkoutId = null;
   let outDate = null;
@@ -29,7 +26,7 @@ const ToolCard = ({ tool, checkout, checkoutModal, userOwned }) => {
   const borrower = data?.checkoutBorrower || [];
 
   return <div id='tool-container'>
-    <Card key={tool._id} id={tool._id}>
+    <Card key={tool._id} id={tool._id} cardColor>
       <Card.Content>
         <Image
           // floated='right'

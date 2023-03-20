@@ -6,6 +6,7 @@ import ToolWrapper from "../../toolComponents/toolWrapper";
 import { Button, Confirm } from 'semantic-ui-react';
 import { Link, useNavigate } from "react-router-dom";
 import Auth from '../../utils/auth';
+import ViewChat from "../../messageComponent/viewChat";
 
 
 
@@ -99,8 +100,9 @@ const GarageList = ({ garage }) => {
 
 
     return (
-      <div key={garage._id} id={garage._id}>
+      <div key={garage._id} id={garage._id} className="container">
         <h3>Welcome to {garage.garageName}!!!</h3>
+        <h4><em>{garage.description}...</em></h4>
 
         <h4 id='invitationCode' key={garage.invitationCode} ><ClipboardCopy copyText={garage.invitationCode} /></h4>
 
@@ -130,6 +132,8 @@ const GarageList = ({ garage }) => {
         </h5>
 
         <h5><Button color='red' data-value={garage.invitationCode} onClick={leaveGarageHandler}>Leave This Garage</Button></h5>
+{/* GARAGE BULLETIN */}
+        <ViewChat garageId={garage._id}/>
 
         <h4>Garage Tools:</h4>
         <div id='displayTools'>
@@ -143,6 +147,7 @@ const GarageList = ({ garage }) => {
 
         </div>
       </div>
+      
     );
   }
 
