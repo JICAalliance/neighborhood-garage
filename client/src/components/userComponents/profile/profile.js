@@ -36,7 +36,10 @@ const Profile = () => {
 
   if (loading) {
     return <div>Loading...</div>;
-  } else {
+  };
+
+ if(data){
+    
     const { name, email, myGarages, myTools, phone, address, borrowedTools } =
       data.currentUser;
       console.log("MYGARAGES", myGarages);
