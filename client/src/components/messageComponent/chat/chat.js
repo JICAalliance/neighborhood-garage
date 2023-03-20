@@ -4,24 +4,29 @@ import { Button, Comment, Form, Header } from 'semantic-ui-react'
 import ChatRender from '../chatRender';
 import { useState, useEffect, useRef } from "react";
 import { useMutation } from "@apollo/client";
-// import Auth from "../../utils/auth"
-import { ADD_MESSAGE } from "../../utils/mutations";
+import Auth from "../../utils/auth";
+import { ADD_MESSAGE, DELETE_MESSAGE } from "../../utils/mutations";
 
 
 
 
 function Chat({ initMessage, garageId }) {
 
-  // console.log("PROPS IN CHAT", initMessage, "garageID", garageId);
+  //find out who the user is
+  const user = Auth.getProfile();
+  console.log("USER", user.data._id);
+  const userId = user.data._id;
 
-  const newMessages = [];
 
+  //initiate mutations
+  const [deleteMessage] = useMutation(DELETE_MESSAGE);
   const [addMessage] = useMutation(ADD_MESSAGE);
 
+  //initialize states
   const [formState, setFormState] = useState({
     body: "",
   });
-  
+  const [savedChat, setSavedChat] = useState(initMessage);
   const [newChat, setNewChat] = useState([]);
 
   const messagesEndRef = useRef(null)
@@ -31,12 +36,9 @@ function Chat({ initMessage, garageId }) {
   }
 
 
-  // useEffect(() => {
-  //   scrollToBottom()
-  // }, [addMessage]);
 
   const handleFormSubmit = async (event) => {
- 
+
     try {
       const newMessage = await addMessage({
         variables: {
@@ -45,16 +47,14 @@ function Chat({ initMessage, garageId }) {
         },
       });
 
-      const chatHolder = newChat;
+      let chatHolder = newChat;
 
       chatHolder.push(newMessage.data.addMessage);
 
       setNewChat(chatHolder);
 
-      return newMessages;
-
-
-      // }
+      //clear form
+      event.target.reset();
     } catch (e) {
       console.log(e);
     }
@@ -70,6 +70,44 @@ function Chat({ initMessage, garageId }) {
     });
   };
 
+  const deleteMessageHandler = async (event) => {
+    event.preventDefault();
+    try {
+      // get message ID
+      const messageId = event.currentTarget.getAttribute("data-value");
+      console.log(" CHAT messageId", messageId);
+
+      const messageDeleted = await deleteMessage({
+        variables: {
+          id: messageId,
+        }
+      })
+
+      let savedChatHolder = savedChat;
+      let newChatHolder = newChat;
+      //search which array has the message
+
+      const savedChatHolderIndex = savedChatHolder.findIndex((obj) => obj._id === messageId)
+      const newChatHolderIndex = newChatHolder.findIndex((obj) => obj._id === messageId)
+      // chatHolder.push(newMessage.data.addMessage);
+
+      //if deleted message saved chat
+      if (savedChatHolderIndex > -1) {
+        savedChatHolder.splice(savedChatHolderIndex, 1);
+        setSavedChat(savedChatHolder);
+      }
+
+      //if deleted message in new chat
+      if (newChatHolderIndex > -1) {
+        newChatHolder.splice(newChatHolderIndex, 1);
+        setNewChat(newChatHolder);
+      }
+
+      return messageDeleted;
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
 
   return (
@@ -81,12 +119,55 @@ function Chat({ initMessage, garageId }) {
       <div className="bulletin container">
         <div className="chat">
           {/* map here to send in chat */}
-          {initMessage.map((message1, index) => {
-            return <ChatRender message={message1} key={message1._id} />;
+          {savedChat.map((message1, index) => {
+            let chatDate = new Date(Date.parse(message1.createdAt))
+            return (
+              <Comment key={message1._id} id={message1._id}>
+                {/* <Comment.Avatar src='https://react.semantic-ui.com/images/avatar/small/matt.jpg' /> */}
+                <Comment.Content>
+
+                  <Comment.Author as='a'>{message1.author.name}</Comment.Author>
+                  <Comment.Metadata>
+                    <div> On {chatDate.toLocaleDateString([], { year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</div>
+                  </Comment.Metadata>
+                  {message1.author._id === userId
+                    ? <div className="deleteChat" onClick={deleteMessageHandler} data-value={message1._id}>
+                      <i className="trash alternate icon"></i>
+                    </div>
+                    : ""
+                  }
+
+                  <Comment.Text> {message1.body}</Comment.Text>
+                </Comment.Content>
+              </Comment>
+
+            );
+
+            // return <ChatRender message={message1} key={message1._id} />;
           })}
           {/* <div ref={messagesEndRef} /> */}
           {newChat.map((message2) => {
-            return message2 ? <ChatRender message={message2} key={message2._id} /> : '';
+            let chatDate = new Date(Date.parse(message2.createdAt))
+            return (
+              <Comment key={message2._id} id={message2._id}>
+                {/* <Comment.Avatar src='https://react.semantic-ui.com/images/avatar/small/matt.jpg' /> */}
+                <Comment.Content>
+
+                  <Comment.Author as='a'>{message2.author.name}</Comment.Author>
+                  <Comment.Metadata>
+                    <div> On {chatDate.toLocaleDateString([], { year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</div>
+                  </Comment.Metadata>
+                  {message2.author._id === userId
+                    ? <div className="deleteChat" onClick={deleteMessageHandler} data-value={message2._id}>
+                      <i className="trash alternate icon"></i>
+                    </div>
+                    : ""
+                  }
+                  <Comment.Text> {message2.body}</Comment.Text>
+                </Comment.Content>
+              </Comment>
+
+            );
           })
           }
           {scrollToBottom()}
