@@ -36,7 +36,7 @@ function AddTool(props) {
     console.log(file);
 
     const { files } = document.querySelector('input[type="file"]')
-    
+
     const tool_image = await convertBase64(files[0]);
     console.log('tool image', tool_image)
     // const formData = new FormData();
@@ -52,10 +52,10 @@ function AddTool(props) {
           image: tool_image
         }
       });
-      if (user){
-      console.log("USER AddTool", user);
+      if (user) {
+        console.log("USER AddTool", user);
       };
- 
+      //TODO: clear form?
       // window.location.reload();
 
     } catch (e) {
