@@ -11,9 +11,7 @@ import { QUERY_CHECKOUT_BORROWER } from '../../utils/queries';
 
 const ToolCard = ({ tool, checkout, checkoutModal, userOwned }) => {
 
-  console.log(checkout);
-
-  const [borrowed, setBorrowed] = React.useState(Boolean(checkout));
+  const [borrowed, setBorrowed] = React.useState(Boolean(!(checkout.length == 0)));
   const [approved, setApproved] = React.useState(checkout.approved);
 
   let checkoutId = null;
