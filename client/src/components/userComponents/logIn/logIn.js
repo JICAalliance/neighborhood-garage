@@ -24,7 +24,7 @@ function Login(props) {
       //navigate to profile when login successful
       navigate(`/profile`);
     } catch (e) {
-      console.log("Cannot login.",e);
+      console.log("Cannot login.", e);
     }
   };
 
@@ -37,65 +37,54 @@ function Login(props) {
   };
 
   return (
-<<<<<<< HEAD
     <section>
-    <div className="showcase">
-    <video src={Video} muted loop autoPlay></video>
-    <div className="ui container">
-      <div className="ui grid">
-        <form onSubmit={handleFormSubmit} className="ui form six wide column centered">
-=======
-    <div className="showcase">
-      <video src={Video} muted loop autoPlay></video>
-      <div className="ui container">
-        <div className="ui grid">
-          <form
-            onSubmit={handleFormSubmit}
-            className="ui form six wide column centered"
-          >
->>>>>>> d2edb82de04e1381554cd607a3cdaf148db39af3
-            <div className="flex-center">
-              <h2>Login</h2>
-            </div>
-            <div className="field">
-              <label htmlFor="email">Email address:</label>
-              <input
-                placeholder="youremail@test.com"
-                name="email"
-                type="email"
-                id="email"
-                onChange={handleChange}
-              />
-            </div>
-            <div className="field">
-              <label htmlFor="pwd">Password:</label>
-              <input
-                placeholder="******"
-                name="password"
-                type="password"
-                id="pwd"
-                onChange={handleChange}
-              />
-            </div>
-            {error ? (
-              <div>
-                <p className="">The provided credentials are incorrect</p>
+      <div className="showcase">
+        <video src={Video} muted loop autoPlay></video>
+        <div className="ui container">
+          <div className="ui grid">
+            <form onSubmit={handleFormSubmit} className="ui form six wide column centered">
+              <div className="flex-center">
+                <h2>Login</h2>
               </div>
-            ) : null}
-            <br></br>
-            <div className="flex-center">
-              <button type="submit" className="ui button">
-                Submit
-              </button>
+              <div className="field">
+                <label htmlFor="email">Email address:</label>
+                <input
+                  placeholder="youremail@test.com"
+                  name="email"
+                  type="email"
+                  id="email"
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="field">
+                <label htmlFor="pwd">Password:</label>
+                <input
+                  placeholder="******"
+                  name="password"
+                  type="password"
+                  id="pwd"
+                  onChange={handleChange}
+                />
+              </div>
+              {error ? (
+                <div>
+                  <p className="">The provided credentials are incorrect</p>
+                </div>
+              ) : null}
               <br></br>
-              <Link to="/">Need an account? Sign up!</Link>
-            </div>
-          </form>
+              <div className="flex-center">
+                <button type="submit" className="ui button">
+                  Submit
+                </button>
+                <br></br>
+                <Link to="/">Need an account? Sign up!</Link>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
-    </div>
-    </section>
+
+    </section >
   );
 }
 
