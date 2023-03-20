@@ -128,7 +128,7 @@ function Signup(props) {
           <img className="rounded" src="https://uphomes.com/storage/blogposts/July2022/medium/zNKSu0bJxtRpPul6acFD.jpeg"></img>
         </div>
         <div className="six wide column flex-center">
-          <h1>Connect with neighbors</h1>
+          <h1>Connect with friends and neighbors</h1>
       </div>
     </div>
     <div className="info-div reveal ui centered stackable grid">
