@@ -36,7 +36,7 @@ function Chat({ initMessage, garageId }) {
   // }, [addMessage]);
 
   const handleFormSubmit = async (event) => {
-    event.preventDefault();
+ 
     try {
       const newMessage = await addMessage({
         variables: {
