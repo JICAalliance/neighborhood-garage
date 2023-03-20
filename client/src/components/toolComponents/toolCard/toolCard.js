@@ -26,7 +26,7 @@ const ToolCard = ({ tool, checkout, checkoutModal, userOwned }) => {
   const borrower = data?.checkoutBorrower || [];
 
   return <div id='tool-container'>
-    <Card key={tool._id} id={tool._id}>
+    <Card key={tool._id} id={tool._id} cardColor>
       <Card.Content>
         <Image
           // floated='right'
