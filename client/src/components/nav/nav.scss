@@ -1,15 +1,91 @@
 * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 .navbar {
-    margin-bottom: 10vh;
-    position: relative;
-    z-index: 10;
+  margin-bottom: 10vh;
+  position: relative;
+  z-index: 10;
 }
 
 .right-tabs {
-    margin-left: 0 !important;
+  margin-left: 0 !important;
+}
+
+#title {
+  color: skyblue;
+  text-shadow: 5px 4px gray;
+  font-size: 6vh;
+  margin: 20px;
+  padding: 20px;
+}
+
+#navTitle {
+  color: black;
+  text-shadow: 5px 4px lightgray;
+  font-size: 5vh;
+  margin: 0px;
+  padding: 0px;
+}
+
+#menu {
+  background-color: lightblue;
+  a {
+    &:hover {
+      color: black;
+      svg {
+        opacity: 0;
+      }
+      &:after {
+        opacity: 1;
+      }
+    }
+
+    &:after {
+      content: "";
+      font-size: 9px;
+      letter-spacing: 2px;
+      bottom: 0;
+      display: block;
+      width: 100%;
+      text-align: center;
+      opacity: 0;
+      -webkit-transition: all 0.3s ease-out;
+      transition: all 0.3s ease-out;
+    }
+  }
+
+  a.dashboard-link {
+    &:after {
+      content: "DASHBOARD";
+      font-size: medium;
+    }
+    text-align: center;
+  }
+  a.donate-link {
+    &:after {
+      content: "DONATE";
+      font-size: medium;
+    }
+    text-align: center;
+  }
+  a.logout-link {
+    &:after {
+      content: "LOGOUT";
+      font-size: medium;
+    }
+    text-align: center;
+  }
+
+  a.active {
+    svg {
+      color: green;
+    }
+  }
+}
+
+.navIcon {
+  height: 4vh;
 }
