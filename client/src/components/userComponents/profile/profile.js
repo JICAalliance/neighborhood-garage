@@ -34,6 +34,22 @@ const Profile = () => {
   //   return navigate(`/store`);
   // };
 
+  const reveal = () => {
+    var reveals = document.querySelectorAll(".reveal");
+    for (var i = 0; i < reveals.length; i++) {
+      var windowHeight = window.innerHeight;
+      var elementTop = reveals[i].getBoundingClientRect().top;
+      var elementVisible = 150;
+      if (elementTop < windowHeight - elementVisible) {
+        reveals[i].classList.add("active");
+      } else {
+        reveals[i].classList.remove("active");
+      }
+    }
+  };
+
+  window.addEventListener("scroll", reveal);
+
   if (loading) {
     return <div>Loading...</div>;
   } else {
@@ -46,7 +62,7 @@ const Profile = () => {
         {/* <h2 className="welcome">Welcome {name}!</h2> */}
 
         <div className="ui stackable three column grid">
-          <div className="row">
+          <div className="row reveal">
             <div className="column">
               <h2 className="welcome">Info</h2>
             </div>
@@ -69,7 +85,7 @@ const Profile = () => {
               </button>
             </div>
           </div>
-          <div className="row">
+          <div className="row reveal">
             <div className="column">
               <h2 className="welcome">Garages</h2>
             </div>
@@ -110,7 +126,7 @@ const Profile = () => {
 
 
 
-          <div class="three column row">
+          <div class="three column row reveal">
             <div class="column">
               <h2 className="welcome">Toolbox</h2>
             </div>

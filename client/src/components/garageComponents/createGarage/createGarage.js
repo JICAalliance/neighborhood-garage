@@ -53,34 +53,41 @@ const handleChange = (event) => {
 };
 
 return (
-  <div className="container my-1 createGarage-container">
-    <h2>Create a Neighborhood Garage</h2>
+  <div className="">
+    <h1>Create a Neighborhood Garage</h1>
     <div>{errorResponse? "Something went wrong..." : ''}</div>
-    <form onSubmit={handleFormSubmit} className="createGarage-form">
+    <div className="ui grid">
+    <form onSubmit={handleFormSubmit} className="createGarage-form ui form six wide column centered">
       <div className="flex-row space-between my-2">
+        <div className="field">
         <label htmlFor="name">Name:</label>
-        <input
-          placeholder="garage name"
-          name="name"
-          type="text"
-          id="name"
-          required
-          onChange={handleChange}
-        />
+          <input
+            placeholder="Garage Name"
+            name="name"
+            type="text"
+            id="name"
+            required
+            onChange={handleChange}
+          />
+        </div>
       </div>
       <div className="flex-row space-between my-2">
-        <label htmlFor="description">Description:</label>
-        <textarea
-          placeholder="Enter a description"
-          name="description"
-          id="description"
-          onChange={handleChange}
-        />
+          <div className="field">
+            <label htmlFor="description">Description:</label>
+            <input
+              placeholder="What is your garage for?"
+              name="description"
+              id="description"
+              onChange={handleChange}
+            />
+          </div>
       </div>
-      <div className="flex-row flex-end">
-        <button type="submit">Submit</button>
+      <br/>
+      <div className="flex-center">
+        <button type="submit" className="ui button">Submit</button>
       </div>
     </form>
+    </div>
 
     <Link to="/profile">← Go to Profile</Link>
   </div>
