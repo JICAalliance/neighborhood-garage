@@ -6,6 +6,8 @@ import Auth from '../../utils/auth';
 
 const GarageCard = ({ garage }) => {
 
+  console.log(garage);
+
   const userId = Auth.getProfile().data._id;
   const userOwned = (garage.admin._id == userId);
     //to navigate back to the garage
@@ -27,7 +29,7 @@ const GarageCard = ({ garage }) => {
         // size='mini'
         // src={}
         />
-        <Card.Header>{garage.name}</Card.Header>
+        <Card.Header>{garage.garageName}</Card.Header>
         <Card.Meta>
           <p>Admin: {userOwned ? <span>You</span> : <span>{garage.admin.name}</span>}</p>
         </Card.Meta>
@@ -37,7 +39,7 @@ const GarageCard = ({ garage }) => {
       </Card.Content>
 
       <Card.Content extra>
-        <Button color='grey' onClick={(e) => navToGarage(e)}/>
+        <Button color='grey' value={garage._id} onClick={(e) => navToGarage(e)} content='View Garage'/>
       </Card.Content>
     </Card>
   </div>

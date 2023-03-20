@@ -12,6 +12,7 @@ import {
 
 import { QUERY_ME } from "../../utils/queries";
 import { useQuery } from "@apollo/client";
+import GarageCard from "../../garageComponents/garageCard/garageCard";
 
 const Profile = () => {
   const { loading, data } = useQuery(QUERY_ME);
@@ -93,22 +94,16 @@ const Profile = () => {
             <div className="column">
               <h2 className="welcome">Garages</h2>
             </div>
-            <div className="column flex-center">
-              {/* View Garage Dropdown */}
-              <select name="garage" onClick={(e) => navToGarage(e)}>
-                <option>Choose Garage</option>
-                {myGarages.map((garage) => {
-                  return (
-                    <option
-                      value={garage._id}
-                      key={garage._id}
-                      onClick={(e) => navToGarage(e)}
-                    >
-                      {garage.garageName}
-                    </option>
-                  );
-                })}
-              </select>
+            <div className="column">
+              <div id='displayGarages' className="ui two column grid">
+                {myGarages.map((garage, index) => (
+                  <div className="column">
+                    <GarageCard garage={garage} key={index}>
+                    </GarageCard>
+                  </div>
+                )
+                )}
+              </div>
             </div>
             <div className="column flex-center">
               <div className="">
