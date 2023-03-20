@@ -14,10 +14,10 @@ import { QUERY_ME } from "../../utils/queries";
 import { useQuery } from "@apollo/client";
 
 const Profile = () => {
-  
+
   const { loading, data } = useQuery(QUERY_ME);
   const navigate = useNavigate();
-  
+
 
 
 
@@ -49,22 +49,36 @@ const Profile = () => {
       <div id="profile">
         <h1 className="welcome">Dashboard</h1>
         {/* <h2 className="welcome">Welcome {name}!</h2> */}
-          <div id="info" className="six wide column">
-            <h2 className="welcome">Info</h2>
-            <p>Name: {name} </p>
-            <p>Email: {email}</p>
-            <p>Phone number: {phone}</p>
-            <p>Address: {address}</p>
-            <button onClick={navToEditProfile}>Edit Profile</button>
+        <div class="ui stackable three column grid">
+          <div class="row">
+            <div class="column"><h2 className="welcome">Info</h2></div>
+            <div class="column">
+              <div id="info" className="welcome">
+                <p>Name: {name} </p>
+                <p>Email: {email}</p>
+                <p>Phone number: {phone}</p>
+                <p>Address: {address}</p>
+              </div>
+            </div>
+            <div class="column"><button onClick={navToEditProfile}>Edit Profile</button></div>
           </div>
-          <div id="garages" className="ten wide column welcome">
-              <h2>My Garages</h2>
+          <div class="row">
+              <div class="column"><h2 className="welcome">Garages</h2></div>
+              <div class="column"></div>
+              <div class="column">
+                <button onClick={navToCreateGarage}>Create Garage</button>
+                <div>
+                    <JoinGarage />
+                </div>
+              </div>
           </div>
-        
-        
-        <div >
-            <ViewTool />
+          <div class="row">
+              <div class="column"><h2 className="welcome">Toolbox</h2></div>
+              <div class="column"><ViewTool /></div>
           </div>
+        </div>
+
+       
         {/* <div className="ui centered divided three column grid">
           <div className="five wide column"></div>
           <div className="five wide column">
@@ -104,7 +118,8 @@ const Profile = () => {
             <AddTool />
           </div>
         </div> */}
-        
+
+      
       </div>
     );
   }
