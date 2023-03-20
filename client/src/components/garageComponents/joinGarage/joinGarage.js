@@ -4,11 +4,15 @@ import { Link, useNavigate } from "react-router-dom";
 import { useMutation, useQuery } from "@apollo/client";
 import { JOIN_GARAGE } from "../../utils/mutations";
 import { QUERY_ME } from "../../utils/queries";
-import { Button, Image, Modal } from 'semantic-ui-react'
+import { Button, Image, Modal } from 'semantic-ui-react';
+
 
 const JoinGarage = () => {
   //for modal use
   const [open, setOpen] = useState(false)
+
+  //error response
+  const [errorResponse, setError] = useState(null);
 
   //to navigate to profile once joined
   const navigate = useNavigate();
@@ -39,6 +43,7 @@ const JoinGarage = () => {
       }
     } catch (e) {
       console.log(e);
+      setError(e);
     }
   };
 
@@ -50,7 +55,8 @@ const JoinGarage = () => {
     });
   };
 
-  return (
+  return (<div>
+    <div>{errorResponse ? "Something went wrong..." : ''}</div>
     <Modal
       onClose={() => setOpen(false)}
       onOpen={() => setOpen(true)}
@@ -78,6 +84,7 @@ const JoinGarage = () => {
         </form>
       </Modal.Content>
     </Modal>
+  </div>
   );
 };
 

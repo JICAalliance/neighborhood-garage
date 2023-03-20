@@ -3,7 +3,6 @@ import React from "react";
 import { Button, Header, Image, Modal } from 'semantic-ui-react'
 import { REMOVE_TOOL, UPDATE_TOOL } from '../../utils/mutations';
 import { useMutation } from '@apollo/client';
-import editTool from '.';
 
 const EditTool = ({ _id, name, description, image, checkout, setBorrowed, borrowed, borrower }) => {
     const [open, setOpen] = React.useState();
@@ -14,9 +13,12 @@ const EditTool = ({ _id, name, description, image, checkout, setBorrowed, borrow
         description: description,
     });
     const [invalidWarning, setInvalidWarning] = React.useState(false);
+    //error response
+    const [errorResponse, setError] = React.useState(null);
 
     const [updateTool] = useMutation(UPDATE_TOOL)
     const [removeTool] = useMutation(REMOVE_TOOL);
+
 
     const deleteHandler = () => {
         setDeleting(!deleting);
@@ -27,12 +29,17 @@ const EditTool = ({ _id, name, description, image, checkout, setBorrowed, borrow
     }
 
     const confirmDelete = async () => {
-        await removeTool({
-            variables: {
-                id: _id
-            }
-        })
-        window.location.reload();
+        try {
+            await removeTool({
+                variables: {
+                    id: _id
+                }
+            })
+            window.location.reload();
+        } catch (e) {
+            console.log(e);
+            setError(e);
+        };
     }
 
     const handleNameChange = (event) => {
@@ -94,8 +101,8 @@ const EditTool = ({ _id, name, description, image, checkout, setBorrowed, borrow
                 <Modal.Description>
                     {editing ?
                         <form class="ui form">
-                            <input value={formState.name} onChange={handleNameChange} />
-                            <textarea value={formState.description} onChange={handleDescriptionChange} />
+                            <input value={formState.name}  onChange={handleNameChange} />
+                            <textarea value={formState.description}  onChange={handleDescriptionChange} />
                             <p id='{owner.id} owner'>Owner: You</p>
                             {checkout ?
                                 <p id='borrower'>Borrower: {borrower}</p>
@@ -138,6 +145,7 @@ const EditTool = ({ _id, name, description, image, checkout, setBorrowed, borrow
                                 <Button color='red' onClick={deleteHandler} content='Delete Tool' />
                             </div>
                         }
+                       {errorResponse? <div>'Tool not deleted..'</div> : ''}
                     </div>
                 }
             </Modal.Actions>

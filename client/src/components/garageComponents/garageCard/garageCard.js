@@ -1,13 +1,15 @@
 import './garageCard.scss';
 import React from "react";
-
+import { useNavigate} from "react-router-dom";
 import { Card, Button, Image } from 'semantic-ui-react';
-
+import Auth from '../../utils/auth';
 
 const GarageCard = ({ garage }) => {
 
   const userId = Auth.getProfile().data._id;
   const userOwned = (garage.admin._id == userId);
+    //to navigate back to the garage
+    const navigate = useNavigate();
 
   const navToGarage = (e) => {
     // navigate(e.target.value)

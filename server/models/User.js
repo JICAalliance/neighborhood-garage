@@ -38,6 +38,7 @@ const userSchema = new Schema({
     myGarages: [{
         type: Schema.Types.ObjectId,
         ref: 'Garage',
+        unique: true,
     }],
 
 },
