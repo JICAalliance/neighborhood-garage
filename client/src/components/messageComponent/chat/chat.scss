@@ -1,0 +1,44 @@
+* {
+    padding: 0;
+    box-sizing: border-box;
+}
+textarea {
+    resize: none !important;
+    width:200% !important;
+    height: 100% !important;
+    margin: 1rem !important;
+  }
+
+.container {
+    width: 100% !important;
+    margin: 1rem !important;
+    position: relative;
+    top: 1rem;
+
+    h2 {
+        margin-bottom: 1.2rem;
+        font-size: 1.2rem;
+    }
+}
+
+.bulletin{
+    width: 100% !important;
+
+    height: 150px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    
+}
+
+.chat{
+    flex: 1;
+    overflow-y: scroll;
+    background-color: #f2eecb;
+}
+
+.Form {
+    width:100% !important;
+
+}
