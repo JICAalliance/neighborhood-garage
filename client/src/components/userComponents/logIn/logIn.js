@@ -4,6 +4,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import Auth, { useStateContext } from "../../utils/auth";
 import { LOGIN } from "../../utils/mutations";
+import Video from "../../../files/login.mp4"
 
 function Login(props) {
   const [formState, setFormState] = useState({ email: "", password: "" });
@@ -37,6 +38,9 @@ function Login(props) {
   };
 
   return (
+    <section>
+    <div className="showcase">
+    <video src={Video} muted loop autoPlay></video>
     <div className="ui container">
       <div className="ui grid">
         <form onSubmit={handleFormSubmit} className="ui form six wide column centered">
@@ -77,6 +81,8 @@ function Login(props) {
         </form>
       </div>
     </div>
+    </div>
+    </section>
   );
 }
 
