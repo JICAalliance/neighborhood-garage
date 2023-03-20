@@ -37,6 +37,14 @@ function Login(props) {
   };
 
   return (
+<<<<<<< HEAD
+    <section>
+    <div className="showcase">
+    <video src={Video} muted loop autoPlay></video>
+    <div className="ui container">
+      <div className="ui grid">
+        <form onSubmit={handleFormSubmit} className="ui form six wide column centered">
+=======
     <div className="showcase">
       <video src={Video} muted loop autoPlay></video>
       <div className="ui container">
@@ -45,6 +53,7 @@ function Login(props) {
             onSubmit={handleFormSubmit}
             className="ui form six wide column centered"
           >
+>>>>>>> d2edb82de04e1381554cd607a3cdaf148db39af3
             <div className="flex-center">
               <h2>Login</h2>
             </div>
@@ -85,6 +94,8 @@ function Login(props) {
         </div>
       </div>
     </div>
+    </div>
+    </section>
   );
 }
 
