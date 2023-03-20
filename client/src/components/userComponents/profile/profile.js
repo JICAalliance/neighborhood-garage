@@ -36,9 +36,13 @@ const Profile = () => {
 
   if (loading) {
     return <div>Loading...</div>;
-  } else {
+  };
+
+ if(data){
+    
     const { name, email, myGarages, myTools, phone, address, borrowedTools } =
       data.currentUser;
+      console.log("MYGARAGES", myGarages);
 
     return (
       <div id="profile">
@@ -95,7 +99,9 @@ const Profile = () => {
           {/* View Garage Dropdown */}
           <select name="garage" onClick={(e) => navToGarage(e)}>
             <option>Choose Garage</option>
+
             {myGarages.map((garage) => {
+
               return (
                 <option
                   value={garage._id}
@@ -108,14 +114,14 @@ const Profile = () => {
             })}
           </select>
 
-          <div class="three column row">
+          <div className="three column row">
             <div id="addTool" className="five wide column">
               <AddTool />
             </div>
-            <div class="column">
+            <div className="column">
               <h2 className="welcome">Toolbox</h2>
             </div>
-            <div class="column">
+            <div className="column">
               <ViewTool />
             </div>
           </div>

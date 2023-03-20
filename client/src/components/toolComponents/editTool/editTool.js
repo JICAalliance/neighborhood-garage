@@ -100,7 +100,7 @@ const EditTool = ({ _id, name, description, image, checkout, setBorrowed, borrow
                 <Image size='medium' src={image} wrapped />
                 <Modal.Description>
                     {editing ?
-                        <form class="ui form">
+                        <form className="ui form">
                             <input value={formState.name}  onChange={handleNameChange} />
                             <textarea value={formState.description}  onChange={handleDescriptionChange} />
                             <p id='{owner.id} owner'>Owner: You</p>

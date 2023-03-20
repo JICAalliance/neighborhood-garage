@@ -20,12 +20,10 @@ function ViewChat(props) {
   }
 
   else {
-    console.log('currentGarage', data);
+ 
     data.messages.messages.forEach((message) => {
       chatHolder.push(message);
     });
-
-    console.log("chatHolder", chatHolder);
 
 
     return (
