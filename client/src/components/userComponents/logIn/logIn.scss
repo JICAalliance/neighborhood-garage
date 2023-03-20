@@ -1,3 +1,41 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Golos+Text&display=swap');
+
+h1, h2, h3 {
+    font-family: 'Golos Text', sans-serif !important;
+}
+
+h1 {
+    font-size: 3rem !important;
+}
+
+.flex-center {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+.showcase {
+    height: 100%;
+}
+
+.showcase video
+{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.8;
+}
+
 .login-container {
     width: fit-content;
     margin: auto;

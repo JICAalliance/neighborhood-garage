@@ -1,22 +1,25 @@
 // coffee: price_1MnLHuGEUClOdAIcEmsJ7HwQ
 // sunglasses: price_1MnLL2GEUClOdAIcCLxl7nJK
 // camera: price_1MnLLFGEUClOdAIcyOb9Oauy
+// $1 Donation: price_1MnhHDGEUClOdAIcCXdCfeSh
+// $10 Donation: price_1MnhHiGEUClOdAIc1HAa66ro
+// $100 Donation: price_1MnhHuGEUClOdAIcFZ0H2dbx
 
 const productsArray = [
   {
     id: "price_1MnLHuGEUClOdAIcEmsJ7HwQ",
-    title: "Coffee",
-    price: 4.99,
+    title: "$1 Donation",
+    price: 1,
   },
   {
     id: "price_1MnLL2GEUClOdAIcCLxl7nJK",
-    title: "Sunglasses",
-    price: 9.99,
+    title: "$10 Donation",
+    price: 10,
   },
   {
     id: "price_1MnLLFGEUClOdAIcyOb9Oauy",
-    title: "Camera",
-    price: 39.99,
+    title: "$100 Donation",
+    price: 100,
   },
 ];
 
