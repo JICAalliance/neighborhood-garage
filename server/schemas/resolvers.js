@@ -267,7 +267,6 @@ const resolvers = {
           members: [context.user._id],
         });
 
-
         const garage = await Garage.findById(newGarage._id )       
           .populate("admin")
           .populate("members");
@@ -377,7 +376,7 @@ const resolvers = {
         );
         return user;
       }
-      throw new AuthenticationError("You need to be logged in!");
+      throw new AuthenticationError("You need to be logged in to leave this garage!");
     },
 
     addCheckout: async (parent, args, context) => {

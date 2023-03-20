@@ -29,7 +29,6 @@ const garageSchema = new Schema(
             unique: true,
             default: () => uuidv4(),
         },
-        // TODO: add typedef and resolvers to use this community chat
         messages: [{
             type: Schema.Types.ObjectId,
             ref: 'Message',
