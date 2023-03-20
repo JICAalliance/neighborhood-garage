@@ -8,9 +8,9 @@ import Auth from "../../utils/auth";
 
 
 function ChatRender({message}) {
-  console.log("PROPS in CHAT RENDER", message)
+  // console.log("PROPS in CHAT RENDER", message)
   const user = Auth.getProfile();
-  console.log("chatRender",user.data._id);
+  // console.log("chatRender",user.data._id);
 
   const chatDate = new Date(Date.parse(message.createdAt));
 

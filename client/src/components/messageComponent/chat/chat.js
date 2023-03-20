@@ -12,9 +12,9 @@ import { ADD_MESSAGE } from "../../utils/mutations";
 
 function Chat({ initMessage, garageId }) {
 
-  console.log("PROPS IN CHAT", initMessage, "garageID", garageId);
+  // console.log("PROPS IN CHAT", initMessage, "garageID", garageId);
 
-  let newMessages = [];
+  const newMessages = [];
 
   const [addMessage] = useMutation(ADD_MESSAGE);
 
@@ -22,10 +22,7 @@ function Chat({ initMessage, garageId }) {
     body: "",
   });
   
-  let [newChat, setNewChat] = useState([]);
-
-
-  // let chatHolder = [];
+  const [newChat, setNewChat] = useState([]);
 
   const messagesEndRef = useRef(null)
 
@@ -48,11 +45,13 @@ function Chat({ initMessage, garageId }) {
         },
       });
 
-      newMessages.push(newMessage.data.addMessage);
+      const chatHolder = newChat;
 
-      // console.log("CHATCHAIN", chatChain)
-      console.log("intiMessage chat", initMessage);
-      setNewChat(newMessages);
+      chatHolder.push(newMessage.data.addMessage);
+
+      setNewChat(chatHolder);
+
+      return newMessages;
 
 
       // }
@@ -85,11 +84,12 @@ function Chat({ initMessage, garageId }) {
           {initMessage.map((message1, index) => {
             return <ChatRender message={message1} key={index + 1000} />;
           })}
-          <div ref={messagesEndRef} />
+          {/* <div ref={messagesEndRef} /> */}
           {newChat.map((message2) => {
             return message2 ? <ChatRender message={message2} key={message2._id} /> : '';
           })
           }
+          {scrollToBottom()}
         </div>
       </div>
 
