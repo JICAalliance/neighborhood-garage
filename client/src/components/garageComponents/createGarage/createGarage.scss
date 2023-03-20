@@ -1,7 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+
+
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+}
+
+h1 {
+    font-size: 2rem;
+    font-family: 'Fredoka One', cursive !important;
+    text-align: center;
 }
 
 .createGarage-container {
@@ -27,3 +36,4 @@
         }
     }
 }
+
