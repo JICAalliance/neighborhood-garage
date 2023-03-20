@@ -15,21 +15,25 @@ function Store() {
   );
 
   const checkout = async () => {
-    await fetch("/checkout", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ items: cart.items }),
-    })
-      .then((response) => {
-        return response.json();
+    try {
+      await fetch("/checkout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ items: cart.items }),
       })
-      .then((response) => {
-        if (response.url) {
-          window.location.assign(response.url); // Forwarding user to Stripe
-        }
-      });
+        .then((response) => {
+          return response.json();
+        })
+        .then((response) => {
+          if (response.url) {
+            window.location.assign(response.url); // Forwarding user to Stripe
+          }
+        });
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (

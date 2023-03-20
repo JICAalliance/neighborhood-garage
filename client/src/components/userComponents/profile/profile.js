@@ -52,9 +52,13 @@ const Profile = () => {
 
   if (loading) {
     return <div>Loading...</div>;
-  } else {
+  };
+
+ if(data){
+    
     const { name, email, myGarages, myTools, phone, address, borrowedTools } =
       data.currentUser;
+      console.log("MYGARAGES", myGarages);
 
     return (
       <div id="profile">
@@ -123,14 +127,12 @@ const Profile = () => {
               </div>
             </div>
           </div>
-
-
-
           <div class="three column row reveal">
             <div class="column">
+
               <h2 className="welcome">Toolbox</h2>
             </div>
-            <div class="column">
+            <div className="column">
               <ViewTool />
             </div>
             <div id="addTool" className="five wide column">

@@ -28,13 +28,13 @@ function AddTool(props) {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-
-    const { files } = document.querySelector('input[type="file"]')
-
-    const tool_image = await convertBase64(files[0]);
-    console.log('tool image', tool_image)
-
     try {
+      const { files } = document.querySelector('input[type="file"]')
+
+      const tool_image = await convertBase64(files[0]);
+      console.log('tool image', tool_image)
+
+
       const user = await addTool({
         variables: {
           name: formState.name,

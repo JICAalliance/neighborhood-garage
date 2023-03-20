@@ -46,7 +46,7 @@ const GarageList = ({ garage }) => {
     e.preventDefault();
     const inviteCode = e.currentTarget.getAttribute("data-value");
     try {
-      // console.log("inviteCode ", inviteCode)
+
       const user = await leaveGarage({
         variables: {
           invitationCode: inviteCode,
@@ -80,7 +80,7 @@ const GarageList = ({ garage }) => {
 
       try {
         const inviteCode = garage.invitationCode;
-        console.log("inviteCode", inviteCode);
+
 
         const garageDeleted = await deleteGarage({
           variables: {
@@ -110,14 +110,15 @@ const GarageList = ({ garage }) => {
     });
 
 
+
     return (
       <div>
-        <div>{errorResponse ? "Something went wrong..." : ''}</div>
+        <div>{errorResponse ? "Sorry, something went wrong..." : ''}</div>
         <div key={garage._id} id={garage._id} className="container">
           <h3>Welcome to {garage.garageName}!!!</h3>
           <h4><em>{garage.description}...</em></h4>
 
-          <h4 id='invitationCode' key={garage.invitationCode} >
+          <h4 id='invitationCode' >
             <ErrorBoundary fallback={"Something went wrong"}>
               <ClipboardCopy copyText={garage.invitationCode} />
             </ErrorBoundary>
@@ -127,7 +128,8 @@ const GarageList = ({ garage }) => {
           {isAdmin
             ? <div>
               <Button color='olive' onClick={event => window.location.href = `/editGarage/${garage._id}`}>Edit Garage</Button>
-              <Button color='black' data-value={garage.invitationCode} onClick={show} >Delete Garage</Button>
+              <Button color='olive' onClick={event => window.location.href = `/profile`}>To Dashboard</Button>
+              <Button color='red' data-value={garage.invitationCode} onClick={show} >Delete Garage</Button>
               <Confirm
                 data-value={garage.invitationCode}
                 open={openState}
@@ -150,12 +152,15 @@ const GarageList = ({ garage }) => {
           </h5>
 
 
-            {/* Only for non Admins... admins to leave must delete */}
-            {!isAdmin
-            ? <h5><Button color='red' data-value={garage.invitationCode} onClick={leaveGarageHandler}>Leave This Garage</Button></h5>
-            :''
-            }
-          
+          {/* Only for non Admins... admins to leave must delete */}
+          {!isAdmin
+            ? <h5>
+              <Button color='red' data-value={garage.invitationCode} onClick={leaveGarageHandler}>Leave This Garage</Button>
+              <Button color='olive' onClick={event => window.location.href = `/profile`}>To Dashboard</Button>
+            </h5>
+            : ''
+          }
+
           {/* GARAGE BULLETIN */}
           <ErrorBoundary fallback={"Something went wrong"}>
             <ViewChat garageId={garage._id} />
@@ -163,18 +168,19 @@ const GarageList = ({ garage }) => {
 
           <h4>Garage Tools:</h4>
           <div id='displayTools'>
+    <ErrorBoundary fallback={"Something went wrong"}>
+      {garageTools.map((tool, index) => (
 
-            {garageTools.map((tool, index) => (
-              <ErrorBoundary fallback={"Something went wrong"}>
-                <ToolWrapper tool={tool} key={index} checkoutModal={true}>
-                </ToolWrapper>
-              </ErrorBoundary>
-            )
-            )}
+        <ToolWrapper tool={tool} key={index} checkoutModal={true}>
+        </ToolWrapper>
 
-          </div>
-        </div>
-      </div>
+      )
+      )}
+    </ErrorBoundary>
+
+          </div >
+        </div >
+      </div >
     );
   }
 

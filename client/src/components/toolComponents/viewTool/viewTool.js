@@ -41,7 +41,7 @@ function ViewTool(props) {
           )
           )}
           {borrowedToolIDs.length ?
-          <BorrowedTools borrowedToolIDs={borrowedToolIDs}/>:''}
+          <BorrowedTools borrowedToolIDs={borrowedToolIDs} key={Date.now()} />:''}
 
         </div>
 
