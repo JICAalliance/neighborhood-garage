@@ -457,13 +457,8 @@ const resolvers = {
 
     // //delete Message
     // deleteMessage: async (parent, args, context) => {
-
+    //   const delMessage = await Message.findById()
     // },
-    // //delete Messages in an entire garage
-    // deleteMessages: async (parent, args, context) => {
-
-    // },
-
 
   },
 };
