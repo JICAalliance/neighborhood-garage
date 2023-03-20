@@ -118,6 +118,7 @@ const resolvers = {
       // }
       // throw new AuthenticationError("You need to be logged in!");
     },
+  
   },
   Mutation: {
     // creates user
@@ -311,7 +312,7 @@ const resolvers = {
         const garage = await Garage.findOneAndDelete(
           { invitationCode: args.invitationCode }
         );
-        console.log('GARAGE resolver', garage);
+        // console.log('GARAGE resolver', garage);
 
         //remove garage reference from all the members (this includes the admin)
         const users = await User.updateMany(
@@ -320,10 +321,16 @@ const resolvers = {
           { new: true }
         );
 
-        console.log('GARAGE USER resolver', users);
-        const comments=garage.messages;
+        // console.log('GARAGE USER resolver', users);
+
+        const chatIDs=garage.messages;
+
+        console.log("DELETE GARAGE resolver",chatIDs);
 
         // TODO: after deleting garage, parse through it to delete messages. This is done when messages are done.
+        const messages= await Message.deleteMany({_id:{$in:chatIDs}});
+
+        console.log("messages in delete garage", messages)
 
         return garage;
 
@@ -443,17 +450,6 @@ const resolvers = {
           { $addToSet: { messages: newMessage._id } },
           { new: true },
         );
-          // .populate({
-          //   path: "messages",
-          //   model: "Message",
-          //   populate: {
-          //     path: "author",
-          //     model: "User"
-          //   }
-          // }
-          // );
-          console.log("MESSAGE",message);
-
         return message;
       }
       throw new AuthenticationError('You need to be logged in!');
