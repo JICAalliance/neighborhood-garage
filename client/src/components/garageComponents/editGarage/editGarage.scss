@@ -5,19 +5,19 @@
 }
 
 .createGarage-container {
-    width: 90vw !important;
+    width: 100vw;
     margin: auto;
     position: relative;
     top: 5rem;
     h2 {
-        margin-bottom: 1.2rem !important;
+        margin-bottom: 1.2rem;
         font-size: 1.2rem;
     }
 }
 
 .createGarage-form {
     width: fit-content;
-    height: 50vh;
+    height: 70vh;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -31,6 +31,10 @@
 
 textarea {
     resize: none !important;
-    width:90vw !important;
+    width:0% !important;
 
   }
+  
+btn{
+    margin-left:1rem;
+}

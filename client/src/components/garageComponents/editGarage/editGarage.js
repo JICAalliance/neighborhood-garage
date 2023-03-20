@@ -109,7 +109,8 @@ const EditGarage = () => {
             </textarea>
 
           </div>
-          <div className="flex-row flex-end">
+          <div></div>
+          <div className="btn flex-row flex-end">
             <Button color='olive' type="submit">Submit</Button>   
             <Button color='black' onClick={handleGoBackGarage}>Cancel and Back to Garage</Button>
           </div>

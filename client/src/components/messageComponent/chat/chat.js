@@ -13,13 +13,14 @@ import { ADD_MESSAGE } from "../../utils/mutations";
 function Chat({ initMessage, garageId }) {
 
   console.log("PROPS IN CHAT", initMessage, "garageID", garageId);
+  let newMessages = [];
 
   const [addMessage] = useMutation(ADD_MESSAGE);
 
   const [formState, setFormState] = useState({
     body: "",
   });
-  let [newChat, setNewChat] = useState('');
+  let [newChat, setNewChat] = useState([]);
 
   // let chatHolder = [];
 
@@ -29,9 +30,9 @@ function Chat({ initMessage, garageId }) {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
   }
 
-  useEffect(() => {
-    scrollToBottom()
-  }, [newChat]);
+  // useEffect(() => {
+  //   scrollToBottom()
+  // }, [addMessage]);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -43,11 +44,11 @@ function Chat({ initMessage, garageId }) {
         },
       });
 
-      initMessage.push(newMessage.data.addMessage);
+      newMessages.push(newMessage.data.addMessage);
 
       // console.log("CHATCHAIN", chatChain)
       console.log("intiMessage chat", initMessage);
-      setNewChat(newMessage.data.addMessage);
+      setNewChat(newMessages);
 
       // }
     } catch (e) {
@@ -76,16 +77,15 @@ function Chat({ initMessage, garageId }) {
         <div className="chat">
           {/* map here to send in chat */}
           {initMessage.map((message1, index) => {
-
             return <ChatRender message={message1} key={index + 1000} />;
           })}
-           <div ref={messagesEndRef} />
-          {newChat ? <ChatRender message={newChat} key={newChat._id} /> : ''}
-         
-
+          <div ref={messagesEndRef} />
+          {newChat.map((message2) => {
+            return message2 ? <ChatRender message={message2} key={message2._id} /> : '';
+          })
+          }
         </div>
       </div>
-
 
       <Form reply onSubmit={handleFormSubmit} >
         {/* <label htmlFor="message">What's in your mind? </label> */}
