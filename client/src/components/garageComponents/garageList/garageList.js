@@ -100,7 +100,7 @@ const GarageList = ({ garage }) => {
 
 
     return (
-      <div key={garage._id} id={garage._id}>
+      <div key={garage._id} id={garage._id} className="container">
         <h3>Welcome to {garage.garageName}!!!</h3>
         <h4><em>{garage.description}...</em></h4>
 
@@ -147,6 +147,7 @@ const GarageList = ({ garage }) => {
 
         </div>
       </div>
+      
     );
   }
 

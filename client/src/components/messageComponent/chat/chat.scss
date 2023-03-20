@@ -1,34 +1,29 @@
 * {
     padding: 0;
-    margin: 0;
     box-sizing: border-box;
 }
+textarea {
+    resize: none !important;
+    width:200% !important;
+    height: 100% !important;
+    margin: 1rem !important;
+  }
 
-.viewTool-container {
-    width: fit-content;
-    margin: auto;
+.container {
+    width: 100% !important;
+    margin: 1rem !important;
     position: relative;
-    top: 5rem;
+    top: 1rem;
+
     h2 {
         margin-bottom: 1.2rem;
         font-size: 1.2rem;
     }
 }
 
-.addTool-form {
-    width: fit-content;
-    height: 50vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    div {
-        label {
-            margin-right: 1rem;
-        }
-    }
-}
-
 .bulletin{
+    width: 100% !important;
+
     height: 150px;
     overflow: hidden;
     display: flex;
@@ -40,4 +35,9 @@
 .chat{
     flex: 1;
     overflow-y: scroll;
+}
+
+.Form {
+    width:100% !important;
+
 }
