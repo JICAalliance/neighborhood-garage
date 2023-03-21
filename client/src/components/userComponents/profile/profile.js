@@ -57,7 +57,7 @@ const Profile = () => {
 
     const { name, email, myGarages, myTools, phone, address, borrowedTools } =
       data.currentUser;
-    console.log("MYGARAGES", myGarages);
+  
 
     return (
       <div id="profile">
@@ -130,8 +130,8 @@ const Profile = () => {
               </div>
             </div>
           </div>
-          <div class="three column row reveal">
-            <div class="column">
+          <div className="three column row reveal">
+            <div className="column">
 
               <h2 className="welcome">Toolbox</h2>
               <div className="flex-direction"><div className="sectionwidth"><p className="info" >Find your tools here, or add a tool to your collection. When you're in a garage, these tools will be shown to everyone in that garage.</p></div></div>

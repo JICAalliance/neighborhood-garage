@@ -107,7 +107,7 @@ function Chat({ initMessage, garageId }) {
 
 
   return (
-    <Comment.Group>
+    <Comment.Group className='container'>
       <Header as='h3' dividing>
         Garage Bulletin
       </Header>
@@ -168,6 +168,7 @@ function Chat({ initMessage, garageId }) {
         </div>
       </div>
 
+      
       <Form reply onSubmit={handleFormSubmit} >
         {/* <label htmlFor="message">What's in your mind? </label> */}
         <Form.TextArea
@@ -178,9 +179,8 @@ function Chat({ initMessage, garageId }) {
           size="50"
           rows="3"
           onChange={handleChange}>
-
         </Form.TextArea>
-        <Button content='Add Message' labelPosition='left' icon='edit' primary />
+        <button className='button-30 center addMsg' ><i className="edit icon"></i> Add Your Message</button>
       </Form>
     </Comment.Group>
   );

@@ -103,7 +103,7 @@ function AddTool(props) {
             />
           </div>
           <div className="flex-row flex-end flex-center">
-            <button type="submit" className="ui button">Submit</button>
+            <button type="submit" className="ui button-30 add ">Submit</button>
           </div>
         </form>
       </div>

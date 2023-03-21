@@ -31,7 +31,7 @@ const GarageCard = ({ garage }) => {
         />
         <Card.Header>{garage.garageName}</Card.Header>
         <Card.Meta>
-          <p>Admin: {userOwned ? <span>You</span> : <span>{garage.admin.name}</span>}</p>
+          <h4 className='adminLabel'>Admin: {userOwned ? <span>You</span> : <span>{garage.admin.name}</span>}</h4>
         </Card.Meta>
         <Card.Description>
           {garage.description}
@@ -39,9 +39,10 @@ const GarageCard = ({ garage }) => {
       </Card.Content>
 
       <Card.Content extra>
-        <Button color='grey' value={garage._id} onClick={(e) => navToGarage(e)} content='View Garage'/>
+        <button className='button-30 garCard' value={garage._id} onClick={(e) => navToGarage(e)}> View Garage</button>
       </Card.Content>
     </Card>
+    <br/>
   </div>
 
 };

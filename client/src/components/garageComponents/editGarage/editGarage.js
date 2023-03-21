@@ -88,28 +88,27 @@ const EditGarage = () => {
     };
 
     return (
-      <div className="createGarage-container">
+      <div className="flex-center createGarage-container">
         <div>{errorResponse? "Something went wrong..." : ''}</div>
         <h2>Edit {garage.garageName} Garage</h2>
         <form onSubmit={handleFormSubmit} className="createGarage-form">
-          <div className="flex-row space-between my-2">
+          <div className="flex-row space-between my-2 editFont">
             <label htmlFor="name">Name:</label>
             <textarea
               placeholder={'Change from ' + garage.garageName + '? Please do not leave this blank on submit.'}
-              rows="2"
+              rows="3"
               name="name"
               type="text"
               id="name"
               required
               onChange={handleChange}
             >
-
             </textarea>
           </div>
           <div className="flex-row space-between my-2">
             <label htmlFor="description">Description:</label>
             <textarea
-              rows="3" 
+              rows="5" 
               placeholder={'Change the description of ' + garage.description + '?'}
               name="description"
               id="description"
@@ -118,13 +117,14 @@ const EditGarage = () => {
 
           </div>
           <div></div>
-          <div className="btn flex-row flex-end">
-            <Button color='olive' type="submit">Submit</Button>   
-            <Button color='black' onClick={handleGoBackGarage}>Cancel and Back to Garage</Button>
+          <div className="btn flex-column center flex-end">
+            <button className='button-30 subBtn' type="submit">Submit</button>   
+            <br/>
+            <button className='button-30 cancelBtn' onClick={handleGoBackGarage}>Back to Garage</button>
           </div>
         </form>
 
-        <Link to="/profile">← Go to Profile</Link>
+        <Link onClick={() => { window.location.href = "/profile" }} to="/profile">← Got to Profile</Link>
       </div>
     );
   }

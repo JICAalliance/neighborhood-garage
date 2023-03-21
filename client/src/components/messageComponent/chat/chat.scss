@@ -4,7 +4,7 @@
 }
 textarea {
     resize: none !important;
-    width:200% !important;
+    width:90% !important;
     height: 100% !important;
     margin: 1rem !important;
   }
@@ -21,10 +21,14 @@ textarea {
     }
 }
 
-.bulletin{
-    width: 100% !important;
+.btnGar{
+    width: 50% !important;
+}
 
-    height: 150px;
+.bulletin{
+    width: 110% !important;
+
+    height: 250px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -38,7 +42,20 @@ textarea {
     background-color: #f2eecb;
 }
 
-.Form {
-    width:100% !important;
+Form {
+    width:400px !important;
+    display: flex;
+    flex-direction: column;
+    
+    align-items: space-around;
+}
 
+.alarm {
+    color:orange;
+}
+
+.addMsg{
+    color:black !important;
+    background-color: white !important;
+    width:90%
 }

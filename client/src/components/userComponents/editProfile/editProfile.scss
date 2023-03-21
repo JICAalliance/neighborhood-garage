@@ -19,6 +19,7 @@
 .editProfile-form {
     width: fit-content;
     height: fit-content;
+    size: 2rem;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -49,3 +50,9 @@
     display: flex;
     justify-content: space-between;
 }
+
+.delUser{
+    background-color: orange !important;
+    width:100% !important;
+}
+

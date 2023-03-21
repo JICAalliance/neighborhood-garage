@@ -165,12 +165,9 @@ const resolvers = {
 
     // updates user's name, phone and address, email and password cannot be changed
     // front end must always set the value to what was originally there so a field wont be nulled accidentally
-    updateUser: async (parent, args) => {
+    updateUser: async (parent, args, context) => {
       if (context.user) {
-        console.log("PARENT");
-        console.log(parent);
-        console.log("ARGS");
-        console.log(args);
+ 
         return await User.findByIdAndUpdate(
           { _id: args._id },
           {
