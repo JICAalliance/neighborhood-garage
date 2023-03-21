@@ -43,13 +43,19 @@ Check out our features from the deployed application:
 
 💻 [Click here for the view the full video demo](https://vimeo.com/810325428/eda0ec1531)
 
-INSERT SCHREENSHOTS HERE
+![Hompage](https://i.ibb.co/3MzqzWs/image-3.jpg)
+![Garage](https://i.ibb.co/D4mvcVb/image-2.jpg)
+![Dashboard](https://i.ibb.co/Lt73hLQ/image1.jpg)
+![Donation Store](https://ibb.co/Vpt4xjV)
 
 ## Features
 - Create and join community garages where tools can be exchanged
 - Ability to add tools to your toolbox
 - Ability to see your toolbox with items you own and currently borrowed tools
 - See all community members in a particular garage
+- See all community tools
+- Interact with garage members via garage bulletin - similar to chat
+- Purchase items from a store
 
 ## Credits
 
