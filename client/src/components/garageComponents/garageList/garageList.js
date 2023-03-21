@@ -22,8 +22,6 @@ const GarageList = ({ garage }) => {
   //to navigate 
   const navigate = useNavigate();
 
-  console.log(garage);
-
   let adminId = '';
   let memberArray = '';
 

@@ -25,7 +25,7 @@ const ViewGarage = () => {
     return (<div className="container my-2 viewGarage-container">
       <h2>My Garage</h2>
       <div>Loading...</div>
-      <Link onClick={() => { window.location.href = "/profile" }} to="/profile">← Back to Dashboard</Link>
+      <Link onClick={() => { window.location.href = "/profile" }} to="/profile">← Go to Profile</Link>
     </div>);
   }
   else {
@@ -39,7 +39,7 @@ const ViewGarage = () => {
           {loading ? <div>Loading...</div> : <GarageList garage={garage} />}
 
         </div>
-        {/* <button className="button-30 toProfile" onClick={toProfile}>To Dashboard <i class="caret square right outline icon"></i></button> */}
+        {/* <button className="button-30 toProfile" onClick={toProfile}>To Dashboard <i className="caret square right outline icon"></i></button> */}
         <Link onClick={() => { window.location.href = "/profile" }} to="/profile">← Go to Profile</Link>
       </div>
     );

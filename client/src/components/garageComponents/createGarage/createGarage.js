@@ -103,7 +103,7 @@ const CreateGarage = () => {
         <div className="toProfile flex-center">
           <br />
           <br />
-          <button className="button-30 toProfile " onClick={toProfile}>To Dashboard <i class="caret square right outline icon"></i></button>
+          <button className="button-30 toProfile " onClick={toProfile}>To Dashboard <i className="caret square right outline icon"></i></button>
         </div>
       </div>
 
