@@ -117,8 +117,8 @@ const GarageList = ({ garage }) => {
       <div>
         <div>{errorResponse ? "Sorry, something went wrong..." : ''}</div>
         <div key={garage._id} id={garage._id} className="container">
-          <h3>Welcome to {garage.garageName}!!!</h3>
-          <h4><em>{garage.description}...</em></h4>
+          <h3>Welcome to {garage.garageName}!</h3>
+          <h4><em>{garage.description}</em></h4>
 
           <h4 id='invitationCode' >
             <ErrorBoundary fallback={"Something went wrong"}>
