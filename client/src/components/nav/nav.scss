@@ -17,16 +17,25 @@
 #title {
   color: skyblue;
   text-shadow: 5px 4px gray;
-  font-size: 6vh;
+  font-size: 4rem !important;
   margin: 20px;
-  padding: 20px;
+  padding: 10px;
+  height: fit-content;
 }
 
 #navTitle {
   color: white;
-  font-size: 5vh;
+  font-size: 10rem !important;
   margin: 0px;
   padding: 0px;
+}
+
+#inTitle {
+  color: white;
+  font-size: 4rem !important;
+  margin: 0px;
+  padding: 0px;
+  width: 100% !important;
 }
 
 #menu {
@@ -86,6 +95,9 @@
       color: white;
     }
   }
+  margin:auto;
+  min-width: fit-content !important;
+
 }
 
 .navIcon {

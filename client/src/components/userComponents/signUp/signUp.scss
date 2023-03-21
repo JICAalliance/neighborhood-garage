@@ -6,12 +6,14 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Golos+Text&display=swap');
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
     font-family: 'Golos Text', sans-serif !important;
 }
 
 h1 {
-    font-size: 3rem !important;
+    font-size: 5rem !important;
 }
 
 .flex-center {
@@ -25,15 +27,15 @@ h1 {
     height: 100%;
 }
 
-.showcase video
-{
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0.8;
+.showcase video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 800px !important;
+    object-fit: cover;
+    opacity: 0.8;
+    height: 100%;
 }
 
 // .form-div {
@@ -48,28 +50,58 @@ form {
     height: fit-content !important;
 }
 
+.signForm{
+    min-width: 20rem !important;
+    padding:2rem !important;
+}
+
 .info-div {
-    height: 40vh;
-    
+    min-height: fit-content;
+
 }
 
 section {
     height: 100%;
 }
 
-.reveal{
+.reveal {
     position: relative;
+    top: 10rem;
     opacity: 0;
     transition: 2s all ease;
-  }
-.reveal.active{
+    margin-top: 3rem !important;
+    padding-bottom: 3rem;
+    bottom: 10rem;
+
+}
+
+.reveal.active {
     transform: translateY(0);
     opacity: 1;
 }
 
 img.rounded {
     object-fit: cover;
-    height:200px;
+    height: 200px;
     width: 200px;
     border-radius: 10%;
+}
+
+.front {
+    font-size: 2rem !important;
+}
+
+.frontSection {
+    margin-bottom: 1000rem !important;
+    height: max-content;
+}
+
+.clear {
+    clear: both;
+    height: max-content;
+}
+.spacer{
+    margin-bottom: 3rem; /* how high is your footer */
+    visibility: hidden; 
+    color:white;
   }

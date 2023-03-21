@@ -64,10 +64,10 @@ function AddTool(props) {
 
 
   return (
-    <div className="ui container">
+    <div className="ui toolWidth">
       <div>{errorResponse ? "Something went wrong..." : ''}</div>
       <div className="ui grid">
-        <form onSubmit={handleFormSubmit} className="ui form ten wide column centered">
+        <form onSubmit={handleFormSubmit} className="ui form eighteen wide column centered">
           <div className="flex-center">
             <h2>Add Tool</h2>
           </div>
@@ -103,7 +103,7 @@ function AddTool(props) {
             />
           </div>
           <div className="flex-row flex-end flex-center">
-            <button type="submit" className="ui button-30 add ">Submit</button>
+            <button type="submit" className="ui button-30 btnProfile ">Submit</button>
           </div>
         </form>
       </div>

@@ -5,11 +5,12 @@
 }
 
 .editProfile-container {
-    width: fit-content;
-    margin: auto;
+    width: 100% !important;
+    // margin: auto;
     position: relative;
+    align-content: center;
     top: 5rem;
-    padding: 8px;
+    // padding: 8px;
     h2 {
         margin-bottom: 1.2rem;
         font-size: 1.2rem;
@@ -17,12 +18,15 @@
 }
 
 .editProfile-form {
-    width: fit-content;
+    width: 50rem !important;
+    max-width: 80% !important;
+    margin:auto;
     height: fit-content;
+    font-size: 1.25rem !important;
     size: 2rem;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: center;
     div {
         label {
             margin-right: 1rem;
@@ -31,7 +35,7 @@
 }
 
 .deleteProfile-form {
-    width: fit-content;
+    width: 90% !important;
     height: fit-content;
     display: flex;
     margin-top: 8px;
@@ -52,7 +56,24 @@
 }
 
 .delUser{
-    background-color: orange !important;
-    width:100% !important;
+    background-color:red !important;
+    min-width: 20rem !important;
+    width:40% !important;
+    font-size: auto;
 }
 
+.subEdit{
+    min-width:fit-content !important;
+    width:45% !important;
+}
+.w100{
+    width: 100% !important;
+}
+
+.w40{
+    width: 40% !important;
+}
+
+.w70{
+    width: 70% !important;
+}

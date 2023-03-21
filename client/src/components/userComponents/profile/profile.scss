@@ -111,6 +111,13 @@ h1 {
   transform: translateY(2px);
 }
 
+.btnProfile{
+  width: 20rem !important;
+}
+
+.toolWidth{
+  width: 100% !important;
+}
 .reveal{
   position: relative;
   opacity: 0;
@@ -134,5 +141,15 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.toolName{
+  color: teal !important;
+  font-size: 2rem !important;
+  weight: bold !important;
+}
+
+.white{
+  color: white !important;
 }
 

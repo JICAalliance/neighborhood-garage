@@ -76,17 +76,19 @@ const EditProfile = () => {
   };
 
   return (
-    <div className="editProfile-container my-1 editProfile-container">
+    <div className="my-1 editProfile-container center">
       <h2>Edit Profile</h2>
       {errorResponse ? <div>'Something went wrong ..'</div> : ''}
-      <form onSubmit={handleFormSubmit} className="editProfile-form flex-row space-between my-2">
+      <form onSubmit={handleFormSubmit} className="editProfile-form  flex-row space-between my-2">
         <div className="input-row flex-row space-between my-2">
           <label htmlFor="name">Name:</label>
           <input
             placeholder="enter new name"
             name="name"
+            required
             type="text"
             id="name"
+            size='40'
             onChange={handleChange}
           />
         </div>
@@ -95,8 +97,10 @@ const EditProfile = () => {
           <input
             placeholder="enter new email"
             name="email"
+            required
             type="email"
             id="email"
+            className='w70'
             onChange={handleChange}
           />
         </div>
@@ -105,8 +109,10 @@ const EditProfile = () => {
           <input
             placeholder="enter new phone number"
             name="phoneNumber"
+            required
             type="text"
             id="phoneNumber"
+            className='w70'
             onChange={handleChange}
           />
         </div>
@@ -115,20 +121,22 @@ const EditProfile = () => {
           <input
             placeholder="enter new address"
             name="address"
+            required
             type="text"
+            className='w70'
             id="address"
             onChange={handleChange}
           />
         </div>
-        <div className="input-row flex-row space-between my-2">
-          <button type="submit" className='button-30 subEdit' >Update</button>
+        <div className="input-row flex-row space-between flex-center my-2">
+          <button type="submit" className='button-30  subEdit' >Update</button>
         </div>
       </form>
 
       {/* DELETE PROFILE OPTION */}
-      <form onSubmit={handleDelete} className="deleteProfile-form">
-        <div className="flex-row flex-end">
-          <button type="submit" className='button-30 delUser'>Delete Current User and Logout</button>
+      <form onSubmit={handleDelete} className="editProfile-form">
+        <div className="flex-row flex-end center">
+          <button type="submit" className='button-30 delUser center'>Delete User</button>
         </div>
       </form>
 

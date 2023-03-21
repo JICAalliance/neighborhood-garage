@@ -71,7 +71,7 @@ function Chat({ initMessage, garageId }) {
     try {
       // get message ID
       const messageId = event.currentTarget.getAttribute("data-value");
-  
+
       const messageDeleted = await deleteMessage({
         variables: {
           id: messageId,
@@ -113,7 +113,7 @@ function Chat({ initMessage, garageId }) {
       </Header>
       <div>{errorResponse ? "Something went wrong..." : ''}</div>
 
-      <div className="bulletin container">
+      <div className="bulletin ">
         <div className="chat">
           {/* map here to send in chat */}
           {savedChat.map((message1, index) => {
@@ -168,8 +168,8 @@ function Chat({ initMessage, garageId }) {
         </div>
       </div>
 
-      
-      <Form reply onSubmit={handleFormSubmit} >
+
+      <Form reply className='center' onSubmit={handleFormSubmit} >
         {/* <label htmlFor="message">What's in your mind? </label> */}
         <Form.TextArea
           id="message"
@@ -180,7 +180,8 @@ function Chat({ initMessage, garageId }) {
           rows="3"
           onChange={handleChange}>
         </Form.TextArea>
-        <button className='button-30 center addMsg' ><i className="edit icon"></i> Add Your Message</button>
+        <button className='button-30 addMsg' ><i className="edit icon"></i> Add Your Message</button>
+        <br />
       </Form>
     </Comment.Group>
   );

@@ -41,29 +41,30 @@ function Store() {
 
   return (
     <>
-      <h2>Donation amounts:</h2>
-      <div id="products">
+      <h2 className='donateTitle'>Donation amounts:</h2>
+      <div id="products"  className="flex-center">
         {productsArray.map((product, idx) => (
           <div id="productCard" key={idx}>
-            <ProductCard product={product} />{" "}
+            <ProductCard product={product}  />{" "} <br/>
           </div>
+          
         ))}
       </div>
 
       <br />
       <br />
 
-      <div id="cartContainer">
+      <div id="cartContainer flex-center">
         <Modal
           onClose={() => setOpen(false)}
           onOpen={() => setOpen(true)}
           open={open}
           size={"mini"}
           trigger={
-            <Button id="cartButton">
+            <button id="cartButton" className="button-30 w40 ">
               <FontAwesomeIcon icon={faCartShopping} color="#4d4d4e" />(
               {productsCount} Items)
-            </Button>
+            </button>
           }
         >
           <Modal.Header>Shopping Cart</Modal.Header>
@@ -81,7 +82,7 @@ function Store() {
 
                 <h1>Total: {cart.getTotalCost().toFixed(2)}</h1>
 
-                <Button onClick={checkout}>Purchase items!</Button>
+                <button className='button-30 w100' onClick={checkout}>Purchase items!</button>
               </>
             ) : (
               <h1>There are no items in your cart!</h1>
