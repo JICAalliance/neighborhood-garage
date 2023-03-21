@@ -55,31 +55,31 @@ const JoinGarage = () => {
     });
   };
 
-  return (<div>
+  return (<div className='container flex-center'>
     <div>{errorResponse ? "Something went wrong..." : ''}</div>
     <Modal
       onClose={() => setOpen(false)}
       onOpen={() => setOpen(true)}
       open={open}
-      size={'mini'}
+      size={'small'}
       trigger={<button className="button-30" role="button">Join Garage →</button>}
     >
       <Modal.Header>Join A Neighborhood Garage</Modal.Header>
-      <Modal.Content >
-        <form onSubmit={handleFormSubmit} className="editProfile-form">
-          <div className="flex-row space-between my-2">
-            <label htmlFor="invitationCode">Join with Invitation Code:</label>
+      <Modal.Content className="flex-center">
+        <form onSubmit={handleFormSubmit} className="create-form" >
+          <div className="flex-row space-between my-2 container" >
+            <h4><label htmlFor="invitationCode">Past Your Invitation Code:</label>
             <input
               placeholder="enter Invitation code here"
               name="invitationCode"
               type="text"
               id="invitationCode"
-              size="36"
+              size='40'
               onChange={handleChange}
-            />
+            /></h4>
           </div>
-          <div className="flex-row flex-end" style={{ color: "black", backgroundColor: "white" }}>
-            <Button id='joinBtn' type="submit" color='green'>Join</Button>
+          <div className="flex-row flex-end flex-center " style={{ color: "black", backgroundColor: "white", margin: "1rem" }}>
+            <button id='joinBtn' className='button-30' type="submit" color='green'>Join</button>
           </div>
         </form>
       </Modal.Content>

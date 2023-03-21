@@ -1,10 +1,9 @@
 import "./viewGarage.scss";
-import { useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import React from "react";
 import { useQuery } from "@apollo/client";
 import GarageList from "../garageList";
-import { QUERY_GARAGE} from "../../utils/queries";
+import { QUERY_GARAGE } from "../../utils/queries";
 
 
 const ViewGarage = () => {
@@ -14,32 +13,36 @@ const ViewGarage = () => {
     // pass URL parameter
     variables: { id: garageId },
   });
-
+  const navigate = useNavigate();
 
   const garage = data?.garage || [];
 
+  const toProfile = () => {
+    navigate('/profile', { reload: true });
+  }
 
   if (loading) {
     return (<div className="container my-2 viewGarage-container">
       <h2>My Garage</h2>
       <div>Loading...</div>
-      <Link reloadDocument to="/profile">← Back to Profile</Link>
+      <Link onClick={() => { window.location.href = "/profile" }} to="/profile">← Back to Dashboard</Link>
     </div>);
   }
-  else{
+  else {
 
-  return (
-    <div className="container my-1 viewGarage-container">
-      {/* <h2>My Garage</h2> */}
+    return (
       <div>
-       
-        {/* If the data is still loading, render a loading message */}
-        {loading ? <div>Loading...</div> : <GarageList garage={garage} />}
-       
+        {/* <h2>My Garage</h2> */}
+        <div className='flex-center garDesc'>
+
+          {/* If the data is still loading, render a loading message */}
+          {loading ? <div>Loading...</div> : <GarageList garage={garage} />}
+
+        </div>
+        {/* <button className="button-30 toProfile" onClick={toProfile}>To Dashboard <i class="caret square right outline icon"></i></button> */}
+        <Link onClick={() => { window.location.href = "/profile" }} to="/profile">← Go to Profile</Link>
       </div>
-      <Link reloadDocument to="/profile">← Back to Profile</Link>
-    </div>
-  );
+    );
   };
 };
 

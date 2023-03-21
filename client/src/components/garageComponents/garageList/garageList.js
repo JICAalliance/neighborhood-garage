@@ -114,18 +114,21 @@ const GarageList = ({ garage }) => {
 
 
     return (
-      <div>
+      <div className='container'>
+        <h1>Welcome to {garage.garageName}!</h1>
         <div>{errorResponse ? "Sorry, something went wrong..." : ''}</div>
         <div key={garage._id} id={garage._id} className="container">
-          <h1>Welcome to {garage.garageName}!</h1>
+          <br />
           <div className="ui stackable grid">
-            <div className="six wide column">
+            <div className="eight wide column">
               <h3>Description: <em>{garage.description}</em></h3>
               <h3 id='invitationCode' >
+
                 <ErrorBoundary fallback={"Something went wrong"}>
                   <ClipboardCopy copyText={garage.invitationCode} />
                 </ErrorBoundary>
                 <br></br>
+                <br />
                 Admin: {garage.admin.name}
               </h3>
               <h3>Members:
@@ -135,10 +138,12 @@ const GarageList = ({ garage }) => {
                 })}
               </h3>
               {isAdmin
-                ? <div>
-                  <Button color='olive' onClick={event => window.location.href = `/editGarage/${garage._id}`}>Edit Garage</Button>
-                  <Button color='olive' onClick={event => window.location.href = `/profile`}>To Dashboard</Button>
-                  <Button color='red' data-value={garage.invitationCode} onClick={show} >Delete Garage</Button>
+                ? <div className="flex-center">
+                  <button className='button-30 btnGar' onClick={event => window.location.href = `/editGarage/${garage._id}`}>Edit Garage</button>
+                  <br />
+                  <button className='button-30 btnGar' onClick={event => window.location.href = `/profile`}>To Dashboard</button>
+                  <br />
+                  <button className='button-30 btnGar alarm' data-value={garage.invitationCode} onClick={show} >Delete Garage</button>
                   <Confirm
                     data-value={garage.invitationCode}
                     open={openState}
@@ -155,8 +160,9 @@ const GarageList = ({ garage }) => {
               {/* Only for non Admins... admins to leave must delete */}
               {!isAdmin
                 ? <h5>
-                  <Button color='red' data-value={garage.invitationCode} onClick={leaveGarageHandler}>Leave This Garage</Button>
-                  <Button color='olive' onClick={event => window.location.href = `/profile`}>To Dashboard</Button>
+                  <button className='button-30 btnGar alarm' data-value={garage.invitationCode} onClick={leaveGarageHandler}>Leave This Garage</button>
+                  <br></br>
+                  <button className='button-30 btnGar' onClick={event => window.location.href = `/profile`}>To Dashboard</button>
                 </h5>
                 : ''
               }
@@ -169,7 +175,7 @@ const GarageList = ({ garage }) => {
               </ErrorBoundary>
             </div>
           </div>
-          <h4>Garage Tools:</h4>
+          <h3 className="ui dividing header">Community Garage Tools:</h3>
           <div id='displayTools'>
             <ErrorBoundary fallback={"Something went wrong"}>
               {garageTools.map((tool, index) => (

@@ -32,7 +32,7 @@ function ClipboardCopy({ copyText }) {
   
     return (
       <span>
-         Invitation Code: <i type="text" value={copyText}>{copyText} </i>
+         Invitation Code: <br/><i type="text" value={copyText} className='inviteCode'>{copyText} </i>
          <button onClick={handleCopyClick}>
           <span>{isCopied ? 'Copied!' : 'Copy'}</span>
         </button>
