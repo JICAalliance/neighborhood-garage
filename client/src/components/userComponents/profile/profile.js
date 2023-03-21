@@ -70,13 +70,14 @@ const Profile = () => {
           <div className="row reveal">
             <div className="column">
               <h2 className="welcome">Info</h2>
+              <div className="flex-direction"><div className="sectionwidth"><p className="info" >This is where your account information is stored. Use the edit profile button to change your credentials.</p></div></div>
             </div>
             <div className="column">
               <div id="info" className="welcome">
-                <p>Name: {name} </p>
-                <p>Email: {email}</p>
-                <p>Phone number: {phone}</p>
-                <p>Address: {address}</p>
+                <p><b>Name:</b><br></br>{name} </p>
+                <p><b>Email:</b><br></br>{email}</p>
+                <p><b>Phone number:</b><br></br>{phone}</p>
+                <p><b>Address:</b><br></br>{address}</p>
               </div>
             </div>
 
@@ -86,13 +87,14 @@ const Profile = () => {
                 className="button-30"
                 role="button"
               >
-                Edit Profile
+                Edit Profile →
               </button>
             </div>
           </div>
           <div className="row reveal">
             <div className="column">
               <h2 className="welcome">Garages</h2>
+              <div className="flex-direction"><div className="sectionwidth"><p className="info" >See the garages you're a member of, create a garage, or join a garage.</p></div></div>
             </div>
             <div className="column">
               <div id='displayGarages' className="ui two column grid">
@@ -120,7 +122,7 @@ const Profile = () => {
                   role="button"
                   onClick={navToCreateGarage}
                 >
-                  Create Garage
+                  Create Garage →
                 </button>
               </div>
               <br></br>
@@ -134,6 +136,7 @@ const Profile = () => {
             <div class="column">
 
               <h2 className="welcome">Toolbox</h2>
+              <div className="flex-direction"><div className="sectionwidth"><p className="info" >Find your tools here, or add a tool to your collection. When you're in a garage, these tools will be shown to everyone in that garage.</p></div></div>
             </div>
             <div className="column">
               {myTools.length ?
