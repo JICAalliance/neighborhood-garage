@@ -46,7 +46,7 @@ Check out our features from the deployed application:
 ![Hompage](https://i.ibb.co/3MzqzWs/image-3.jpg)
 ![Garage](https://i.ibb.co/D4mvcVb/image-2.jpg)
 ![Dashboard](https://i.ibb.co/Lt73hLQ/image1.jpg)
-![Donation Store](https://ibb.co/Vpt4xjV)
+![Donation Store](https://i.ibb.co/tP4rzmB/image-4.jpg)
 
 ## Features
 - Create and join community garages where tools can be exchanged
