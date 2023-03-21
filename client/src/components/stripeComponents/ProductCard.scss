@@ -1,0 +1,17 @@
+#addRemoveButtons {
+  display: flex;
+  justify-content: space-evenly;
+
+  #addOne {
+    color: white;
+    background-color: lightgreen;
+  }
+  #removeOne {
+    color: white;
+    background-color: lightcoral;
+  }
+}
+#removeFromCart {
+  color: white;
+  background-color: lightblue;
+}

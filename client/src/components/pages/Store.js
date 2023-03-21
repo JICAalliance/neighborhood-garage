@@ -1,9 +1,12 @@
+import "./Store.scss";
 import { Button, Modal } from "semantic-ui-react";
 import { useState, useContext } from "react";
 import { productsArray } from "../stripeComponents/productsStore";
 import ProductCard from "../stripeComponents/ProductCard";
 import { CartContext } from "../stripeComponents/CartContext";
 import CartProduct from "../stripeComponents/CartProduct";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 
 function Store() {
   //for modal use
@@ -38,21 +41,30 @@ function Store() {
 
   return (
     <>
-      <h1>Welcome to the Store!</h1>
+      <h1>Donation amounts:</h1>
+      <div id="products">
+        {productsArray.map((product, idx) => (
+          <div id="productCard" key={idx}>
+            <ProductCard product={product} />{" "}
+          </div>
+        ))}
+      </div>
 
-      {productsArray.map((product, idx) => (
-        <div key={idx}>
-          <ProductCard product={product} />{" "}
-        </div>
-      ))}
+      <br />
+      <br />
 
-      <div>
+      <div id="cartContainer">
         <Modal
           onClose={() => setOpen(false)}
           onOpen={() => setOpen(true)}
           open={open}
           size={"mini"}
-          trigger={<Button>My Cart ({productsCount} Items)</Button>}
+          trigger={
+            <Button id="cartButton">
+              <FontAwesomeIcon icon={faCartShopping} color="#4d4d4e" />(
+              {productsCount} Items)
+            </Button>
+          }
         >
           <Modal.Header>Shopping Cart</Modal.Header>
           <Modal.Content>
