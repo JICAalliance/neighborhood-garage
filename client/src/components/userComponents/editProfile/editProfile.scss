@@ -9,6 +9,7 @@
     margin: auto;
     position: relative;
     top: 5rem;
+    padding: 8px;
     h2 {
         margin-bottom: 1.2rem;
         font-size: 1.2rem;
@@ -17,7 +18,7 @@
 
 .editProfile-form {
     width: fit-content;
-    height: 50vh;
+    height: fit-content;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -26,4 +27,25 @@
             margin-right: 1rem;
         }
     }
+}
+
+.deleteProfile-form {
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    flex-direction: column;
+    justify-content: space-around;
+    div {
+        label {
+            margin-right: 1rem;
+        }
+    }
+}
+
+.input-row {
+    margin: 8px;
+    display: flex;
+    justify-content: space-between;
 }

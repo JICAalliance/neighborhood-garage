@@ -60,7 +60,7 @@ const EditProfile = () => {
       });
 
       Auth.logout();
-      
+
     } catch (e) {
       console.log(e);
       setError(e);
@@ -76,11 +76,11 @@ const EditProfile = () => {
   };
 
   return (
-    <div className="container my-1 editProfile-container">
+    <div className="editProfile-container my-1 editProfile-container">
       <h2>Edit Profile</h2>
       {errorResponse ? <div>'Something went wrong ..'</div> : ''}
-      <form onSubmit={handleFormSubmit} className="editProfile-form">
-        <div className="flex-row space-between my-2">
+      <form onSubmit={handleFormSubmit} className="editProfile-form flex-row space-between my-2">
+        <div className="input-row flex-row space-between my-2">
           <label htmlFor="name">Name:</label>
           <input
             placeholder="enter new name"
@@ -90,7 +90,7 @@ const EditProfile = () => {
             onChange={handleChange}
           />
         </div>
-        <div className="flex-row space-between my-2">
+        <div className="input-row flex-row space-between my-2">
           <label htmlFor="email">Email:</label>
           <input
             placeholder="enter new email"
@@ -100,17 +100,17 @@ const EditProfile = () => {
             onChange={handleChange}
           />
         </div>
-        <div className="flex-row space-between my-2">
+        <div className="input-row flex-row space-between my-2">
           <label htmlFor="phoneNumber">Phone Number:</label>
           <input
             placeholder="enter new phone number"
             name="phoneNumber"
-            type="tel"
+            type="text"
             id="phoneNumber"
             onChange={handleChange}
           />
         </div>
-        <div className="flex-row space-between my-2">
+        <div className="input-row flex-row space-between my-2">
           <label htmlFor="address">Address:</label>
           <input
             placeholder="enter new address"
@@ -120,13 +120,13 @@ const EditProfile = () => {
             onChange={handleChange}
           />
         </div>
-        <div className="flex-row flex-end">
+        <div className="input-row flex-row space-between my-2">
           <button type="submit">Update</button>
         </div>
       </form>
 
       {/* DELETE PROFILE OPTION */}
-      <form onSubmit={handleDelete} className="editProfile-form">
+      <form onSubmit={handleDelete} className="deleteProfile-form">
         <div className="flex-row flex-end">
           <button type="submit">Delete Current User and Logout</button>
         </div>
