@@ -93,6 +93,7 @@ const EditTool = ({ _id, name, description, image, checkout, setBorrowed, borrow
             }}
             onOpen={() => setOpen(true)}
             open={open}
+            className='w70'
             trigger={<button className='button-30 ediTool'>Edit Tool</button>}
         >
             <Modal.Header>Edit Tool</Modal.Header>
@@ -101,29 +102,35 @@ const EditTool = ({ _id, name, description, image, checkout, setBorrowed, borrow
                 <Modal.Description>
                     {editing ?
                         <form className="ui form">
-                            <input value={formState.name}  onChange={handleNameChange} />
-                            <textarea value={formState.description}  onChange={handleDescriptionChange} />
-                            <p id='{owner.id} owner'>Owner: You</p>
+                            <h3 className='toolName'>
+                                <input value={formState.name} onChange={handleNameChange} />
+                            </h3>
+                            <textarea value={formState.description} onChange={handleDescriptionChange} />
+                            <h3 id='{owner.id} owner'>Owner: You</h3>
                             {checkout ?
-                                <p id='borrower'>Borrower: {borrower}</p>
+                                <h3 id='borrower'>Borrower: {borrower}</h3>
                                 : ''}
                             {invalidWarning ?
-                                <p>Fields cannot be blank!</p>
+                                <h3>Fields cannot be blank!</h3>
                                 : ''
                             }
-                            <Button color='grey' onClick={saveHandler} type='submit' content='Save Changes' />
-                            <Button color='grey' onClick={cancelHandler} content='Cancel Changes' />
+                            <div className='flex-center white'>
+                                <button className='button-30 w70' onClick={saveHandler} type='submit' content='Save Changes'>Save Changes</button>
+                                <button className='button-30 delBtn w70 alarm' onClick={cancelHandler} content='Cancel Changes'>Cancel Changes</button>
+                            </div>
                         </form>
                         :
                         <div>
-                            <Header>{name}</Header>
-                            <p>
-                                {description}
-                            </p>
-                            <p id='{owner.id} owner'>Owner: You</p>
+                            <Header className='toolName'>{name}</Header>
+                            <h4 >
+                                <i>
+                                    {description}
+                                </i>
+                            </h4>
+                            <h5 id='{owner.id} owner'>Owner: You</h5>
                             {checkout ?
-                                <p id='borrower'>Borrower: {borrower}</p>
-                                : ''}
+                                <h5 id='borrower'>Borrower: {borrower}</h5>
+                                : 'None'}
                         </div>
                     }
 
@@ -143,9 +150,10 @@ const EditTool = ({ _id, name, description, image, checkout, setBorrowed, borrow
                             <div>
                                 <Button color='grey' onClick={editHandler} content='Edit Tool' />
                                 <Button color='red' onClick={deleteHandler} content='Delete Tool' />
+                                <div className='spacer'>.</div>
                             </div>
                         }
-                       {errorResponse? <div>'Tool not deleted..'</div> : ''}
+                        {errorResponse ? <div>'Tool not deleted..'</div> : ''}
                     </div>
                 }
             </Modal.Actions>

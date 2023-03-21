@@ -14,6 +14,12 @@ h1 {
     font-size: 3rem !important;
 }
 
+.frontH2{
+    font-size: 2rem !important;
+    margin-bottom: 1rem !important;
+    margin-top: 1rem !important;
+}
+
 .flex-center {
     display: flex !important;
     flex-direction: column !important;
@@ -38,6 +44,8 @@ h1 {
 
 .login-container {
     width: fit-content;
+    min-width: 20rem !important;
+    min-height: 25rem !important;
     margin: auto;
     position: relative;
     top: 5rem;
@@ -69,4 +77,9 @@ h1 {
   height: 100%;
   object-fit: cover;
   opacity: 0.8;
+}
+.frontBtn{
+    width: 70% !important;
+    color: white !important;
+    background-color: gray !important;
 }

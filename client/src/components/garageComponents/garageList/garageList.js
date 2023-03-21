@@ -137,11 +137,11 @@ const GarageList = ({ garage }) => {
               </h3>
               {isAdmin
                 ? <div className="flex-center">
-                  <button className='button-30 btnGar' onClick={event => window.location.href = `/editGarage/${garage._id}`}>Edit Garage</button>
+                  <button className='button-30 w100 mw40' onClick={event => window.location.href = `/editGarage/${garage._id}`}>Edit Garage</button>
                   <br />
-                  <button className='button-30 btnGar' onClick={event => window.location.href = `/profile`}>To Dashboard</button>
+                  <button className='button-30 w100 mw40' onClick={event => window.location.href = `/profile`}>To Dashboard</button>
                   <br />
-                  <button className='button-30 btnGar alarm' data-value={garage.invitationCode} onClick={show} >Delete Garage</button>
+                  <button className='button-30 delUser w100 mw40' data-value={garage.invitationCode} onClick={show} >Delete Garage</button>
                   <Confirm
                     data-value={garage.invitationCode}
                     open={openState}

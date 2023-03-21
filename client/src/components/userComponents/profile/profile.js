@@ -57,11 +57,15 @@ const Profile = () => {
 
     const { name, email, myGarages, myTools, phone, address, borrowedTools } =
       data.currentUser;
-  
+
 
     return (
       <div id="profile">
         <h1 className="welcome">Dashboard</h1>
+        <h5 className="center"><i className="arrow circle down icon"></i>
+          scroll down for more 
+          <i class="arrow circle down icon"></i>
+        </h5>
         {/* <h2 className="welcome">Welcome {name}!</h2> */}
 
         <div className="ui stackable three column grid">
@@ -82,7 +86,7 @@ const Profile = () => {
             <div className="column welcome">
               <button
                 onClick={navToEditProfile}
-                className="button-30"
+                className="button-30 btnProfile"
                 role="button"
               >
                 Edit Profile →
@@ -107,7 +111,7 @@ const Profile = () => {
                     )}
                   </div>
                   :
-                  <div>
+                  <div className="center">
                     <p>You are not in any garages. Create or join a garage!</p>
                   </div>
                 }
@@ -116,7 +120,7 @@ const Profile = () => {
             <div className="column center">
               <div className="welcome">
                 <button
-                  className="button-30"
+                  className="button-30 btnProfile"
                   role="button"
                   onClick={navToCreateGarage}
                 >
@@ -143,11 +147,17 @@ const Profile = () => {
                 <p>You do not have any tools yet.</p>
               }
             </div>
-            <div id="addTool" className="five wide column">
+            <div id="addTool" className="five wide column toolWidth">
               <AddTool />
             </div>
+
           </div>
         </div>
+        <div className="spacer"> .</div>
+        <div className="spacer"> .</div>
+        <div className="spacer"> .</div>
+        <div className="spacer"> .</div>
+
       </div>
     );
   }

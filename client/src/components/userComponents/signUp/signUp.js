@@ -20,13 +20,7 @@ function Signup(props) {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     try {
-      //test
-      // console.log(
-      //   formState.name,
-      //   formState.email,
-      //   formState.password,
-      //   formState.address
-      // );
+
       const mutationResponse = await addUser({
         variables: {
           name: formState.name,
@@ -42,7 +36,7 @@ function Signup(props) {
     } catch (e) {
       console.log("Cannot add user.", e);
       alert("Our apologies, we cannot add you as a user at this time.");
-      
+
     };
   };
 
@@ -71,63 +65,69 @@ function Signup(props) {
   window.addEventListener("scroll", reveal);
 
   return (
-    <section>
+    <section className='frontSection clear'>
       <div className="showcase">
-        <video src={Video} muted loop autoPlay></video>
+        <video src={Video} muted loop autoPlay className='video'></video>
         <div className="ui container">
           <div className="ui grid form-div">
             <form
               onSubmit={handleFormSubmit}
-              className="ui form six wide column centered"
+              className="ui form eight wide column centered signForm"
             >
               <div className="flex-center">
-                <h2>Sign Up</h2>
+                <h2 className='frontH2'>Sign Up</h2>
+                <h6>*Required fields.</h6>
               </div>
               <div className="field">
-                <label htmlFor="name">Name:</label>
+                <label htmlFor="name">Name: *</label>
                 <input
                   placeholder="First and Last"
                   name="name"
+                  required
                   type="text"
                   id="email"
                   onChange={handleChange}
                 />
               </div>
               <div className="field">
-                <label htmlFor="email">Email:</label>
+                <label htmlFor="email">Email: *</label>
                 <input
                   placeholder="youremail@example.com"
                   name="email"
+                  required
                   type="email"
                   id="email"
                   onChange={handleChange}
                 />
               </div>
               <div className="field">
-                <label htmlFor="pwd">Password:</label>
+                <label htmlFor="pwd">Password: *</label>
                 <input
                   placeholder="******"
                   name="password"
+                  required
                   type="password"
                   id="pwd"
                   onChange={handleChange}
                 />
               </div>
               <div className="field">
-                <label htmlFor="phone">Phone:</label>
+                <label htmlFor="phone">Phone: *</label>
                 <input
                   placeholder="XXX-XXX-XXXX"
                   name="phone"
+                  required
                   type="text"
                   id="phone"
                   onChange={handleChange}
                 />
               </div>
               <div className="field">
-                <label htmlFor="address">Address:</label>
+                <label htmlFor="address">Address: *</label>
                 <input
                   placeholder="Enter address here"
                   name="address"
+                  required
                   type="text"
                   id="address"
                   onChange={handleChange}
@@ -135,7 +135,7 @@ function Signup(props) {
               </div>
               <br></br>
               <div className="flex-center">
-                <button type="submit" className="ui button">
+                <button type="submit" className="ui button-30 frontBtn">
                   Submit
                 </button>
                 <br></br>
@@ -153,7 +153,7 @@ function Signup(props) {
           ></img>
         </div>
         <div className="six wide column flex-center">
-          <h1>Connect with friends and neighbors</h1>
+          <h1 className="front">Connect with friends and neighbors</h1>
         </div>
       </div>
       <div className="info-div reveal ui centered stackable grid">
@@ -162,9 +162,10 @@ function Signup(props) {
             className="rounded"
             src="https://images.unsplash.com/photo-1599256630445-67b5772b1204?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjN8fGdhcmFnZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
           ></img>
+
         </div>
         <div className="six wide column flex-center">
-          <h1>Share and borrow tools</h1>
+          <h1 className="front">Share and borrow tools</h1>
         </div>
       </div>
       <div className="info-div reveal ui centered stackable grid">
@@ -175,10 +176,13 @@ function Signup(props) {
           ></img>
         </div>
         <div className="six wide column flex-center">
-          <h1>Create your own garage</h1>
+          <h1 className="front">Create your own garage</h1>
+          <div className="spacer"> .</div>
         </div>
       </div>
+      
     </section>
+    
   );
 }
 

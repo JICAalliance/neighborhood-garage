@@ -12,7 +12,7 @@ const Footer = () => {
   return (
     <footer id="footer">
       <div>
-        <p>&copy; 2023, JICAlliance Inc.</p>
+        <h3 id='copyright'>&copy; 2023, JICAlliance Inc.</h3>
       </div>
       <div id="footerIcons">
         <a href="https://github.com/JICAalliance/neighborhood-garage">

@@ -24,9 +24,7 @@ function ViewTool(props) {
     borrowedToolIDs = data.myTools.borrowedTools.map((tool) => (tool._id));
 
     return (
-      <div className="container my-4 ">
-
-        {/* <AddTool toolSubmit={toolSubmit} setToolSubmit={setToolSubmit}/> */}
+      <div className=" my-4 ">
 
         {/* map through tool and display via card */}
 
@@ -49,30 +47,6 @@ function ViewTool(props) {
     );
   };
 
-
-
-
-  // console.log(useQuery(QUERY_TOOLS));
-
-  // handle form click
-  // const handleFormSubmit = async (event) => {
-  //   event.preventDefault();
-  //   const mutationResponse = await addTool({
-  //     variables: {
-  //       name: formState.name,
-  //       description: formState.description,
-  //       image: formState.image
-  //     },
-  //   });
-  // };
-
-  // const handleChange = (event) => {
-  //   const { name, value } = event.target;
-  //   setFormState({
-  //     ...formState,
-  //     [name]: value,
-  //   });
-  // };
 }
 
 export default ViewTool;

@@ -1,10 +1,10 @@
 import "./joinGarage.scss";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useMutation, useQuery } from "@apollo/client";
 import { JOIN_GARAGE } from "../../utils/mutations";
-import { QUERY_ME, QUERY_GARAGE } from "../../utils/queries";
-import { Button, Image, Modal } from 'semantic-ui-react';
+import { QUERY_ME} from "../../utils/queries";
+import { Modal } from 'semantic-ui-react';
 
 
 const JoinGarage = () => {
@@ -55,14 +55,14 @@ const JoinGarage = () => {
     });
   };
 
-  return (<div className='container flex-center'>
+  return (<div className='flex-center'>
     <div>{errorResponse ? "Something went wrong..." : ''}</div>
     <Modal
       onClose={() => setOpen(false)}
       onOpen={() => setOpen(true)}
       open={open}
       size={'small'}
-      trigger={<button className="button-30" role="button">Join Garage →</button>}
+      trigger={<button className="button-30 btnProfile " role="button">Join Garage →</button>}
     >
       <Modal.Header>Join A Neighborhood Garage</Modal.Header>
       <Modal.Content className="flex-center">

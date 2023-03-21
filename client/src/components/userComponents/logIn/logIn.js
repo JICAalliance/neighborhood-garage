@@ -42,9 +42,9 @@ function Login(props) {
         <video src={Video} muted loop autoPlay></video>
         <div className="ui container">
           <div className="ui grid">
-            <form onSubmit={handleFormSubmit} className="ui form six wide column centered">
+            <form onSubmit={handleFormSubmit} className="ui form eight wide column centered login-container">
               <div className="flex-center">
-                <h2>Login</h2>
+                <h2 className="frontH2">Login</h2>
               </div>
               <div className="field">
                 <label htmlFor="email">Email address:</label>
@@ -73,7 +73,7 @@ function Login(props) {
               ) : null}
               <br></br>
               <div className="flex-center">
-                <button type="submit" className="ui button">
+                <button type="submit" className="ui button-30 frontBtn">
                   Submit
                 </button>
                 <br></br>
@@ -89,137 +89,3 @@ function Login(props) {
 }
 
 export default Login;
-
-// const Login = () => {
-//   //having an object of key and value pairs
-//   const [signUpUser, setSignUpUser] = useState({
-//     username: "",
-//     email: "",
-//     number: "",
-//     password: "",
-//     address: "",
-//   });
-//   //can access these values inside of user
-//   const { username, email, number, password, address } = signUpUser;
-//   //when they start typing, we're going to deconstruct the object
-//   const setOwner = (e) => {
-//     //targeting the field with a specific name; items destructured from user must match the name= value in the inputs
-//     const name = e.target.name;
-//     //value will be whatever the user types
-//     const value = e.target.value;
-//     //using spread operator gives you access to all of those values
-//     setSignUpUser({ ...signUpUser, [name]: value });
-//   };
-//   //code for login
-//   const [loginUser, setLoginUser] = useState({
-//     loginusername: "",
-//     loginpassword: "",
-//   });
-//   const { loginusername, loginpassword } = loginUser;
-//   const setLoginOwner = (e) => {
-//     const name = e.target.name;
-//     const value = e.target.value;
-//     setLoginUser({ ...loginUser, [name]: value });
-//   };
-
-//   const { login } = useStateContext();
-//   const navigate = useNavigate();
-//   const handleLogin = () => {
-//     // login(user);
-//     navigate("/");
-//   };
-//   const handleSignup = () => {};
-//   const [accountChecker, setAccountChecker] = useState(false);
-//   const swapLogin = () => {
-//     setAccountChecker(true);
-//   };
-//   const swapSignup = () => {
-//     setAccountChecker(false);
-//   };
-
-//   return (
-//     <div>
-//       {accountChecker ? (
-//         <div id="signup">
-//           <h1>Sign Up</h1>
-//           <label>
-//             Username:{""}
-//             <input
-//               type="text"
-//               name="username"
-//               value={username}
-//               onInput={setOwner}
-//             />
-//           </label>
-//           <br />
-//           <label>
-//             Email:{""}
-//             <input type="text" name="email" value={email} onInput={setOwner} />
-//           </label>
-//           <br />
-//           <label>
-//             Phone Number:{""}
-//             <input
-//               type="text"
-//               name="number"
-//               value={number}
-//               onInput={setOwner}
-//             />
-//           </label>
-//           <br />
-//           <label>
-//             Password:{""}
-//             <input
-//               type="text"
-//               name="password"
-//               value={password}
-//               onInput={setOwner}
-//             />
-//           </label>
-//           <br />
-//           <label>
-//             Address:{""}
-//             <input
-//               type="text"
-//               name="address"
-//               value={address}
-//               onInput={setOwner}
-//             />
-//           </label>
-//           <br />
-//           <button onClick={handleSignup}>Sign Up</button>
-//           <br />
-//           <button onClick={swapSignup}>Already a member? Log in!</button>
-//         </div>
-//       ) : (
-//         <div id="logIn">
-//           <h1>Log In</h1>
-//           <label>
-//             Username:{""}
-//             <input
-//               type="text"
-//               name="loginusername"
-//               value={loginusername}
-//               onInput={setLoginOwner}
-//             />
-//           </label>
-//           <br />
-//           <label>
-//             Password:{""}
-//             <input
-//               type="text"
-//               name="loginpassword"
-//               value={loginpassword}
-//               onInput={setLoginOwner}
-//             />
-//           </label>
-//           <br />
-//           <button onClick={handleLogin}>Log In</button>
-//           <br />
-//           <button onClick={swapLogin}>Not a member? Sign up!</button>
-//           {/* {console.log(user)} */}
-//         </div>
-//       )}
-//     </div>
-//   );
-// };

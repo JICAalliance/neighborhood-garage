@@ -30,9 +30,9 @@ function ProductCard(props) {
           </Button>
         </>
       ) : (
-        <Button onClick={() => cart.addOneToCart(product.id)}>
+        <button className='button-30 w70' onClick={() => cart.addOneToCart(product.id)}>
           Add To Cart
-        </Button>
+        </button>
       )}
     </Card>
   );

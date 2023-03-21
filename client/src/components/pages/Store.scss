@@ -4,8 +4,11 @@
 }
 
 #cartContainer {
-  display: flex;
-  justify-content: flex-end;
+  min-height: 30rem !important;
+  width:100% !important;
+  display: block;
+  margin:auto;
+  // justify-content: flex-end;
 }
 
 #cartButton {
@@ -14,4 +17,12 @@
   /* align-content: center; */
   justify-content: center;
   align-items: center;
+  background-color: gray !important;
+  margin:auto;
+  min-width: 30 rem !important;
+
+}
+
+.donateTitle{
+  font-size: 3rem !important;
 }

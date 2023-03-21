@@ -1,8 +1,8 @@
 import "./nav.scss";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import Auth from "../utils/auth";
 import { Menu } from "semantic-ui-react";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faWarehouse,
@@ -13,14 +13,23 @@ import {
 function Nav() {
   const [activeItem, setActiveItem] = useState();
   const handleItemClick = (e, { name }) => setActiveItem(name);
+  //find location
+  const page = useParams();
+
   function showNavigation() {
+
+
     if (Auth.loggedIn()) {
       return (
-        <>
-          <Menu stackable id="menu">
+        <div>
+          <Menu stackable id="menu" >
             <Menu.Item>
               {/* <img alt="logo" src="./icons8-wrench-64.png" /> */}
-              <div id="navTitle">neighborhood garage</div>
+              {(page === 'profile' || page === 'login')
+                ? <div id="navTitle">neighborhood garage</div>
+                : <div id="inTitle">neighborhood garage</div>
+              }
+
             </Menu.Item>
 
             <Menu.Item
@@ -78,7 +87,8 @@ function Nav() {
               </NavLink>
             </Menu.Item>
           </Menu>
-        </>
+        </div>
+
       );
     } else {
       return <div id="title">neighborhood garage</div>;
