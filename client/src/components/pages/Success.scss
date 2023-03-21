@@ -1,0 +1,14 @@
+#backToCart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  #cartIcon {
+    height: 5vh;
+  }
+  
+  #buttonContainer {
+    display: flex;
+    justify-content: center;
+  }

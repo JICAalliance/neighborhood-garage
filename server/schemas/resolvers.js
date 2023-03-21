@@ -260,20 +260,20 @@ const resolvers = {
 
     updateTool: async (parent, args, context) => {
       if (context.user) {
-      const updatedTool = await Tool.findOneAndUpdate(
-        { _id: args._id },
-        {
-          $set: {
-            name: args.name,
-            description: args.description
-          }
-        },
-        { new: true }
-      )
+        const updatedTool = await Tool.findOneAndUpdate(
+          { _id: args._id },
+          {
+            $set: {
+              name: args.name,
+              description: args.description
+            }
+          },
+          { new: true }
+        )
 
-      return updatedTool;
-    }
-    throw new AuthenticationError('You need to be logged in!');
+        return updatedTool;
+      }
+      throw new AuthenticationError('You need to be logged in!');
     },
     // garage creation accepts userId (atm ID but TODO: login details), garageName and description
     // create Garage and return it with admin and members populated, the user who created it automatically becomes a member
@@ -366,12 +366,13 @@ const resolvers = {
           .populate("members")
           .populate("admin");
         //update member with new garage
-        const user = await User.findByIdAndUpdate(
-          { _id: context.user._id },
-          { $push: { myGarages: garage._id } },
-          { new: true }
-        ).exec();
-
+        if (!garage.members.includes(context.user)) {
+          const user = await User.findByIdAndUpdate(
+            { _id: context.user._id },
+            { $push: { myGarages: garage._id } },
+            { new: true }
+          ).exec();
+        }
         return garage;
       }
       throw new AuthenticationError("You need to be logged in!");
@@ -422,12 +423,12 @@ const resolvers = {
 
     approveCheckout: async (parent, args, context) => {
       if (context.user) {
-      return await Checkout.findOneAndUpdate(
-        { _id: args._id },
-        { $set: { approved: true } }
-      );
-    }
-    throw new AuthenticationError('You need to be logged in!');
+        return await Checkout.findOneAndUpdate(
+          { _id: args._id },
+          { $set: { approved: true } }
+        );
+      }
+      throw new AuthenticationError('You need to be logged in!');
     },
 
     // user removes tool

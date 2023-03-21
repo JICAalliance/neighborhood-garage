@@ -55,11 +55,11 @@ const Profile = () => {
     return <div>Loading...</div>;
   };
 
- if(data){
-    
+  if (data) {
+
     const { name, email, myGarages, myTools, phone, address, borrowedTools } =
       data.currentUser;
-      console.log("MYGARAGES", myGarages);
+    console.log("MYGARAGES", myGarages);
 
     return (
       <div id="profile">
@@ -98,13 +98,21 @@ const Profile = () => {
             </div>
             <div className="column">
               <div id='displayGarages' className="ui two column grid">
-                {myGarages.map((garage, index) => (
-                  <div className="column">
-                    <GarageCard garage={garage} key={index}>
-                    </GarageCard>
+                {myGarages.length ?
+                  <div>
+                    {myGarages.map((garage, index) => (
+                      <div className="column">
+                        <GarageCard garage={garage} key={index}>
+                        </GarageCard>
+                      </div>
+                    )
+                    )}
                   </div>
-                )
-                )}
+                  :
+                  <div>
+                    <p>You are not in any garages. Create or join a garage!</p>
+                  </div>
+                }
               </div>
             </div>
             <div className="column center">
@@ -131,7 +139,11 @@ const Profile = () => {
               <div className="flex-direction"><div className="sectionwidth"><p className="info" >Find your tools here, or add a tool to your collection. When you're in a garage, these tools will be shown to everyone in that garage.</p></div></div>
             </div>
             <div className="column">
-              <ViewTool />
+              {myTools.length ?
+                <ViewTool />
+                :
+                <p>You do not have any tools yet.</p>
+              }
             </div>
             <div id="addTool" className="five wide column">
               <AddTool />
