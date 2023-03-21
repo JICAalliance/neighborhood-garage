@@ -41,7 +41,7 @@ To access and manually configure with the code if you please:
 
 Check out our features from the deployed application: 
 
-INSERT VIDEO HERE
+💻 [Click here for the view the full video demo](https://vimeo.com/810325428/eda0ec1531)
 
 INSERT SCHREENSHOTS HERE
 
