@@ -11,9 +11,9 @@ function ProductCard(props) {
   console.log(cart.items);
 
   return (
-    <Card>
-      <h1>{product.title}</h1>
-      <h1>${product.price}</h1>
+    <Card id="productCard">
+      <h3 id="productTitle">{product.title}</h3>
+      <h3 id="productPrice">${product.price}</h3>
       {productQuantity > 0 ? (
         <>
           <div id="addRemoveButtons">

@@ -5,9 +5,7 @@ import { useNavigate } from "react-router-dom";
 import {
   ViewTool,
   AddTool,
-  JoinGarage,
-  EditProfile,
-  CreateGarage,
+  JoinGarage
 } from "../../../components";
 
 import { QUERY_ME } from "../../utils/queries";

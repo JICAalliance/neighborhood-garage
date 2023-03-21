@@ -1,5 +1,6 @@
 import Nav from "./nav";
 import Home from "./home";
+import Footer from "./footer";
 import { EditProfile, Login, Profile, Signup } from "./userComponents/";
 import {
   CreateGarage,
@@ -22,6 +23,7 @@ import {
 export {
   Nav,
   Home,
+  Footer,
   EditProfile,
   Login,
   Profile,

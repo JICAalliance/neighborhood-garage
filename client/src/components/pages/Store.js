@@ -41,7 +41,7 @@ function Store() {
 
   return (
     <>
-      <h1>Donation amounts:</h1>
+      <h2>Donation amounts:</h2>
       <div id="products">
         {productsArray.map((product, idx) => (
           <div id="productCard" key={idx}>

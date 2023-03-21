@@ -1,5 +1,8 @@
 import "./App.scss";
 import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+//import components
 import {
   Nav,
   Home,
@@ -7,12 +10,19 @@ import {
   Profile,
   CreateGarage,
   ViewGarage,
+  Footer,
 } from "./components";
 import EditProfile from "./components/userComponents/editProfile";
 import EditGarage from "./components/garageComponents/editGarage";
 
-// import { useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+//import STORE components
+import { setContext } from "@apollo/client/link/context";
+import Cancel from "./components/pages/Cancel";
+import Store from "./components/pages/Store";
+import Success from "./components/pages/Success";
+import CartProvider from "./components/stripeComponents/CartContext";
+
+//import Apollo
 import {
   from,
   ApolloClient,
@@ -20,13 +30,6 @@ import {
   ApolloProvider,
   createHttpLink,
 } from "@apollo/client";
-import { setContext } from "@apollo/client/link/context";
-
-import Cancel from "./components/pages/Cancel";
-import Store from "./components/pages/Store";
-import Success from "./components/pages/Success";
-import CartProvider from "./components/stripeComponents/CartContext";
-
 //error handling on Apollo
 import { onError } from "@apollo/client/link/error";
 
@@ -72,49 +75,42 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
-        <div>
-          <Nav />
-          <CartProvider>
-            <Routes>
-              <Route index element={loggedIn ? <Profile /> : <Home />} />
-              <Route
-                path="login"
-                element={loggedIn ? <Profile /> : <Login />}
-              />
-              <Route
-                path="profile"
-                element={loggedIn ? <Profile /> : <Login />}
-              />
-              <Route
-                path="createGarage"
-                element={loggedIn ? <CreateGarage /> : <Login />}
-              />
-              <Route
-                path="/editGarage/:garageId"
-                element={loggedIn ? <EditGarage /> : <Login />}
-              />
-              {/* <Route path="/addTool" element={<AddTool />} /> */}
-              <Route
-                path="editProfile"
-                element={loggedIn ? <EditProfile /> : <Login />}
-              />
-              {/* <Route path="/joinGarage" element={<JoinGarage />} /> */}
-              <Route
-                path="/viewGarage/:garageId"
-                element={loggedIn ? <ViewGarage /> : <Login />}
-              />
-              <Route
-                path="success"
-                element={loggedIn ? <Success /> : <Login />}
-              />
-              <Route
-                path="cancel"
-                element={loggedIn ? <Cancel /> : <Login />}
-              />
-              <Route path="store" element={loggedIn ? <Store /> : <Login />} />
-            </Routes>
-          </CartProvider>
-        </div>
+        <Nav />
+        <CartProvider>
+          <Routes>
+            <Route index element={loggedIn ? <Profile /> : <Home />} />
+            <Route path="login" element={loggedIn ? <Profile /> : <Login />} />
+            <Route
+              path="profile"
+              element={loggedIn ? <Profile /> : <Login />}
+            />
+            <Route
+              path="createGarage"
+              element={loggedIn ? <CreateGarage /> : <Login />}
+            />
+            <Route
+              path="/editGarage/:garageId"
+              element={loggedIn ? <EditGarage /> : <Login />}
+            />
+            {/* <Route path="/addTool" element={<AddTool />} /> */}
+            <Route
+              path="editProfile"
+              element={loggedIn ? <EditProfile /> : <Login />}
+            />
+            {/* <Route path="/joinGarage" element={<JoinGarage />} /> */}
+            <Route
+              path="/viewGarage/:garageId"
+              element={loggedIn ? <ViewGarage /> : <Login />}
+            />
+            <Route
+              path="success"
+              element={loggedIn ? <Success /> : <Login />}
+            />
+            <Route path="cancel" element={loggedIn ? <Cancel /> : <Login />} />
+            <Route path="store" element={loggedIn ? <Store /> : <Login />} />
+          </Routes>
+        </CartProvider>
+        <Footer />
       </Router>
     </ApolloProvider>
   );
