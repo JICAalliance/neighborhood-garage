@@ -93,7 +93,7 @@ const EditTool = ({ _id, name, description, image, checkout, setBorrowed, borrow
             }}
             onOpen={() => setOpen(true)}
             open={open}
-            trigger={<Button content="Edit Tool" />}
+            trigger={<button className='button-30 ediTool'>Edit Tool</button>}
         >
             <Modal.Header>Edit Tool</Modal.Header>
             <Modal.Content image>

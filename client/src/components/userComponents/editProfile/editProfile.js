@@ -121,14 +121,14 @@ const EditProfile = () => {
           />
         </div>
         <div className="input-row flex-row space-between my-2">
-          <button type="submit">Update</button>
+          <button type="submit" className='button-30 subEdit' >Update</button>
         </div>
       </form>
 
       {/* DELETE PROFILE OPTION */}
       <form onSubmit={handleDelete} className="deleteProfile-form">
         <div className="flex-row flex-end">
-          <button type="submit">Delete Current User and Logout</button>
+          <button type="submit" className='button-30 delUser'>Delete Current User and Logout</button>
         </div>
       </form>
 

@@ -36,7 +36,7 @@ const ToolCard = ({ tool, checkout, checkoutModal, userOwned }) => {
         <Card.Header>{tool.name}</Card.Header>
         <Card.Meta>
           {userOwned ?
-            <p>Your tool</p>
+            <h4>Your tool</h4>
             :
             ''
           }
@@ -44,8 +44,8 @@ const ToolCard = ({ tool, checkout, checkoutModal, userOwned }) => {
             <div>
               {approved ?
                 <div>
-                  <p>Status: Borrowed</p>
-                  <p>Borrowed by: {borrower.name}</p>
+                  <p className='borrowed'>Status: Borrowed</p>
+                  <p className='borrowed'>Borrowed by: {borrower.name}</p>
                   <p>Checked out on: {outDate.toLocaleDateString()}</p>
                   <p>Due on: {dueDate.toLocaleDateString()}</p>
                 </div>
@@ -58,7 +58,7 @@ const ToolCard = ({ tool, checkout, checkoutModal, userOwned }) => {
 
             </div>
             :
-            <div>
+            <div className='available'>
               Status: Available
             </div>}
         </Card.Meta>

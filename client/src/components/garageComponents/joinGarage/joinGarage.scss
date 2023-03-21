@@ -4,28 +4,35 @@
     box-sizing: border-box;
 }
 
-// #joinBtn{
+#joinBtn{
 
-//     // color:black !important;
-//     height: fit-content;
-//     width: fit-content;
-//     padding: 1rem 3rem;
-//     font-size: 1rem;
-//     font-weight: bold;
-//     border-radius: 7px;
-//     margin-bottom: 2rem;
-//     outline: none;
-//     border-width: thin;
-//     box-shadow: 7px 5px 7px #b9b8b8 !important;
-//     cursor: pointer;
-//     &:hover {
-//         background-color: black !important;
-//         color: white;
-//     }
+    // color:black !important;
+    height: fit-content;
+    width: fit-content;
+    padding: 1rem 3rem;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 7px;
+    margin-bottom: 2rem;
+    outline: none;
+    border-width: thin;
+    box-shadow: 7px 5px 7px #b9b8b8 !important;
+    cursor: pointer;
+    &:hover {
+        background-color: black !important;
+        color: white;
+    }
 
 
-// }
+}
 
+.center{
+  text-align: center !important;
+}
+
+.chat{
+  width:80% !important;
+}
 .editProfile-container {
     width: fit-content;
     margin: auto;
@@ -37,7 +44,7 @@
     }
 }
 
-.editProfile-form {
+.create-form {
     width: fit-content;
     height: 50vh;
     display: flex;
@@ -53,12 +60,12 @@
 .button-30 {
     align-items: center;
     appearance: none;
-    background-color: #FCFCFD;
+    background-color:teal;
     border-radius: 4px;
     border-width: 0;
     box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,rgba(45, 35, 66, 0.3) 0 7px 13px -3px,#D6D6E7 0 -3px 0 inset;
     box-sizing: border-box;
-    color: #36395A;
+    color: white;
     cursor: pointer;
     display: inline-flex;
     font-family: "JetBrains Mono",monospace;
@@ -94,3 +101,7 @@
     box-shadow: #D6D6E7 0 3px 7px inset;
     transform: translateY(2px);
   }
+
+h4 {
+  size:1.5rem !important;
+}
