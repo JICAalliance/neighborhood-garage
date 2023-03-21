@@ -70,6 +70,9 @@ https://github.com/iwirsing
 We used Cloudinary for image hosting.
 https://cloudinary.com/
 
+We used Stripe to handle donation payments.
+https://stripe.com/
+
 ## License
 
 MIT license
