@@ -11,6 +11,25 @@
   background-repeat: no-repeat;
 }
 
+.row {
+  height: 70vh
+}
+
+h2 {
+  font-size: 4vw !important;
+}
+
+p {
+  font-size: 2vw;
+}
+
+center {
+  display: flex !important;
+  flex-direction: column !important;
+  align-content: center !important;
+  justify-content: center !important;
+}
+
 .profile-container {
   width: fit-content;
   margin: auto;
@@ -32,6 +51,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+h1 {
+  font-size: 5vw !important;
 }
 
 .button-30 {
@@ -91,3 +114,9 @@
   transform: translateY(0);
   opacity: 1;
 }
+
+.row {
+  min-height: 70
+  vh;
+}
+

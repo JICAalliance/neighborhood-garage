@@ -80,7 +80,7 @@ const Profile = () => {
               </div>
             </div>
 
-            <div className="column flex-center">
+            <div className="column welcome">
               <button
                 onClick={navToEditProfile}
                 className="button-30"
@@ -105,8 +105,8 @@ const Profile = () => {
                 )}
               </div>
             </div>
-            <div className="column flex-center">
-              <div className="">
+            <div className="column center">
+              <div className="welcome">
                 <button
                   className="button-30"
                   role="button"
@@ -117,7 +117,7 @@ const Profile = () => {
               </div>
               <br></br>
 
-              <div>
+              <div className="welcome">
                 <JoinGarage />
               </div>
             </div>
