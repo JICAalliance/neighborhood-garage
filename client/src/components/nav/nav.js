@@ -77,65 +77,11 @@ function Nav() {
                 />
               </NavLink>
             </Menu.Item>
-
-            {/* <Link to="/profile">
-              <Menu.Item
-                name="dashboard"
-                active={activeItem === "dashboard"}
-                onClick={handleItemClick}
-              >
-                Dashboard
-              </Menu.Item>
-            </Link> */}
-
-            {/* <Link to="/store">
-              <Menu.Item
-                name="store"
-                active={activeItem === "store"}
-                onClick={handleItemClick}
-              >
-                Donate
-              </Menu.Item>
-            </Link>
-
-            <a href="/" onClick={() => Auth.logout()}>
-              <Menu.Item
-                name="logout"
-                active={activeItem === "logout"}
-                onClick={handleItemClick}
-              >
-                Logout
-              </Menu.Item>
-            </a> */}
           </Menu>
         </>
       );
     } else {
-      return (
-        <div id="title">neighborhood garage</div>
-        //   <div className="ui">
-        //     <div className="ui stackable menu">
-        //       {/* <li>
-        //         <Link to="/signup">
-        //           <button>Signup</button>
-        //         </Link>
-        //       </li>
-        //       <div className="right item">
-        //         <Link to="/login">Login</Link>
-        //       </div> */}
-        //       {/* <li>
-        //         <Link to="/createGarage">
-        //           <button>Create Garage</button>
-        //         </Link>
-        //       </li> */}
-        //       {/* <li>
-        //         <Link to="/addTool">
-        //           <button>Add Tool</button>
-        //         </Link>
-        //       </li> */}
-        //     </div>
-        //   </div>
-      );
+      return <div id="title">neighborhood garage</div>;
     }
   }
 

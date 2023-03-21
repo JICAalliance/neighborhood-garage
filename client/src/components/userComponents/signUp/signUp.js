@@ -149,7 +149,7 @@ function Signup(props) {
         <div className="six wide column flex-center">
           <img
             className="rounded"
-            src="https://uphomes.com/storage/blogposts/July2022/medium/zNKSu0bJxtRpPul6acFD.jpeg"
+            src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGdhcmFnZSUyMGNvbW11bml0eXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
           ></img>
         </div>
         <div className="six wide column flex-center">
@@ -160,7 +160,7 @@ function Signup(props) {
         <div className="six wide column flex-center">
           <img
             className="rounded"
-            src="https://uphomes.com/storage/blogposts/July2022/medium/zNKSu0bJxtRpPul6acFD.jpeg"
+            src="https://images.unsplash.com/photo-1599256630445-67b5772b1204?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjN8fGdhcmFnZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
           ></img>
         </div>
         <div className="six wide column flex-center">

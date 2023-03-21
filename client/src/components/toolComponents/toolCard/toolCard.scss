@@ -1,7 +1,13 @@
-.borrowed{
-    color: red !important;
+.borrowed {
+  color: red !important;
 }
 
-.available{
-    color: teal !important;
+.available {
+  color: teal !important;
+}
+
+#tool-container {
+  p {
+    font-size: 1rem;
+  }
 }
