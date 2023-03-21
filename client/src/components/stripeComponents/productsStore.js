@@ -7,18 +7,18 @@
 
 const productsArray = [
   {
-    id: "price_1MnLHuGEUClOdAIcEmsJ7HwQ",
-    title: "$1 Donation",
+    id: "price_1MnhHDGEUClOdAIcCXdCfeSh",
+    title: "Small Donation",
     price: 1,
   },
   {
-    id: "price_1MnLL2GEUClOdAIcCLxl7nJK",
-    title: "$10 Donation",
+    id: "price_1MnhHiGEUClOdAIc1HAa66ro",
+    title: "Medium Donation",
     price: 10,
   },
   {
-    id: "price_1MnLLFGEUClOdAIcyOb9Oauy",
-    title: "$100 Donation",
+    id: "price_1MnhHuGEUClOdAIcFZ0H2dbx",
+    title: "Large Donation",
     price: 100,
   },
 ];
