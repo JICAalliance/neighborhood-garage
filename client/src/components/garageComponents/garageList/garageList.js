@@ -117,68 +117,79 @@ const GarageList = ({ garage }) => {
       <div>
         <div>{errorResponse ? "Sorry, something went wrong..." : ''}</div>
         <div key={garage._id} id={garage._id} className="container">
-          <h3>Welcome to {garage.garageName}!!!</h3>
-          <h4><em>{garage.description}...</em></h4>
+          <h1>Welcome to {garage.garageName}!</h1>
+          <div className="ui stackable grid">
+            <div className="six wide column">
+              <h3>Description: <em>{garage.description}</em></h3>
+              <h3 id='invitationCode' >
+                <ErrorBoundary fallback={"Something went wrong"}>
+                  <ClipboardCopy copyText={garage.invitationCode} />
+                </ErrorBoundary>
+                <br></br>
+                Admin: {garage.admin.name}
+              </h3>
+              <h3>Members:
+                {memberArray.map((member) => {
 
-          <h4 id='invitationCode' >
-            <ErrorBoundary fallback={"Something went wrong"}>
-              <ClipboardCopy copyText={garage.invitationCode} />
-            </ErrorBoundary>
-          </h4>
+                  return <li key={member._id} id={member.id}> {member.name} </li>
+                })}
+              </h3>
+              {isAdmin
+                ? <div>
+                  <Button color='olive' onClick={event => window.location.href = `/editGarage/${garage._id}`}>Edit Garage</Button>
+                  <Button color='olive' onClick={event => window.location.href = `/profile`}>To Dashboard</Button>
+                  <Button color='red' data-value={garage.invitationCode} onClick={show} >Delete Garage</Button>
+                  <Confirm
+                    data-value={garage.invitationCode}
+                    open={openState}
+                    content='Are you absolutely sure you want to delete this garage?'
+                    cancelButton='Cancel Delete'
+                    confirmButton="Sure!"
+                    onCancel={handleCancel}
+                    onConfirm={handleConfirm}
+                  />
+                </div>
 
-          <h5>Admin: {garage.admin.name}</h5>
-          {isAdmin
-            ? <div>
-              <Button color='olive' onClick={event => window.location.href = `/editGarage/${garage._id}`}>Edit Garage</Button>
-              <Button color='olive' onClick={event => window.location.href = `/profile`}>To Dashboard</Button>
-              <Button color='red' data-value={garage.invitationCode} onClick={show} >Delete Garage</Button>
-              <Confirm
-                data-value={garage.invitationCode}
-                open={openState}
-                content='Are you absolutely sure you want to delete this garage?'
-                cancelButton='Cancel Delete'
-                confirmButton="Sure!"
-                onCancel={handleCancel}
-                onConfirm={handleConfirm}
-              />
+                :
+                ''}
+              {/* Only for non Admins... admins to leave must delete */}
+              {!isAdmin
+                ? <h5>
+                  <Button color='red' data-value={garage.invitationCode} onClick={leaveGarageHandler}>Leave This Garage</Button>
+                  <Button color='olive' onClick={event => window.location.href = `/profile`}>To Dashboard</Button>
+                </h5>
+                : ''
+              }
             </div>
-
-            :
-            ''}
-
-          <h5>Members:
-            {memberArray.map((member) => {
-
-              return <li key={member._id} id={member.id}> {member.name} </li>
-            })}
-          </h5>
+            <div className="eight wide column">
+              {/* GARAGE BULLETIN */}
+              <ErrorBoundary fallback={"Something went wrong"}>
+                <ViewChat garageId={garage._id} />
+              </ErrorBoundary>
+            </div>
+          </div>
 
 
-          {/* Only for non Admins... admins to leave must delete */}
-          {!isAdmin
-            ? <h5>
-              <Button color='red' data-value={garage.invitationCode} onClick={leaveGarageHandler}>Leave This Garage</Button>
-              <Button color='olive' onClick={event => window.location.href = `/profile`}>To Dashboard</Button>
-            </h5>
-            : ''
-          }
 
-          {/* GARAGE BULLETIN */}
-          <ErrorBoundary fallback={"Something went wrong"}>
-            <ViewChat garageId={garage._id} />
-          </ErrorBoundary>
+
+
+
+
+
+
+
 
           <h4>Garage Tools:</h4>
           <div id='displayTools'>
-    <ErrorBoundary fallback={"Something went wrong"}>
-      {garageTools.map((tool, index) => (
+            <ErrorBoundary fallback={"Something went wrong"}>
+              {garageTools.map((tool, index) => (
 
-        <ToolWrapper tool={tool} key={index} checkoutModal={true}>
-        </ToolWrapper>
+                <ToolWrapper tool={tool} key={index} checkoutModal={true}>
+                </ToolWrapper>
 
-      )
-      )}
-    </ErrorBoundary>
+              )
+              )}
+            </ErrorBoundary>
 
           </div >
         </div >

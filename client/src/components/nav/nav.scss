@@ -23,29 +23,30 @@
 }
 
 #navTitle {
-  color: black;
-  text-shadow: 5px 4px lightgray;
+  color: white;
   font-size: 5vh;
   margin: 0px;
   padding: 0px;
 }
 
 #menu {
-  background-color: lightblue;
+  background-color: black;
   a {
     &:hover {
-      color: black;
+      color: white;
       svg {
         opacity: 0;
       }
       &:after {
         opacity: 1;
+        color: white;
       }
     }
 
     &:after {
       content: "";
       font-size: 9px;
+      color: white;
       letter-spacing: 2px;
       bottom: 0;
       display: block;
@@ -61,7 +62,9 @@
     &:after {
       content: "DASHBOARD";
       font-size: medium;
+      color: white;
     }
+    color: white;
     text-align: center;
   }
   a.donate-link {
@@ -79,11 +82,11 @@
     text-align: center;
   }
 
-  a.active {
-    svg {
-      color: green;
-    }
-  }
+  
+}
+
+NavLink {
+  color: white;
 }
 
 .navIcon {
