@@ -32,8 +32,10 @@
 #menu {
   background-color: black;
   a {
+    svg {
+      color: gray;
+    }
     &:hover {
-      color: white;
       svg {
         opacity: 0;
       }
@@ -46,7 +48,7 @@
     &:after {
       content: "";
       font-size: 9px;
-      color: white;
+      color: gray;
       letter-spacing: 2px;
       bottom: 0;
       display: block;
@@ -62,9 +64,7 @@
     &:after {
       content: "DASHBOARD";
       font-size: medium;
-      color: white;
     }
-    color: white;
     text-align: center;
   }
   a.donate-link {
@@ -81,12 +81,11 @@
     }
     text-align: center;
   }
-
-  
-}
-
-NavLink {
-  color: white;
+  a.active {
+    svg {
+      color: white;
+    }
+  }
 }
 
 .navIcon {

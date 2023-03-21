@@ -16,22 +16,42 @@ const Footer = () => {
       </div>
       <div id="footerIcons">
         <a href="https://github.com/JICAalliance/neighborhood-garage">
-          <FontAwesomeIcon icon={faGithub} color="#4d4d4e" />
+          <FontAwesomeIcon
+            icon={faGithub}
+            color="#4d4d4e"
+            className="footerIcon"
+          />
         </a>
         <a href="https://cloudinary.com">
-          <FontAwesomeIcon icon={faCloudArrowUp} color="#4d4d4e" />
+          <FontAwesomeIcon
+            icon={faCloudArrowUp}
+            color="#4d4d4e"
+            className="footerIcon"
+          />
         </a>
         <a href="https://stripe.com">
-          <FontAwesomeIcon icon={faStripe} color="#4d4d4e" />
+          <FontAwesomeIcon
+            icon={faStripe}
+            color="#4d4d4e"
+            className="footerIcon"
+          />
         </a>
         <a href="https://react.semantic-ui.com/">
-          <FontAwesomeIcon icon={faReact} color="#4d4d4e" />
+          <FontAwesomeIcon
+            icon={faReact}
+            color="#4d4d4e"
+            className="footerIcon"
+          />
         </a>
         <a href="https://sass-lang.com/">
-          <FontAwesomeIcon icon={faSass} color="#4d4d4e" />
+          <FontAwesomeIcon
+            icon={faSass}
+            color="#4d4d4e"
+            className="footerIcon"
+          />
         </a>
         <a href="https://www.apollographql.com/">
-          <FontAwesomeIcon icon={faA} color="#4d4d4e" />
+          <FontAwesomeIcon icon={faA} color="#4d4d4e" className="footerIcon" />
         </a>
       </div>
     </footer>

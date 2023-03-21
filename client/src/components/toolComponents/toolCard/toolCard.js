@@ -1,17 +1,17 @@
-import "./toolCard.scss";
+import './toolCard.scss';
 import React from "react";
 
-import { Card, Icon, Button, Image } from "semantic-ui-react";
-import ToolCheckout from "../toolCheckout";
-import EditTool from "../editTool";
-import ToolApproval from "../toolApproval";
-import { useQuery } from "@apollo/client";
-import { QUERY_CHECKOUT_BORROWER } from "../../utils/queries";
+import { Card, Icon, Button, Image } from 'semantic-ui-react';
+import ToolCheckout from '../toolCheckout';
+import EditTool from '../editTool';
+import ToolApproval from '../toolApproval';
+import { useQuery } from '@apollo/client';
+import { QUERY_CHECKOUT_BORROWER } from '../../utils/queries';
+
 
 const ToolCard = ({ tool, checkout, checkoutModal, userOwned }) => {
-  const [borrowed, setBorrowed] = React.useState(
-    Boolean(!(checkout.length == 0))
-  );
+
+  const [borrowed, setBorrowed] = React.useState(Boolean(!(checkout.length == 0)));
   const [approved, setApproved] = React.useState(checkout.approved);
 
   let checkoutId = null;
@@ -22,9 +22,7 @@ const ToolCard = ({ tool, checkout, checkoutModal, userOwned }) => {
     outDate = new Date(Date.parse(checkout.outDate));
     dueDate = new Date(Date.parse(checkout.dueDate));
   }
-  const { data } = useQuery(QUERY_CHECKOUT_BORROWER, {
-    variables: { id: checkoutId },
-  });
+  const { data } = useQuery(QUERY_CHECKOUT_BORROWER, { variables: { id: checkoutId } });
   const borrower = data?.checkoutBorrower || [];
 
   return <div id='tool-container'>
@@ -77,55 +75,20 @@ const ToolCard = ({ tool, checkout, checkoutModal, userOwned }) => {
             : ''
           }
         </Card.Content>
+        :
+        <div>
+          {(checkoutModal && !borrowed) ?
+            <Card.Content extra>
+              <ToolCheckout _id={tool._id} name={tool.name} description={tool.description} image={tool.image} checkout={checkout} setBorrowed={setBorrowed} borrowed={borrowed} borrower={borrower} />
+            </Card.Content>
+            :
+            ''
+          }
+        </div>}
+    </Card>
+  </div>
 
-        {userOwned ? (
-          <Card.Content extra>
-            <EditTool
-              _id={tool._id}
-              name={tool.name}
-              description={tool.description}
-              image={tool.image}
-              checkout={checkout}
-              setBorrowed={setBorrowed}
-              borrowed={borrowed}
-              borrower={borrower}
-            />
-            {borrowed ? (
-              <ToolApproval
-                borrower={borrower}
-                checkout={checkout}
-                tool={tool}
-                approved={approved}
-                setApproved={setApproved}
-                setBorrowed={setBorrowed}
-              />
-            ) : (
-              ""
-            )}
-          </Card.Content>
-        ) : (
-          <div>
-            {checkoutModal && !borrowed ? (
-              <Card.Content extra>
-                <ToolCheckout
-                  _id={tool._id}
-                  name={tool.name}
-                  description={tool.description}
-                  image={tool.image}
-                  checkout={checkout}
-                  setBorrowed={setBorrowed}
-                  borrowed={borrowed}
-                  borrower={borrower}
-                />
-              </Card.Content>
-            ) : (
-              ""
-            )}
-          </div>
-        )}
-      </Card>
-    </div>
-  );
 };
+
 
 export default ToolCard;
