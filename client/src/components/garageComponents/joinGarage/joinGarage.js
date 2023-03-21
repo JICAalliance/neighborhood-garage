@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useMutation, useQuery } from "@apollo/client";
 import { JOIN_GARAGE } from "../../utils/mutations";
-import { QUERY_ME } from "../../utils/queries";
+import { QUERY_ME, QUERY_GARAGE } from "../../utils/queries";
 import { Button, Image, Modal } from 'semantic-ui-react';
 
 
