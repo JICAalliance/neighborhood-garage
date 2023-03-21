@@ -103,11 +103,15 @@ function App() {
                 path="/viewGarage/:garageId"
                 element={loggedIn ? <ViewGarage /> : <Login />}
               />
-                            
-              <Route path="success" element={<Success />} />
-              <Route path="cancel" element={<Cancel />} />
-              <Route path="store" element={<Store />} />
-              
+              <Route
+                path="success"
+                element={loggedIn ? <Success /> : <Login />}
+              />
+              <Route
+                path="cancel"
+                element={loggedIn ? <Cancel /> : <Login />}
+              />
+              <Route path="store" element={loggedIn ? <Store /> : <Login />} />
             </Routes>
           </CartProvider>
         </div>

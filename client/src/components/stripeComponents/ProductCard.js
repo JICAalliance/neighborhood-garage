@@ -1,3 +1,4 @@
+import "./ProductCard.scss";
 import { useContext } from "react";
 import { Card, Button, Form, Label } from "semantic-ui-react";
 import { CartContext } from "./CartContext";
@@ -15,14 +16,16 @@ function ProductCard(props) {
       <h1>${product.price}</h1>
       {productQuantity > 0 ? (
         <>
-          <Form>
-            <Label>In Cart: {productQuantity}</Label>
-            <Button onClick={() => cart.addOneToCart(product.id)}>+</Button>
-            <Button onClick={() => cart.removeOneFromCart(product.id)}>
-              -
-            </Button>
-          </Form>
-          <Button onClick={() => cart.deleteFromCart(product.id)}>
+          <div id="addRemoveButtons">
+            {/* <Form> */}
+              <Label>In Cart: {productQuantity}</Label>
+              <Button id="addOne" onClick={() => cart.addOneToCart(product.id)}>+</Button>
+              <Button id="removeOne" onClick={() => cart.removeOneFromCart(product.id)}>
+                -
+              </Button>
+            {/* </Form> */}
+          </div>
+          <Button id="removeFromCart" onClick={() => cart.deleteFromCart(product.id)}>
             Remove From Cart
           </Button>
         </>

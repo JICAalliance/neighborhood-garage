@@ -160,6 +160,7 @@ const GarageList = ({ garage }) => {
                 </h5>
                 : ''
               }
+
             </div>
             <div className="eight wide column">
               {/* GARAGE BULLETIN */}
@@ -168,17 +169,6 @@ const GarageList = ({ garage }) => {
               </ErrorBoundary>
             </div>
           </div>
-
-
-
-
-
-
-
-
-
-
-
           <h4>Garage Tools:</h4>
           <div id='displayTools'>
             <ErrorBoundary fallback={"Something went wrong"}>
