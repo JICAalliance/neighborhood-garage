@@ -62,7 +62,7 @@ const JoinGarage = () => {
       onOpen={() => setOpen(true)}
       open={open}
       size={'mini'}
-      trigger={<button className="button-30" role="button">Join Garage</button>}
+      trigger={<button className="button-30" role="button">Join Garage →</button>}
     >
       <Modal.Header>Join A Neighborhood Garage</Modal.Header>
       <Modal.Content >
