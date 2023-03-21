@@ -36,7 +36,7 @@ function Nav() {
               >
                 <FontAwesomeIcon
                   icon={faWarehouse}
-                  color="#4d4d4e"
+                  color="#ffffff"
                   className="navIcon"
                 />
               </NavLink>
@@ -54,7 +54,7 @@ function Nav() {
               >
                 <FontAwesomeIcon
                   icon={faHandHoldingDollar}
-                  color="#4d4d4e"
+                  color="#ffffff"
                   className="navIcon"
                 />
               </NavLink>
@@ -72,7 +72,7 @@ function Nav() {
               >
                 <FontAwesomeIcon
                   icon={faRightFromBracket}
-                  color="#4d4d4e"
+                  color="#ffffff"
                   className="navIcon"
                 />
               </NavLink>

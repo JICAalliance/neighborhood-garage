@@ -4,7 +4,7 @@
 }
 textarea {
     resize: none !important;
-    width:200% !important;
+    width:90% !important;
     height: 100% !important;
     margin: 1rem !important;
   }
@@ -38,7 +38,10 @@ textarea {
     background-color: #f2eecb;
 }
 
-.Form {
-    width:100% !important;
-
+Form {
+    width:400px !important;
+    display: flex;
+    flex-direction: column;
+    
+    align-items: space-around;
 }
