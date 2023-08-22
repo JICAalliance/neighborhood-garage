@@ -4,15 +4,21 @@ import { useNavigate } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { CREATE_GARAGE } from "../../utils/mutations";
 
+import { Modal } from 'semantic-ui-react';
 
 const CreateGarage = () => {
   const [createGarage] = useMutation(CREATE_GARAGE);
+
+  //for modal use
+  const [open, setOpen] = useState(false)
 
   //set States
   const [formState, setFormState] = useState({
     name: "",
     description: "",
   });
+
+  //error response
   const [errorResponse, setError] = useState(null);
 
   //to navigate to profile once joined
@@ -59,9 +65,17 @@ const CreateGarage = () => {
 
   return (
     <div className="flex-center">
-      <h1 id='create-title'>Create a Neighborhood Garage</h1>
+      {/* <h1 id='create-title'>Create a Neighborhood Garage</h1> */}
       <div>{errorResponse ? "Something went wrong..." : ''}</div>
-      <div className="ui grid createGarage-container">
+      <Modal
+        onClose={() => setOpen(false)}
+        onOpen={() => setOpen(true)}
+        open={open}
+        size={'large'}
+        trigger={<button className="button-30 btnProfile " role="button">Create Garage →</button>}
+      >
+        <Modal.Header>Join A Neighborhood Garage</Modal.Header>
+        <Modal.Content className="flex-center">
         <form onSubmit={handleFormSubmit} className="createGarage-form ui form twelve wide column centered">
           <div className="flex-row space-between my-2 container">
             <div className="field">
@@ -99,15 +113,9 @@ const CreateGarage = () => {
           </div>
           <br />
         </form>
+        </Modal.Content>
+      </Modal>
 
-        <div className="toProfile flex-center">
-          <br />
-          <br />
-          <button className="button-30 toProfile " onClick={toProfile}>To Dashboard <i className="caret square right outline icon"></i></button>
-        </div>
-      </div>
-
-      {/* <Link to="/profile">← Go to Profile</Link> */}
     </div>
   );
 };
