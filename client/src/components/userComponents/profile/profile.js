@@ -5,7 +5,8 @@ import { useNavigate } from "react-router-dom";
 import {
   ViewTool,
   AddTool,
-  JoinGarage
+  JoinGarage,
+  CreateGarage,
 } from "../../../components";
 
 import { QUERY_ME } from "../../utils/queries";
@@ -119,13 +120,14 @@ const Profile = () => {
             </div>
             <div className="column center">
               <div className="welcome">
-                <button
+                <CreateGarage />
+                {/* <button
                   className="button-30 btnProfile"
                   role="button"
                   onClick={navToCreateGarage}
                 >
                   Create Garage →
-                </button>
+                </button> */}
               </div>
               <br></br>
 

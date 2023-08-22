@@ -61,14 +61,14 @@ const JoinGarage = () => {
       onClose={() => setOpen(false)}
       onOpen={() => setOpen(true)}
       open={open}
-      size={'small'}
+      size={'large'}
       trigger={<button className="button-30 btnProfile " role="button">Join Garage →</button>}
     >
       <Modal.Header>Join A Neighborhood Garage</Modal.Header>
       <Modal.Content className="flex-center">
         <form onSubmit={handleFormSubmit} className="create-form" >
           <div className="flex-row space-between my-2 container" >
-            <h4><label htmlFor="invitationCode">Past Your Invitation Code:</label>
+            <h3><label htmlFor="invitationCode">Paste Your Invitation Code:</label>
             <input
               placeholder="enter Invitation code here"
               name="invitationCode"
@@ -76,7 +76,7 @@ const JoinGarage = () => {
               id="invitationCode"
               size='40'
               onChange={handleChange}
-            /></h4>
+            /></h3>
           </div>
           <div className="flex-row flex-end flex-center " style={{ color: "black", backgroundColor: "white", margin: "1rem" }}>
             <button id='joinBtn' className='button-30' type="submit" color='green'>Join</button>
